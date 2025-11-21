@@ -14,7 +14,5 @@ I design and build AI products, agentic systems, and trust layers like GatewaySt
 - Shipped multiple production AI apps and internal copilots  
 - Helped teams move from no-code MVPs to real AI backends  
 
-[Writing](/writing) ·  
-[LinkedIn](https://www.linkedin.com/in/mrdavidcrowe) ·  
-[GitHub](https://github.com/davidcrowe) ·  
-[Email](mailto:david.paul.crowe@gmail.com)
+[Writing](/writing) · [LinkedIn](https://www.linkedin.com/in/mrdavidcrowe) · [GitHub](https://github.com/davidcrowe) · [Email](mailto:david.paul.crowe@gmail.com)
+
