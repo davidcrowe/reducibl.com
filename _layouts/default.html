@@ -75,6 +75,30 @@
         color: var(--muted);
       }
 
+      .top-nav {
+        margin-bottom: 24px;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .top-nav a {
+        color: var(--muted);
+      }
+
+      .top-nav a:hover {
+        color: var(--link);
+      }
+
+      .top-nav .sep {
+        margin: 0 6px;
+      }
+
+      .meta {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-bottom: 1.25rem;
+      }
+
       @media (max-width: 640px) {
         body {
           padding: 24px 12px 60px;
@@ -84,6 +108,16 @@
   </head>
   <body>
     <div class="page">
+      {% if page.url != "/" %}
+        <nav class="top-nav">
+          <a href="{{ '/' | relative_url }}">Home</a>
+          {% if page.url != '/writing/' %}
+            <span class="sep">·</span>
+            <a href="{{ '/writing' | relative_url }}">Writing</a>
+          {% endif %}
+        </nav>
+      {% endif %}
+
       {{ content }}
     </div>
   </body>

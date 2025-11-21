@@ -4,8 +4,6 @@ title: "The Dev Pipeline Behind Modern AI Products"
 description: "How I think about moving from idea to architecture to production in modern AI systems."
 ---
 
-# The Dev Pipeline Behind Modern AI Products
-
 You found your million-dollar AI idea. You built a no-code MVP and showed it to real users.  
 The interactions validated a real problem people will pay to solve.  
 And your MVP… actually solves it.
