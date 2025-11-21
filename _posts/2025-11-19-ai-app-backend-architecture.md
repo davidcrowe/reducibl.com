@@ -1,84 +1,46 @@
 ---
 layout: post
-title: "The Dev Pipeline Behind Modern AI Products"
+title: "the dev pipeline behind modern AI products"
 description: "How I think about moving from idea to architecture to production in modern AI systems."
 ---
 
-You found your million-dollar AI idea. You built a no-code MVP and showed it to real users.  
-The interactions validated a real problem people will pay to solve.  
-And your MVP… actually solves it.
+you found your million-dollar ai idea. you built a no-code minimum viable product and showed it to potential customers. the interactions validated a real problem they will pay to solve. and your mvp solves it!
 
-Then you try to turn it into a real product.
+so you set out to build a legitimate product. and you start hitting the limitations that the no-code mvp glossed over… things like personalization, rag pipelines, and llm orchestration. “details” like authentication, latency, and secure data access start to matter. you need to build a real backend.
 
-And you immediately hit everything the MVP glossed over: personalization, retrieval, state management, LLM orchestration, and “little” details like authentication, latency, and secure data access. Suddenly you need a real backend — not a no-code demo.
+## what do modern early-stage ai app backends look like?
 
-After turning multiple MVPs into working AI apps, I realized the underlying architecture was almost always the same.
+after turning multiple mvps into real ai apps, i realized that the underlying backend architecture was often the same:
 
-## The Three-Layer Architecture I Kept Rebuilding
+1/ serverless orchestration layer (e.g., cloud run)
+2/ authentication + user data layer (e.g., firebase)
+3/ vector database + llm api layer (e.g., vertex ai & openai)
 
-**1. Serverless orchestration layer (Cloud Run / Cloud Functions)**  
-This becomes the app’s nervous system — routing requests, composing context, enforcing security boundaries, and calling models.
+user → orchestration → firebase + vector dbs/llms → response
 
-**2. Authentication + user data layer (Firebase / Auth0)**  
-Identity, user state, documents, events, and the logic needed for user-scoped data access.
+setting up each layer from scratch took days. this added weeks of repetitive work every time i spun up a new app.
 
-**3. Vector database + LLM API (Vertex AI, OpenAI)**  
-Embeddings, retrieval, and the model interface itself.
+## so how did i accelerate development?
 
-The actual flow is simple to describe:
+every user interaction hits the orchestration layer, which becomes the ai app’s core nervous system. it contains the logic and routing to pull the right data, build the appropriate context, call the llm, and write results back safely.
 
-**User → Orchestration → Firebase + Vector DBs/LLMs → Response**
+this cloud-native, service-driven architecture is already tuned for rapid prototyping. i don’t need to worry about setting up servers. i don’t need to train models (unless i want to).
 
-But rebuilding this stack from scratch every time added *weeks* to each project.
+but the real unlock was developing reusable tools instead of reinventing the wheel for each new app:
 
-## Reducing the Rebuild Tax
+— cloud function templates prewired to connect to my resources and enforce tight data scopes
+— flexible vector database and rag pipelines
+— a shared firebase project with isolated data access for multi-app usage
 
-Every user interaction enters the system through the orchestration layer.  
-This is where:
+end of the day? my cycle time to spin up net new ai apps dropped by 60%. from months to weeks.
 
-- context is assembled  
-- data is pulled  
-- security is enforced  
-- tools and models are routed  
-- outputs are persisted  
 
-Once that was stable, I realized something obvious in retrospect:
+## what to do with all of this new free time?
 
-> If every app uses the same backbone, then the backbone should be reusable.
+now i spend that time differently… talking to customers and refining product strategy.
 
-So I stopped reinventing the wheel and started building *infrastructure* instead of *projects*:
+why? because increasing dev velocity ended up reminding me what really matters… building the right thing in the first place.
 
-- cloud function templates already wired to my resources  
-- opinionated patterns for user-scoped data access  
-- drop-in RAG pipelines and vector indexing tools  
-- a shared Firebase project for isolated app-level namespaces  
-- model integration utilities that standardize logging and context construction  
+it doesn’t matter how fast your dev cycle is if you aren’t building the right thing. and that doesn’t happen by building fast. it happens by learning and iterating fast.
 
-Once these pieces existed, my ability to spin up new AI apps changed dramatically.
-
-## Cycle Time: Months → Weeks
-
-Development speed didn’t improve because I typed faster.  
-It improved because the architecture stopped changing.
-
-With the repetitive setup handled, I started spending more time on things that actually matter:
-
-- talking to users  
-- validating direction  
-- refining behavior  
-- rewriting prompts  
-- improving UX  
-- making the app less magical and more useful  
-
-It turns out:
-
-> Development velocity matters.  
-> But **learning velocity** matters more.
-
-You can build incredibly fast and still build the wrong thing.
-
-The trick is building fast *enough* to maximize how quickly you can learn what the right thing actually is.
-
----
-
-If you’ve found ways to reduce iteration time for greenfield AI products — technical or process — I’d love to hear them.
+what are your best hacks for accelerating development, learning, and iteration velocity for greenfield ai products?
