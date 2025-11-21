@@ -1,0 +1,6 @@
+title: "reducibl"
+description: "Applied AI systems and infrastructure."
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
