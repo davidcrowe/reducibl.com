@@ -5,15 +5,15 @@ title: reducibl
 
 # reducibl
 
-applied AI studio — a place for the systems, apps, and infrastructure that i build.
-
-
-
+applied AI studio — a place for systems, apps, and infrastructure
+  
+  
+  
 **complexity is reducibl**
 
 technical, architectural, organizational, and strategic
 
-even complex applied ai systems can be broken down into core components that are simpler, easier to build, and faster to value.
+even complex applied AI systems can be broken down into core components that are simpler, easier to build, and faster to value.
 
 i design and build AI products, agentic systems, and trust layers like gatewaystack. 
 
