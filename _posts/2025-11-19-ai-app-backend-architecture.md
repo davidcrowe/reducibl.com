@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "the dev pipeline behind modern AI products"
-description: "How I think about moving from idea to architecture to production in modern AI systems."
+title: "building an ai backend for early-stage products"
+description: "how I think about moving from idea to architecture to production for modern early-stage AI systems."
 ---
 
 you found your million-dollar ai idea. you built a no-code minimum viable product and showed it to potential customers. the interactions validated a real problem they will pay to solve. and your mvp solves it!
@@ -12,9 +12,9 @@ so you set out to build a legitimate product. and you start hitting the limitati
 
 after turning multiple mvps into real ai apps, i realized that the underlying backend architecture was often the same:
 
-1/ serverless orchestration layer (e.g., cloud run)
-2/ authentication + user data layer (e.g., firebase)
-3/ vector database + llm api layer (e.g., vertex ai & openai)
+1/ serverless orchestration layer (e.g., cloud run)  
+2/ authentication + user data layer (e.g., firebase)  
+3/ vector database + llm api layer (e.g., vertex ai & openai)  
 
 user → orchestration → firebase + vector dbs/llms → response
 
