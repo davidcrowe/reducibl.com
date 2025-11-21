@@ -5,7 +5,7 @@ title: reducibl
 
 # reducibl
 
-reducibl is about reducing complexity — making applied AI systems simpler, easier to build, and faster to show results.
+reducibl is about reducing complexity — making applied AI systems simpler, easier to build, and faster to value.
 
 i design and build AI products, agentic systems, and trust layers like gatewaystack. previously at aws and dell; educated at harvard and uchicago; now helping teams ship real AI systems fast using tools like the openai apps sdk, mcp servers, and modern cloud infrastructure.
 
