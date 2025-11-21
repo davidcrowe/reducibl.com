@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "validating ai workflows with no-code mvps"
+title: "validating AI workflows with no-code mvps"
 description: "a simple approach to proving a problem exists before investing in engineering."
 ---
 
