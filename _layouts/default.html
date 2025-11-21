@@ -9,20 +9,26 @@
 
     <style>
       :root {
-        --primary: #231E5C;        /* Inner primary (deep indigo) */
-        --accent-light: #E1E6F8;  /* Inner tertiary, soft background */
-        --text: #1A1A1A;
-        --muted: #626B7A;
-        --card-bg: #FFFFFF;
+        --bg: #E1E6F8;          /* Inner tertiary, periwinkle */
+        --text: #111827;        /* dark neutral */
+        --muted: #6B7280;       /* gray */
+        --heading: #231E5C;     /* Inner primary */
+        --link: #2563EB;        /* brighter blue for links */
+        --link-hover: #1D4ED8;  /* darker on hover */
+      }
+
+      * {
+        box-sizing: border-box;
       }
 
       body {
         margin: 0;
         padding: 32px 16px 80px;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-        background: var(--accent-light);
+        background: var(--bg);
         color: var(--text);
         line-height: 1.6;
+        font-size: 16px;
       }
 
       .page {
@@ -30,59 +36,33 @@
         margin: 0 auto;
       }
 
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        margin-bottom: 32px;
-      }
-
       a {
-        color: var(--primary);
+        color: var(--link);
         text-decoration: none;
       }
+
       a:hover {
+        color: var(--link-hover);
         text-decoration: underline;
       }
 
-      .site-title {
-        font-size: 1.2rem;
-        font-weight: 600;
-        letter-spacing: -0.01em;
-        color: var(--primary);
-      }
-
-      nav a {
-        margin-left: 16px;
-        font-size: 0.9rem;
-        color: var(--muted);
-      }
-      nav a:hover {
-        color: var(--primary);
-      }
-
-      .card {
-        background: var(--card-bg);
-        border-radius: 14px;
-        padding: 32px 28px;
-        border: 1px solid rgba(35, 30, 92, 0.08); /* subtle Inner border */
-        box-shadow: 0 8px 32px rgba(35, 30, 92, 0.06);
-      }
-
       h1 {
-        margin-top: 0;
         font-size: 2rem;
-        color: var(--primary);
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        color: var(--heading);
+        letter-spacing: -0.01em;
       }
 
       h2 {
         font-size: 1.35rem;
-        color: var(--primary);
         margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
       }
 
       p {
-        margin-bottom: 1rem;
+        margin: 0 0 1rem;
       }
 
       ul {
@@ -97,27 +77,14 @@
 
       @media (max-width: 640px) {
         body {
-          padding: 20px 12px 60px;
-        }
-        .card {
-          padding: 24px 18px;
+          padding: 24px 12px 60px;
         }
       }
     </style>
   </head>
   <body>
     <div class="page">
-      <header>
-        <a href="{{ '/' | relative_url }}" class="site-title">reducibl</a>
-        <nav>
-          <a href="{{ '/' | relative_url }}">Home</a>
-          <a href="{{ '/writing' | relative_url }}">Writing</a>
-        </nav>
-      </header>
-
-      <main class="card">
-        {{ content }}
-      </main>
+      {{ content }}
     </div>
   </body>
 </html>
