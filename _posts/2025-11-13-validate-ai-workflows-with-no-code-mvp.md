@@ -10,7 +10,7 @@ they asked me a good question… what is the best way to validate their problem 
 
 after building multiple full-stack AI apps and backends, i’ve learned how important it is to validate the problem before committing real time and money. here is my preferred, simple way to build a no-code minimum viable product (mvp) to quickly validate a workflow:
 
-## step 1: build custom gpts to prove out your core ai workflow
+## step 1: build custom gpts to prove out your core AI workflow
 
 for many AI native apps, getting the “context” right is critical. the context is what you send the llm above and beyond a user prompt.
 
