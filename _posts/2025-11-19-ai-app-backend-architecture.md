@@ -28,9 +28,9 @@ this cloud-native, service-driven architecture is already tuned for rapid protot
 
 but the real unlock was developing reusable tools instead of reinventing the wheel for each new app:
 
-— cloud function templates prewired to connect to my resources and enforce tight data scopes
-— flexible vector database and rag pipelines
-— a shared firebase project with isolated data access for multi-app usage
+— cloud function templates prewired to connect to my resources and enforce tight data scopes  
+— flexible vector database and rag pipelines  
+— a shared firebase project with isolated data access for multi-app usage  
 
 end of the day? my cycle time to spin up net new AI apps dropped by 60%. from months to weeks.
 
