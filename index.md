@@ -5,9 +5,9 @@ title: reducibl
 
 # reducibl
 
-reducibl is my applied AI studio — a place for the systems, apps, and infrastructure i build.
+reducibl is my applied AI studio — a place for the systems, apps, and infrastructure that i build.
 
-it's about reducing complexity — making applied AI systems simpler, easier to build, and faster to value.
+complexity is reducible. even complex applied ai systems can be broken down into core components that are simpler, easier to build, and faster to value.
 
 i design and build AI products, agentic systems, and trust layers like gatewaystack. previously at aws and dell; educated at harvard and uchicago; now helping teams ship real AI systems fast using tools like the openai apps sdk, mcp servers, and modern cloud infrastructure.
 
