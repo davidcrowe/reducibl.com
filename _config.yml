@@ -1,5 +1,8 @@
 title: "reducibl"
 description: "Applied AI systems and infrastructure."
+url: "https://reducibl.com"   # <-- important
+baseurl: ""                   # <-- EMPTY for a root-domain site
+
 markdown: kramdown
 theme: minima
 plugins:
