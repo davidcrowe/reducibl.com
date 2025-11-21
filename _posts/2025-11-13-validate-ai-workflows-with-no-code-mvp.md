@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "validating ai workflows with no-code mvps"
-description: "a simple approach to proving a problem exists before investing in engineering.”"
+description: "a simple approach to proving a problem exists before investing in engineering."
 ---
 
 i was on a call recently with a group of subject matter experts who want to build an AI app in their field.
