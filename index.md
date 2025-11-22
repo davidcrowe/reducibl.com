@@ -9,7 +9,9 @@ applied AI studio — from mvps to apps to infra
 
 ## complexity is reducibl
 
-even the most complex applied AI systems can be reduced to core components that are simpler to build and faster to value.
+even the most complex applied AI systems can be reduced to core components. 
+
+simpler to build. faster to value.
 
 i design and build AI products, agentic systems, and trust layers like gatewaystack.
 
