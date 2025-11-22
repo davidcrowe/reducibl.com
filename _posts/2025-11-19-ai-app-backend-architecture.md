@@ -8,7 +8,7 @@ you found your million-dollar AI idea. you built a no-code minimum viable produc
 
 so you set out to build a legitimate product. and you start hitting the limitations that the no-code mvp glossed over… things like personalization, rag pipelines, and llm orchestration. “details” like authentication, latency, and secure data access start to matter. you need to build a real backend.
 
-## what do modern early-stage AI app backends look like?
+### what do modern early-stage AI app backends look like?
 
 after turning multiple mvps into real AI apps, i realized that the underlying backend architecture was often the same:
 
@@ -20,7 +20,7 @@ user → orchestration → firebase + vector dbs/llms → response
 
 setting up each layer from scratch took days. this added weeks of repetitive work every time i spun up a new app.
 
-## so how did i accelerate development?
+### so how did i accelerate development?
 
 every user interaction hits the orchestration layer, which becomes the AI app’s core nervous system. it contains the logic and routing to pull the right data, build the appropriate context, call the llm, and write results back safely.
 
@@ -35,7 +35,7 @@ but the real unlock was developing reusable tools instead of reinventing the whe
 end of the day? my cycle time to spin up net new AI apps dropped by 60%. from months to weeks.
 
 
-## what to do with all of this new free time?
+### what to do with all of this new free time?
 
 now i spend that time differently… talking to customers and refining product strategy.
 
