@@ -13,7 +13,7 @@ even the most complex applied AI systems can be reduced to core components that 
 
 i design and build AI products, agentic systems, and trust layers like gatewaystack.
 
-## ai consulting
+## AI consulting
 
 previously at aws and dell; educated at harvard and uchicago. 
 
@@ -24,11 +24,11 @@ i help teams ship real AI systems fast using the openai apps sdk, mcp servers, a
 - launch production AI systems and internal copilots  
 - accelerate teams from prototype to production
 
-## ai apps
+## AI apps
 
 i build both the *apps* and the *infrastructure* behind modern agentic systems.
 
-my app [**inner**](https://innerdreamapp.com) helps users collect dreams and memories, map emotions over time, and explore personal meaning through an agentic LLM interface.  
+my app [**inner**](https://innerdreamapp.com) helps users collect dreams and memories, map emotions over time, and explore personal meaning through an agentic llm interface.  
 
 it’s available in the ios app store and inside chatgpt as an emotional and personal memory context layer for llms.
 
@@ -47,6 +47,6 @@ the gatewaystack modules form a composable architecture for user-scoped AI syste
 
 individually useful but designed to interlock, gatewaystack defines the emerging trust and governance layer of the AI stack — the primitives every agent ecosystem will eventually rely on.
 
----
+## more
 
 [writing](/writing) · [linkedin](https://www.linkedin.com/in/mrdavidcrowe) · [github](https://github.com/davidcrowe) · [email](mailto:david.paul.crowe@gmail.com)
