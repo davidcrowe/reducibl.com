@@ -40,12 +40,12 @@ i built [**gatewaystack**](https://gatewaystack.com), secure user-scoped trust a
 
 the gatewaystack modules form a composable architecture for user-scoped AI systems. each layer solves a foundational requirement of modern agentic applications:
 
-- [**`identifiabl`**](https://identifiabl.com) — bind every request to a real user and context  
-- [**`transformabl`**](https://transformabl.com) — safety, normalization, classification, and preprocessing  
-- [**`validatabl`**](https://validatabl.com) — permissions, policies, roles, and organizational rules  
-- [**`limitabl`**](https://limitabl.com) — rate limits, quotas, budgets, spend controls  
-- [**`proxyabl`**](https://proxyabl.com) — identity-aware routing across models and providers  
-- [**`explicabl`**](https://explicabl.com) — full audit trail, traces, and observability
+- [`identifiabl`](https://identifiabl.com) — bind every request to a real user and context  
+- [`transformabl`](https://transformabl.com) — safety, normalization, classification, and preprocessing  
+- [`validatabl`](https://validatabl.com) — permissions, policies, roles, and organizational rules  
+- [`limitabl`](https://limitabl.com) — rate limits, quotas, budgets, spend controls  
+- [`proxyabl`](https://proxyabl.com) — identity-aware routing across models and providers  
+- [`explicabl`](https://explicabl.com) — full audit trail, traces, and observability
 
 individually useful but designed to interlock, gatewaystack defines the emerging trust and governance layer of the AI stack — the primitives every agent ecosystem will eventually rely on.
 
