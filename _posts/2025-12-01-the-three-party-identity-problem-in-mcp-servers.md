@@ -58,7 +58,7 @@ the lack of a standard trust layer becomes a risk and bottleneck.
 
 ### what i'm thinking
 
-it occured to me that identity is just the first of a set of modular components of the same system - the trust and governance agentic control plane. 
+it occurred to me that identity is just the first of a set of modular components of the same system - the trust and governance agentic control plane. 
 
 the core insights are:
 
@@ -66,9 +66,8 @@ the core insights are:
 2. that identity is a prerequisite for governance.
 
 and i am curious... 
-- is this actually a widespread problem?
-- is there already a standard approach that i'm missing?
-- should this just be application logic, not infrastructure?
+- is there any known standard emerging to bridge user ↔ LLM ↔ backend identity? 
+- or are most teams just rolling their own?
 
 curious what others are doing. is your team hitting these issues? how are you solving them?
 
