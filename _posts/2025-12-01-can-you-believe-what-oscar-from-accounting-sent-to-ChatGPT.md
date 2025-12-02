@@ -11,12 +11,12 @@ and that got me thinking… if it’s this hard to even identify who is interact
 ### what are we supposed to govern for ai model calls?
 ideally the dundler mifflin it team would do some mix of the following before sending the message to chatgpt:
 
-— identify who is actually making the call (e.g., oscar from Accounting)
-— validate that oscar is allowed to call the model or share that data
-— transform the data (e.g., remove customer names from the revenue forecast he pasted in, or tag the request as containing sensitive info and requiring vp approval)
-— limit the call (has oscar exceeded his quota or budget?)
-— route the request to the correct model for his role
-— store + explain the result (for when corporate flies in from scranton with kpmg and wants an audit trail)
+— identify who is actually making the call (e.g., oscar from Accounting)  
+— validate that oscar is allowed to call the model or share that data  
+— transform the data (e.g., remove customer names from the revenue forecast he pasted in, or tag the request as containing sensitive info and requiring vp approval)  
+— limit the call (has oscar exceeded his quota or budget?)  
+— route the request to the correct model for his role  
+— store + explain the result (for when corporate flies in from scranton with kpmg and wants an audit trail)  
 
 ### what actually happens today?
 
