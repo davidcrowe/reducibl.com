@@ -11,7 +11,7 @@ here is the basic flow:
 1. user logs into chatgpt (openai identity) 
 2. user initiates oauth flow from chatgpt to connect my app
 3. chatgpt redirects to my oauth endpoint with standard PKCE flow
-4. **the gap**: my backend needs to cryptographically bind chatgpt's user to my firebase user
+4. **the gap**: my backend needs to cryptographically bind chatgpt's user to my backend user identity
 5. i built a custom token exchange: validate the oauth callback, issue a firebase custom token, then inject verified identity (X-User-Id) into every subsequent request
 
 this works, but it's fragile and not standardized. everyone is rolling their own version of this identity bridge inside their mcp server. worse, once you solve identity, you still need to build:
@@ -22,9 +22,10 @@ this works, but it's fragile and not standardized. everyone is rolling their own
 - policy routing (send doctors to medical models, analysts to financial models)
 
 ### ai model access governance - best practice
+
 can you believe what oscar from accounting sent to chatgpt?!
 
-before oscar's message get's through to chatgpt, ideally the dundler mifflin it team would make sure his message is:
+before oscar's message gets through to chatgpt, ideally the dundler mifflin it team would make sure his message is:
 
 — **identifiabl** who is actually making the call (e.g., oscar from accounting)  
 — **validatabl** is oscar allowed to call the model or share that data  
@@ -34,6 +35,7 @@ before oscar's message get's through to chatgpt, ideally the dundler mifflin it 
 — **explicabl** store + explain the interaction (for when corporate flies in from scranton with kpmg and wants an audit trail)  
 
 ### ai model access governance - real life
+
 in most companies, llm usage still flows through a single org-wide api key. this means that when oscar pastes that revenue forecast into chatgpt:
 
 — you don't know that it's him  
