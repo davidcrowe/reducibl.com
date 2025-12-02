@@ -24,23 +24,23 @@ this works, but it's fragile and not standardized. everyone is rolling their own
 ### ai model access governance - best practice
 can you believe what oscar from accounting sent to chatgpt?!
 
-before oscar's message got through to chatgpt, ideally the dundler mifflin it team would make sure his message is:
+before oscar's message get's through to chatgpt, ideally the dundler mifflin it team would make sure his message is:
 
 — **identifiabl** who is actually making the call (e.g., oscar from accounting)  
 — **validatabl** is oscar allowed to call the model or share that data  
-— **transformabl** e.g., remove customer names from the revenue forecast he pasted in, or tag the request as containing sensitive info and requiring vp approval
-— **limitabl** has oscar exceeded his quota or budget?
+— **transformabl** e.g., remove customer names from the revenue forecast he pasted in, or tag the request as containing sensitive info and requiring vp approval  
+— **limitabl** has oscar exceeded his quota or budget?  
 — **proxyabl** e.g., forward the message to the correct model for Oscar's role  
 — **explicabl** store + explain the interaction (for when corporate flies in from scranton with kpmg and wants an audit trail)  
 
 ### ai model access governance - real life
 in most companies, llm usage still flows through a single org-wide api key. this means that when oscar pastes that revenue forecast into chatgpt:
 
-— you don't know that it's him
-— you don't know what is being sent
-— you don't know if he has permission to access that model or send that data
-— you can't control how much money is spent on model calls
-— you can't audit the call or prove compliance e.g., with HIPAA or SOX
+— you don't know that it's him  
+— you don't know what is being sent  
+— you don't know if he has permission to access that model or send that data  
+— you can't control how much money is spent on model calls  
+— you can't audit the call or prove compliance e.g., with HIPAA or SOX  
 
 there's nothing preventing him from sending it, no cryptographic proof it was Oscar. just a shared key that could be anyone.
 
@@ -49,7 +49,7 @@ there's nothing preventing him from sending it, no cryptographic proof it was Os
 mcp servers are proliferating. openai's apps sdk and anthropic's mcp are making it trivial to give llms access to tools and data. but the identity and governance layer is still homegrown.
 
 this worked fine when llms were isolated experiments. but as they become:
-- multi-user production systems
+- multi-user production systems  
 - integrated with sensitive data
 - subject to compliance requirements
 - billed per-user or per-call
