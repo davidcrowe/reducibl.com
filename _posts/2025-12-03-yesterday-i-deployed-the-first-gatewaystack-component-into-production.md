@@ -10,7 +10,7 @@ these aren't issues with my app. not a framework issue from something like fireb
 
 so i started writing a package to standardize this process for my new apps. and i realized that i wasn't building an app anymore. I was reverse-engineering the missing trust and governance layer for AI model calls.
 
-**tl;dr:** here is how I replaced ~100 lines of custom jwt/jose logic in my mcp server with a single `identifiablVerifier()` call. first production deployment of gatewaystack's identity layer. zero changes to tool definitions, scopes, or firebase integration.
+> **tl;dr:** here is how I replaced ~100 lines of custom jwt/jose logic in my mcp server with a single `identifiablVerifier()` call. first production deployment of gatewaystack's identity layer. zero changes to tool definitions, scopes, or firebase integration.
 
 **this post is for you if:**
 - you're building an mcp server with oauth
@@ -23,39 +23,42 @@ so i started writing a package to standardize this process for my new apps. and 
 
 ### origins of gatewaystack
 
-identity is fundamental to ai apps but it's just the start. so I started writing, designing, and prototyping what eventually became gatewaystack: a modular, open-source agentic control plane that adds identity, safety, validation, routing, limits, and auditability to AI calls. gatewaystack is a user-scoped trust and governance gateway for ai apps. it standardizes the layer that should exist between a user clicking “send” and the request hitting the model api.
+identity is fundamental to ai apps but it's just the start. so I started writing, designing, and prototyping what eventually became [gatewaystack](https://gatewaystack.com): a modular, open-source agentic control plane that adds identity, safety, validation, routing, limits, and auditability to AI calls. gatewaystack is a user-scoped trust and governance gateway for ai apps. it standardizes the layer that should exist between a user clicking “send” and the request hitting the model api.
 
 last night, one piece of that vision went live.
 
-### `identifiabl`: gatewaystack's first production module
+### identifiabl: gatewaystack's first production module
 
 every llm integration has the same challenge...
 
 three parties are involved — the user, the llm, and your backend — but there is no shared identity between them. 
 
-- ChatGPT knows who the user is (OpenAI auth)
-- Your backend knows who the user is (your app's auth e.g., Firebase Auth)
-- But your MCP server has no simple way to carry the user’s cryptographic identity across the boundary
+- chatgpt knows who the user is (via openai auth)
+- your backend knows who the user is (via your app's auth e.g., firebase auth)
+- but your mcp server has no simple way to carry the user’s cryptographic identity across the boundary
 
 `identifiabl` makes it easy, repeatable, and secure to bridge that boundary... providing shared identity across the entire interaction.
 
-It binds user identity to AI-originated requests and exposes a normalized gatewaystack request context for other controls to plug into later (policy, limits, routing, audit, etc.).
+it binds user identity to AI-originated requests and exposes a normalized gatewaystack request context for other controls to plug into later (policy, limits, routing, audit, etc.).
 
-**get started:** `npm i identifiabl` | [github →](https://github.com/davidcrowe/GatewayStack/tree/main/packages/identifiabl) | [Docs →](https://identifiabl.com)
+**get started:** `npm i identifiabl` 
+
+[→ github](https://github.com/davidcrowe/GatewayStack/tree/main/packages/identifiabl) 
+[→ Docs](https://identifiabl.com)
 
 #### Who needs this?
 
-you're building an mcp server that:
+if you're building an mcp server that:
 - accepts oauth tokens from chatgpt, claude, or another AI platform
 - needs to verify user identity before calling your backend
 - wants to enforce scopes/permissions on tool calls
 - currently has 50-100 lines of custom jose/jwt logic
 
-if that's you, identifiabl handles all of it.
+you should check out `identifiabl`. it handles all of it.
 
 ### how exactly did my mcp server code change?
 
-after launching identifiabl, i immediately used it to replace my hand-rolled identity handling in the mcp server for my app inner. 
+after launching `identifiabl`, i immediately used it to replace my hand-rolled identity handling in the mcp server for my app inner. 
 
 it was... easy. my mcp server used to contain ~100 lines of custom jose/jwt wiring to:
 
@@ -67,7 +70,7 @@ it was... easy. my mcp server used to contain ~100 lines of custom jose/jwt wiri
 - map subjects
 - forward identity downstream
 
-identifiabl reduces all of this to a single call:
+`identifiabl` reduces all of this to a single call:
 
 ```ts
 const result = await identifiablVerifier(accessToken)
@@ -216,7 +219,7 @@ async function verifyBearer(req: Request) {
 
 #### 2. scope verification: same interface, new foundation
 
-**no api changes** — `verifyBearerAndScopes` still returns `{ uid, gatewaySig }`, but now it's built on identifiabl's normalized identity layer instead of raw jose
+**no api changes** — `verifyBearerAndScopes` still returns `{ uid, gatewaySig }`, but now it's built on `identifiabl`'s normalized identity layer instead of raw jose
 
 ```ts
 async function verifyBearerAndScopes(req: Request, toolName: string) {
@@ -369,9 +372,9 @@ const scopes = Array.from(new Set([...scopeList, ...permissions]));
 - firebase admin init + getFirebaseIdTokenForUid custom token exchange
 - tool schemas, titles, descriptions, and the entire inner widget plumbing 
 
-### The real payload: a standardized request context primed for AI model governance
+### the real payload: a standardized request context primed for AI model governance
 
-identifiabl doesn't just say "this jwt is valid."
+`identifiabl` doesn't just say "this jwt is valid."
 
 it normalizes everything you care about into a **request context** that the rest of gatewaystack can plug into: identity, scopes, roles, tenant/plan, plus the derived `uid` and hmac signature you already use to call firebase functions.
 
@@ -418,7 +421,7 @@ type GatewayRequestContext = {
 
 #### a concrete example
 
-here's what a real `saveMemoryOrb` call looks like flowing through the system — ChatGPT → Inner MCP server → Firebase:
+here's what a real `saveMemoryOrb` call looks like flowing through the system — chatgpt → inner mcp server → firebase:
 
 ```json
 {
@@ -462,7 +465,7 @@ here's what a real `saveMemoryOrb` call looks like flowing through the system �
 everything downstream becomes easier: validation, limits, audit trails, routing, policy, usage metering — because they all start with the same normalized identity and request metadata.
 
 ### try it yourself
-i deployed identifiabl inside inner’s mcp server — and it worked exactly as intended. this is the first live, production instance of gatewaystack.
+i deployed `identifiabl` inside inner’s mcp server — and it worked exactly as intended. this is the first live, production instance of gatewaystack.
 
 If you're running an mcp server with oauth, the migration is straightforward:
 
@@ -476,9 +479,9 @@ reach out if you hit any roadblocks - i would be happy help you migrate.
 ### follow along
 **next up:** `proxyabl` and `limitabl` - gatewaystack's routing and limiting layers — are under active development. follow along at [gatewaystack.com](https://gatewaystack.com) or [star the repo](https://github.com/davidcrowe/GatewayStack) for updates.
 
-this isn't just about replacing 100 lines with 1 line. It's about **standardizing** how identity flows through AI applications.
+this isn't just about replacing 100 lines with 1 line. It's about **standardizing how identity flows through AI applications**.
  
-when every mcp server speaks the same identity language (the gatewaystack request context), the next layers—policy enforcement, rate limiting, audit trails—become plug-and-play.
+when every mcp server speaks the same identity language — the same request context — the next layers—policy enforcement, rate limiting, audit trails—become plug-and-play.
  
 that's the real win: a composable governance stack instead of bespoke middleware in every project.
 
