@@ -41,9 +41,8 @@ three parties are involved — the user, the llm, and your backend — but there
 
 it binds user identity to AI-originated requests and exposes a normalized gatewaystack request context for other controls to plug into later (policy, limits, routing, audit, etc.).
 
-**get started:** `npm i identifiabl` 
-
-[→ github](https://github.com/davidcrowe/GatewayStack/tree/main/packages/identifiabl) 
+**get started:** `npm i identifiabl`  
+[→ github](https://github.com/davidcrowe/GatewayStack/tree/main/packages/identifiabl)  
 [→ Docs](https://identifiabl.com)
 
 #### Who needs this?
