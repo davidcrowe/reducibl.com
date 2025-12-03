@@ -4,11 +4,11 @@ title: "1-line JWT/JWKS verification for MCP backends"
 description: "npm i identifiabl — deploying gatewaystack's first layer into production"
 ---
 
-i have redeveloped the same 100-line jwt verification flow for every mcp server i have built. while somewhat boilerplate, the cognitive load of sorting out JWKS fetching, signature verification, scope mapping, etc. for every app is draining.  
+i have redeveloped the same 100-line jwt verification flow for every model context prptocol (mcp) server i have built. while somewhat boilerplate, the cognitive load of sorting out JWKS fetching, signature verification, scope mapping, etc. for every app is draining.  
 
-these aren't issues with my app. not a framework issue from something like firebase or swift. this is a common backend problem pervasive for every mcp server the moment you try to build something more than a prototype (e.g., multi-tenant or regulated).
+these aren't issues with my app. not a framework issue from something like firebase or swift. this is a common backend problem pervasive for mcp servers the moment you try to build something more than a prototype (e.g., multi-tenant or regulated).
 
-so i started writing a package to standardize this process for my new apps. and i realized that i wasn't building an app anymore. i was reverse-engineering the missing trust and governance layer for AI model calls.
+so i started writing a package to standardize this process for my new apps. and i realized that i wasn't building an app anymore. i was reverse-engineering a trust and governance layer for AI model calls.
 
 > **tl;dr:** here is how I replaced **~100 lines of custom jwt/jose logic** in my mcp server with a single `identifiablVerifier()` call. first production deployment of gatewaystack's identity layer. zero changes to tool definitions, scopes, or firebase integration.
 
@@ -23,13 +23,13 @@ so i started writing a package to standardize this process for my new apps. and 
 
 ### origins of gatewaystack
 
-identity is fundamental to ai apps but it's just the start. so I started writing, designing, and prototyping what eventually became [gatewaystack](https://gatewaystack.com): a modular, open-source agentic control plane that adds identity, safety, validation, routing, limits, and auditability to AI calls. gatewaystack is a user-scoped trust and governance gateway for ai apps. it standardizes the layer that should exist between a user clicking “send” and the request hitting the model api.
+identity is fundamental to ai apps but it's just the start. so I started designing and implementing what eventually became [gatewaystack](https://gatewaystack.com): a modular, open-source agentic control plane that adds identity, safety, validation, routing, limits, and auditability to AI calls. gatewaystack is a user-scoped trust and governance gateway for ai apps. it standardizes the layer that should exist between a user clicking “send” and the request hitting the model api.
 
-last night, one piece of that vision went live.
+last night, the first piece of that vision went live.
 
 ### identifiabl: gatewaystack's first production module
 
-every llm integration has the same challenge...
+every advanced llm integration has the same challenge...
 
 three parties are involved — the user, the llm, and your backend — but there is no shared identity between them. 
 
@@ -47,13 +47,13 @@ it binds user identity to AI-originated requests and exposes a normalized gatewa
 
 #### Who needs this?
 
-if you're building an mcp server that:
+*if* you are building an mcp server that:
 - accepts oauth tokens from chatgpt, claude, or another AI platform
 - needs to verify user identity before calling your backend
 - wants to enforce scopes/permissions on tool calls
 - currently has 50-100 lines of custom jose/jwt logic
 
-you should check out `identifiabl`. it handles all of it.
+*then* you should check out `identifiabl`. it handles all of it.
 
 ### how exactly did my mcp server code change?
 
@@ -377,7 +377,7 @@ const scopes = Array.from(new Set([...scopeList, ...permissions]));
 
 it normalizes everything you care about into a **request context** that the rest of gatewaystack can plug into: identity, scopes, roles, tenant/plan, plus the derived `uid` and hmac signature you already use to call firebase functions.
 
-in other words: one place that understands "who is this, what are they allowed to do, and how should downstream services trust this call?"
+in other words: it standardizes the structure to track "who is this, what are they allowed to do, and how should downstream services trust this call?"
 
 #### the gatewaystack request context
 
@@ -461,12 +461,12 @@ here's what a real `saveMemoryOrb` call looks like flowing through the system �
 }
 ```
 
-everything downstream becomes easier: validation, limits, audit trails, routing, policy, usage metering — because they all start with the same normalized identity and request metadata.
+everything downstream becomes easier: validation, limits, audit trails, routing, policy, usage metering. they all start with the same normalized identity and request metadata.
 
 ### try it yourself
-i deployed `identifiabl` inside inner’s mcp server — and it worked exactly as intended. this is the first live, production instance of gatewaystack.
+i deployed `identifiabl` inside inner’s mcp server. this is the first live, production instance of gatewaystack.
 
-If you're running an mcp server with oauth, the migration is straightforward:
+if you're running an mcp server with oauth, the migration is straightforward:
 
 1. install: `npm i identifiabl`
 2. replace your `jwtVerify()` logic with `createIdentifiablVerifier()`
