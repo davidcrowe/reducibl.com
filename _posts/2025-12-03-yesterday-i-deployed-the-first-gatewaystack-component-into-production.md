@@ -54,6 +54,7 @@ you're building an mcp server that:
 if that's you, identifiabl handles all of it.
 
 ### how exactly did my mcp server code change?
+
 after launching identifiabl, i immediately used it to replace my hand-rolled identity handling in the mcp server for my app inner. 
 
 it was... easy. my mcp server used to contain ~100 lines of custom jose/jwt wiring to:
