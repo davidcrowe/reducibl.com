@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "how i replaced 100 lines of tricky jwt/jwks code with 1 line."
+title: "1-line JWT/JWKS verification for MCP backends"
 description: "npm i identifiabl — deploying gatewaystack's first layer into production"
 ---
 
