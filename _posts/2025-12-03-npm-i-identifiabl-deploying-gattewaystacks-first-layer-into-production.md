@@ -1,16 +1,16 @@
 ---
 layout: post
-title: "npm i identifiabl — deploying gatewaystack's first layer into production"
-description: "how i swapped out ~100 lines of custom jose wiring for a single identifiablVerifier() call, without touching tool definitions, scopes, or firebase integration."
+title: "how i replaced 100 lines of tricky jwt/jwks code with 1 line."
+description: "npm i identifiabl — deploying gatewaystack's first layer into production"
 ---
 
 i have redeveloped the same 100-line jwt verification flow for every mcp server i have built. while somewhat boilerplate, the cognitive load of sorting out JWKS fetching, signature verification, scope mapping, etc. for every app is draining.  
 
 these aren't issues with my app. not a framework issue from something like firebase or swift. this is a common backend problem pervasive for every mcp server the moment you try to build something more than a prototype (e.g., multi-tenant or regulated).
 
-so i started writing a package to standardize this process for my new apps. and i realized that i wasn't building an app anymore. I was reverse-engineering the missing trust and governance layer for AI model calls.
+so i started writing a package to standardize this process for my new apps. and i realized that i wasn't building an app anymore. i was reverse-engineering the missing trust and governance layer for AI model calls.
 
-> **tl;dr:** here is how I replaced ~100 lines of custom jwt/jose logic in my mcp server with a single `identifiablVerifier()` call. first production deployment of gatewaystack's identity layer. zero changes to tool definitions, scopes, or firebase integration.
+> **tl;dr:** here is how I replaced **~100 lines of custom jwt/jose logic** in my mcp server with a single `identifiablVerifier()` call. first production deployment of gatewaystack's identity layer. zero changes to tool definitions, scopes, or firebase integration.
 
 **this post is for you if:**
 - you're building an mcp server with oauth
@@ -77,7 +77,7 @@ const result = await identifiablVerifier(accessToken)
 
 everything else — your scopes, your uid mapping, your firebase plumbing — stays the same.
 
-more specifically, the main changes i made to my mcp server can be bucketed into four areas:
+more specifically, the main changes i made to my mcp server can be bucketed into three areas:
 
 #### 1. core auth helper: `verifyBearer`
 
@@ -473,7 +473,7 @@ If you're running an mcp server with oauth, the migration is straightforward:
 3. update your auth helper to use the result
 4. everything else stays the same
 
-reach out if you hit any roadblocks - i would be happy help you migrate.
+reach out if you hit any roadblocks - i would be happy to help you migrate.
 
 ### follow along
 **next up:** `proxyabl` and `limitabl` - gatewaystack's routing and limiting layers — are under active development. follow along at [gatewaystack.com](https://gatewaystack.com) or [star the repo](https://github.com/davidcrowe/GatewayStack) for updates.
