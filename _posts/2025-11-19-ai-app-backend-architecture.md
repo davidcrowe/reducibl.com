@@ -44,3 +44,6 @@ why? because increasing dev velocity ended up reminding me what really matters�
 it doesn’t matter how fast your dev cycle is if you aren’t building the right thing. and that doesn’t happen by building fast. it happens by learning and iterating fast.
 
 what are your best hacks for accelerating development, learning, and iteration velocity for greenfield AI products?
+
+---
+*david crowe - [reducibl.com](https://reducibl.com) - working on this at [gatewaystack.com](https://gatewaystack.com)*

@@ -35,3 +35,6 @@ the user to backend identity link is missing. for many apps this becomes a secur
 i call this the “three-party problem”. i tackled it while integrating my own app into ChatGPT. 
 
 if you’ve built MCP servers, have you hit this too? how did you approach it?
+
+---
+*david crowe - [reducibl.com](https://reducibl.com) - working on this at [gatewaystack.com](https://gatewaystack.com)*

@@ -4,6 +4,10 @@ title: "does your team use llms securely?"
 description: "why chatgpt enterprise alone isn't sufficient"
 ---
 
+<p align="center">
+  <img src="./assets/chatgpt-enterprise-linkedin-post.png" alt="GatewayStack banner" />
+</p>
+
 *note - originally posted to linkedin*
 
 a few weeks ago i asked a business leader if they are confident their team uses llms securely. 
@@ -18,7 +22,7 @@ it’s true that chatgpt enterprise is the right foundation for giving your team
 
 this is sufficient when your goal starts and ends with giving your team chatgpt access.
 
-# the real value of llms lives beyond access
+### the real value of llms lives beyond access
 
 the real value starts when employees can ask the llm to:
 
@@ -30,7 +34,7 @@ the real value starts when employees can ask the llm to:
 
 - *when chatgpt accesses my backend systems and data on an employee’s behalf, what is it allowed to do?*
 
-# why chatgpt enterprise alone isn’t sufficient (by design)
+### why chatgpt enterprise alone isn’t sufficient (by design)
 
 once an llm can call your backend apis, security is no longer just about chatgpt access. it’s about:
 
@@ -46,7 +50,7 @@ your backend doesn’t automatically know what “my team” means. it can’t q
 
 **what’s missing is a clean, standardized way to let llms act on behalf of users without being trusted with authority themselves**. this is a gap I see teams hit when moving from demo to production.
 
-# what end-to-end governance actually requires
+### what end-to-end governance actually requires
 
 to safely expose internal tools and data to llms, you need to ensure:
 
@@ -56,10 +60,13 @@ to safely expose internal tools and data to llms, you need to ensure:
 
 in short… every tool call is `identifiabl`, `validatabl`, and `explicabl` across system boundaries. 
 
-# curious how others are handling this
+### curious how others are handling this
 
 have you made internal tools or data available to your team from inside of chatgpt or another llm? if so…
 
 - did you hit this trust and governance gap?
 - did your security team push back? why?
 - are you building this internally, or waiting for standards and tooling that solve identity propagation at the platform level?
+
+---
+*david crowe - [reducibl.com](https://reducibl.com) - working on this at [gatewaystack.com](https://gatewaystack.com)*
