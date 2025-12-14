@@ -75,7 +75,7 @@ here’s what actually happens if you were to only rely on chatgpt enterprise:
      │ shows all perf data  │                         │
 ```
 
-#### you need to cryptographically verify the employee on your backend
+### you need to cryptographically verify the employee on your backend
 
 here’s the minimum architecture required to make this safe in production and enable:
 
