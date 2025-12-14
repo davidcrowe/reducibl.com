@@ -10,9 +10,9 @@ i couldn’t figure out why user-scoped data access was so tricky in model conte
 
 **mcp servers are different… they are three-party systems**. similar to a financial advisor accessing your bank records:
 
-— **the user** → person soliciting financial advice
-— **the llm** → financial advisor acting on their behalf
-— **your backend** → the bank holding the records
+— **the user** → person soliciting financial advice  
+— **the llm** → financial advisor acting on their behalf  
+— **your backend** → the bank holding the records  
 
 ### don't give an llm power of attorney
 
