@@ -50,7 +50,7 @@ your backend doesn’t automatically know what “my team” means. it can’t q
 
 **what’s missing is a clean, standardized way to let llms act on behalf of users without being trusted with authority themselves**. this is a gap I see teams hit when moving from demo to production.
 
-#### gap: backend doesn't know who my team is and returns everyone's data
+### chatgpt knows who the user is. you don't
 
 here’s what actually happens if you were to only rely on chatgpt enterprise:
 
@@ -75,7 +75,7 @@ here’s what actually happens if you were to only rely on chatgpt enterprise:
      │ shows all perf data  │                         │
 ```
 
-#### fix: cryptographically verify the employee on your backend
+#### you need to cryptographically verify the employee on your backend
 
 here’s the minimum architecture required to make this safe in production and enable:
 
@@ -101,11 +101,11 @@ here’s the minimum architecture required to make this safe in production and e
      │                      │                    │ GET /perfReviewData │
      │                      │                    │ X-User-Id:          │
      │                      │                    │   alice_123         │
-     │                      │                    ├──────────────►.     │
+     │                      │                    ├────────────────────►│
      │                      │                    │                     │
      │                      │                    │                     │ filter by
      │                      │                    │                     │ alice_123
-     │                      │                    │◄──────────────.     ┤
+     │                      │                    │◄────────────────────┤
      │                      │◄───────────────────┤   alice's           │
      │◄─────────────────────┤    alice's data    │   data only         │
      │ only shows perf data │        only        │                     │
