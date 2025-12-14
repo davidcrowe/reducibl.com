@@ -8,7 +8,7 @@ description: "why chatgpt enterprise alone isn't sufficient"
   <img src="/assets/chatgpt-enterprise-linkedin-post.png" alt="GatewayStack banner" />
 </p>
 
-*note - originally posted to linkedin*
+*originally posted to linkedin*
 
 a few weeks ago i asked a business leader if they are confident their team uses llms securely. 
 
