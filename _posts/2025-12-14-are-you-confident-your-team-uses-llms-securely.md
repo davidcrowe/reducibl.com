@@ -5,7 +5,7 @@ description: "why chatgpt enterprise alone isn't sufficient"
 ---
 
 <p align="center">
-  <img src="../assets/chatgpt-enterprise-linkedin-post.png" alt="GatewayStack banner" />
+  <img src="/assets/chatgpt-enterprise-linkedin-post.png" alt="GatewayStack banner" />
 </p>
 
 *note - originally posted to linkedin*
