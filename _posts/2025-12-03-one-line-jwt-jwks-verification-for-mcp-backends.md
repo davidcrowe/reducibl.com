@@ -43,7 +43,7 @@ it binds user identity to AI-originated requests and exposes a normalized gatewa
 
 **get started:** `npm i identifiabl`  
 [→ github](https://github.com/davidcrowe/GatewayStack/tree/main/packages/identifiabl)  
-[→ Docs](https://identifiabl.com)
+[→ docs](https://identifiabl.com)
 
 #### Who needs this?
 
