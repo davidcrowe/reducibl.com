@@ -42,13 +42,75 @@ once an llm can call your backend apis, security is no longer just about chatgpt
 - user-scoped, least-privilege access to your data
 - auditability across system boundaries
 
-the linchpin? **your backend needs a way to cryptographically identify the employee**. 
+the linchpin? **your backend needs a way to cryptographically identify the employee**. This is the **three-party problem**: the user, the LLM, and your backend have no shared, verifiable identity context.
 
 without this, a manager could ask “*summarize performance review feedback for my team*" and the llm might pull reviews from across the entire organization, exposing sensitive feedback about employees in other departments. 
 
 your backend doesn’t automatically know what “my team” means. it can’t query the right data without verifying their identity. 
 
 **what’s missing is a clean, standardized way to let llms act on behalf of users without being trusted with authority themselves**. this is a gap I see teams hit when moving from demo to production.
+
+#### gap: backend doesn't know who my team is and returns everyone's data
+
+here’s what actually happens if you were to only rely on chatgpt enterprise:
+
+```
+    user                    llm                     backend
+  (alice)              (chatgpt)               (hr system api)
+     │                      │                         │
+     │ "show my team's data"│                         │
+     ├─────────────────────►│                         │
+     │                      │                         │
+     │  (alice is logged in │   GET /perfReviewData   │
+     │   to chatgpt)        │   shared api Key        │
+     │                      ├────────────────────────►│
+     │                      │                         │
+     │                      │ ❌ no user identity     │
+     │                      │ ❌ can't filter         │
+     │                      │                         │
+     │                      │◄────────────────────────┤
+     │                      │  returns EVERYONE's     │
+     │                      │  performance review     │
+     │◄─────────────────────┤        data!            │
+     │ shows all perf data  │                         │
+```
+
+#### fix: cryptographically verify the employee on your backend
+
+here’s the minimum architecture required to make this safe in production and enable:
+
+- per-user data filtering  
+- cryptographically verified identity  
+- audit trail: "alice accessed her calendar via chatgpt"
+
+```
+    user                   llm             missing Layer      backend
+   (alice)              (chatgpt)            (identity       (hr system
+                                            injection)         api)
+     │                      │                    │                     │
+     │ "show my team's data"│                    │                     │
+     ├─────────────────────►│                    │                     │
+     │                      │                    │                     │
+     │  (alice is logged in │  oauth token       │                     │
+     │   to chatgpt)        │  for alice         │                     │
+     │                      ├───────────────────►│                     │
+     │                      │                    │                     │
+     │                      │                    │ ✓ verify            │
+     │                      │                    │   alice's id        │
+     │                      │                    │                     │
+     │                      │                    │ GET /perfReviewData │
+     │                      │                    │ X-User-Id:          │
+     │                      │                    │   alice_123         │
+     │                      │                    ├──────────────►.     │
+     │                      │                    │                     │
+     │                      │                    │                     │ filter by
+     │                      │                    │                     │ alice_123
+     │                      │                    │◄──────────────.     ┤
+     │                      │◄───────────────────┤   alice's           │
+     │◄─────────────────────┤    alice's data    │   data only         │
+     │ only shows perf data │        only        │                     │
+     │  for alice's team    │                    │                     │
+```
 
 ### what end-to-end governance actually requires
 
