@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "portfolio theory for genai"
-description: "how hungry are you for risk?"
+title: "prioritizing genai initiatives"
+description: "portfolio theory for genai"
 ---
 
 <p align="center">
