@@ -5,7 +5,7 @@ description: "why chatgpt enterprise alone isn't sufficient"
 ---
 
 <p align="center">
-  <img src="/assets/chatgpt-enterprise-linkedin-post.png" alt="GatewayStack banner" />
+  <img src="/assets/chatgpt-enterprise-linkedin-post.png" alt="Trust boundaries for ChatGPT tool access" />
 </p>
 
 *originally posted to linkedin*
@@ -42,7 +42,9 @@ once an llm can call your backend apis, security is no longer just about chatgpt
 - user-scoped, least-privilege access to your data
 - auditability across system boundaries
 
-the linchpin? **your backend needs a way to cryptographically identify the employee**. This is the **three-party problem**: the user, the LLM, and your backend have no shared, verifiable identity context.
+the linchpin? **your backend needs a way to cryptographically identify the employee**. 
+
+This is the **three-party problem**: the user, the LLM, and your backend have no shared, verifiable identity context.
 
 without this, a manager could ask “*summarize performance review feedback for my team*" and the llm might pull reviews from across the entire organization, exposing sensitive feedback about employees in other departments. 
 
