@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "most genAI initiatives never make it from pilot to production"
-description: "and why that is expected and okay"
+title: "portfolio theory for genai"
+description: "how hungry are you for risk?"
 ---
 
 <p align="center">
@@ -18,11 +18,13 @@ How can that be?
 
 Finance teaches the concept of the Efficient Frontier for investments. ROI can be the same for projects with wildly different levels of risk. Diversifying your portfolio helps maximize expected return for any given level of risk.
 
-This type of portfolio thinking introduces the million dollar question: how much risk will your org accept? After all, the greater the risk, the greater the reward.
+This type of portfolio thinking introduces the million dollar question: **how much risk will your org accept? After all, the greater the risk, the greater the reward.**
 
 And here is the kicker. The point on the Efficient Frontier that matters most is not a project. It is the portfolio of projects. 
 
-Where your portfolio lands on the Efficient Frontier depends on your org’s risk appetite. How you prioritize GenAI projects depends on where you want to land on the Efficient Frontier.
+**Where your portfolio lands on the Efficient Frontier depends on your org’s risk appetite.**
+
+***How* you prioritize GenAI projects depends on where you want to land on the Efficient Frontier.**
 
 For example: A customer-facing AI chatbot might have high reward but high risk (brand damage if it hallucinates), while an internal doc search tool might have lower reward but also lower risk. Both might show similar ROI, but they fit different portfolio strategies. They might even be complementary in the right portfolio.
 
