@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "most genAI initiatives never make it from pilot to production"
-description: "and why that is expected and okay"
+description: "and why that's expected and okay"
 ---
 
 <p align="center">

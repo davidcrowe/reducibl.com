@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "1-line JWT/JWKS verification for MCP backends"
+title: "1-line jwt/jwks verification for mcp backends"
 description: "npm i identifiabl — deploying gatewaystack's first layer into production"
 ---
 

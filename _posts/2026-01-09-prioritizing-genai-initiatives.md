@@ -18,11 +18,13 @@ how can that be?
 
 let’s borrow some useful concepts from finance: 
 
-—ROI can be equal for projects with different risk levels
-—the efficient frontier of portfolios that maximize expected return for a given risk level
-—diversifying your portfolio helps maximize expected return for a given risk level
+— ROI can be equal for projects with different risk levels  
+— the efficient frontier of portfolios that maximize expected return for a given risk level  
+— diversifying your portfolio helps maximize expected return for a given risk level  
 
-this type of portfolio thinking introduces a million dollar question: **how much risk will your org accept for genAI initiatives?** after all, the greater the risk, the greater the reward.
+this type of portfolio thinking introduces a million dollar question: 
+
+**how much risk will your org accept for genAI initiatives?** after all, the greater the risk, the greater the reward.
 
 the point on the efficient frontier that matters most isn’t a project. it is the portfolio of projects:
  
