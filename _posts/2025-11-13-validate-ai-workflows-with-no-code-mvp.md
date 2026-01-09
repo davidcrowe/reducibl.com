@@ -25,4 +25,4 @@ this approach has limitations — custom gpts don’t connect to backends, so th
 does this resonate? how are you validating AI apps and workflows before investing in development?
 
 ---
-*david crowe - [reducibl.com](https://reducibl.com) - working on this at [gatewaystack.com](https://gatewaystack.com)*
+*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

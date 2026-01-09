@@ -133,4 +133,4 @@ have you made internal tools or data available to your team from inside of chatg
 - are you building this internally, or waiting for standards and tooling that solve identity propagation at the platform level?
 
 ---
-*david crowe - [reducibl.com](https://reducibl.com) - working on this at [gatewaystack.com](https://gatewaystack.com)*
+*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

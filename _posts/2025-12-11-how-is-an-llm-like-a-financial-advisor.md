@@ -39,4 +39,4 @@ for many apps this becomes a security risk. you can't:
 if you’ve built mcp servers, have you hit this too? how did you approach it?
 
 ---
-*david crowe - [reducibl.com](https://reducibl.com) - working on this at [gatewaystack.com](https://gatewaystack.com)*
+*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

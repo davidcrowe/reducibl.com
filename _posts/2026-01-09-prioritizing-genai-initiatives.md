@@ -5,52 +5,55 @@ description: "portfolio theory for genai"
 ---
 
 <p align="center">
-  <img src="/assets/genai-project-portfolio.png" alt="Stack overflow posts by month" />
+  <img src="/assets/genai-portfolio-management.png" alt="Stack overflow posts by month" />
 </p>
 
 *originally posted to linkedin*
 
-If your team only uses ROI to prioritize GenAI initiatives, you’re probably getting suboptimal results. 
+if your team only uses roi to prioritize genAI initiatives, you’re probably getting suboptimal results. 
 
-How can that be?
+how can that be?
 
-### ROI doesn’t factor in your appetite for risk.
+### roi doesn’t factor in your appetite for risk.
 
-Finance teaches the concept of the Efficient Frontier for investments. ROI can be the same for projects with wildly different levels of risk. Diversifying your portfolio helps maximize expected return for any given level of risk.
+let’s borrow some useful concepts from finance: 
 
-This type of portfolio thinking introduces the million dollar question: **how much risk will your org accept? After all, the greater the risk, the greater the reward.**
+—ROI can be equal for projects with different risk levels
+—the efficient frontier of portfolios that maximize expected return for a given risk level
+—diversifying your portfolio helps maximize expected return for a given risk level
 
-And here is the kicker. The point on the Efficient Frontier that matters most is not a project. It is the portfolio of projects. 
+this type of portfolio thinking introduces a million dollar question: **how much risk will your org accept for genAI initiatives?** after all, the greater the risk, the greater the reward.
 
-**Where your portfolio lands on the Efficient Frontier depends on your org’s risk appetite.**
+the point on the efficient frontier that matters most isn’t a project. it is the portfolio of projects:
+ 
+- where your portfolio lands on the efficient frontier depends on your org’s risk appetite 
+- how you prioritize genAI projects depends on where you want to land on the efficient frontier
 
-***How* you prioritize GenAI projects depends on where you want to land on the Efficient Frontier.**
+for example: a customer-facing AI chatbot might have high reward but high risk (brand damage if it hallucinates), while an internal doc search tool might have lower reward but also lower risk. both might show similar roi, but they fit different portfolio strategies. they might even be complementary in the right portfolio.
 
-For example: A customer-facing AI chatbot might have high reward but high risk (brand damage if it hallucinates), while an internal doc search tool might have lower reward but also lower risk. Both might show similar ROI, but they fit different portfolio strategies. They might even be complementary in the right portfolio.
+the exact mechanics matter less than the mental model: prioritization decisions should be made with visibility into how each initiative shifts the risk/reward profile of the overall portfolio.
 
-The exact mechanics matter less than the discipline: prioritization decisions should be made with visibility into how each initiative shifts the risk/reward profile of the overall portfolio.
+### what is risk, anyway?
 
-### So what is risk, anyway?
+at the project level, risk is the variance of expected outcomes for the project. at the portfolio level, you need to account for covariance… how the failure modes of individual projects are correlated. 
 
-At the project level, risk is the variance of expected outcomes for the project. At the portfolio level, you need to account for covariance… how the failure modes of individual projects are correlated. 
+if two projects share a dependency on the same data or are both exposed to the same regulation, they have some shared risk that should be considered. the last thing you want is all of your genAI initiatives failing at once. 
 
-For example, if two projects share a dependency on the same data or are both exposed to the same regulation, they have some shared risk that should be considered. The last thing you want is all of your GenAI initiatives failing at once. 
+and that’s why prioritization decisions shouldn't be made in isolation based solely on project-level roi, but as part of a genAI portfolio strategy.
 
-And that is why prioritization decisions shouldn't be made in isolation based solely on project-level ROI, but as part of a portfolio strategy.
+### how does this work in practice?
 
-### Great... but how does this work in practice?
+to be clear, i’m not proposing that you literally calculate covariance for your genAI projects. rather, use the efficient frontier and portfolio theory as mental models.
 
-To be clear, I am not proposing that you literally calculate covariance for each of your GenAI projects. Rather, use the Efficient Frontier and Portfolio Theory as mental models.
+in practice, you might set things up to estimate risk and reward from your genAI project intake form. plot risk vs. reward for accepted, under consideration, and rejected projects. consider where your overall portfolio sits on the efficient frontier, and where you want it to be. 
 
-In practice, you might set things up to estimate risk and reward from your GenAI project intake form. Plot risk vs. reward for accepted, under consideration, and rejected projects. Consider where your overall portfolio sits on the Efficient Frontier, and where you want it to be. 
+have a leadership discussion about proposed projects at the individual level, then discuss them at the portfolio level. make sure there is a “single threaded owner” with full ownership of the final prioritization decision for the portfolio. 
 
-Have a leadership discussion about the proposed projects at the individual level, then discuss them at the portfolio level. Make sure there is a “single threaded owner” with full ownership of the final prioritization decision. 
+optimize roi? yes. and be sure to consider your risk appetite too. 
 
-Optimize ROI? Yes. And be sure to consider your risk appetite too. 
+does your team prioritize genAI initiatives at the project or portfolio level?
 
-Does your team prioritize GenAI initiatives at the project or portfolio level?
-
-Is your risk appetite explicitly included in the prioritization decision?
+are your risk appetite and portfolio risk explicitly considered in prioritization decisions?
 
 ---
-*david crowe - [reducibl.com](https://reducibl.com) - working on this at [gatewaystack.com](https://gatewaystack.com)*
+*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

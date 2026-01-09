@@ -46,4 +46,4 @@ this is why i built [gatewaystack](https://gatewaystack.com) — a trust layer f
 what are you seeing as you build in this space? what patterns are emerging?
 
 ---
-*david crowe - [reducibl.com](https://reducibl.com) - working on this at [gatewaystack.com](https://gatewaystack.com)*
+*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

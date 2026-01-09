@@ -485,20 +485,4 @@ when every mcp server speaks the same identity language — the same request con
 that's the real win: a composable governance stack instead of bespoke middleware in every project.
 
 ---
-*david crowe - [reducibl.com](https://reducibl.com) - working on this at [gatewaystack.com](https://gatewaystack.com)*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*
