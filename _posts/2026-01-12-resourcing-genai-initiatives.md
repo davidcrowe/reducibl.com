@@ -5,7 +5,7 @@ description: "don’t resource genAI projects. resource learning."
 ---
 
 <p align="center">
-  <img src="/assets/GenAI-initiative-funnel.png" alt="genAI initiative funnel" />
+  <img src="/assets/GenAI-Initiative-Funnel.png" alt="genAI initiative funnel" />
 </p>
 
 *originally posted to linkedin*
