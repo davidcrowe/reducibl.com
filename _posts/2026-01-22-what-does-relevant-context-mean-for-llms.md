@@ -24,7 +24,9 @@ but what if the context you need sits outside of the given data set?
 
 many AI applications automate something that was previously done manually. 
 
-if you want to assess whether you’re giving an AI comprehensive inputs, learn from a human. consider what context they use to do the job manually. *are you providing all of that context to the AI system when you ask it to do the job?*
+**if you want to assess whether you’re giving an AI comprehensive inputs, learn from a human. consider what context they use to do the job manually.**
+
+*are you providing all of that context to the AI system when you ask it to do the job?*
 
 if not, the system may appear to work while missing critical context a human relies on -- making early success potentially misleading and increasing exposure to edge failures.
 
