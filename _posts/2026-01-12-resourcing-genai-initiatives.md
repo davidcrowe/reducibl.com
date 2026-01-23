@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "resourcing genai initiatives"
-description: "don’t resource genAI projects. resource learning."
+description: "don’t resource genAI projects. resource learning"
 ---
 
 <p align="center">
