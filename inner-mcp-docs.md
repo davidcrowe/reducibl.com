@@ -131,4 +131,4 @@ Permanently delete a memory.
 
 ## Support
 
-For questions or issues, contact [david.paul.crowe@gmail.com](mailto:david.paul.crowe@gmail.com).
+For questions or issues, contact [reducibl@gmail.com](mailto:reducibl@gmail.com).
