@@ -7,7 +7,7 @@ description: "first impressions on secrets, prompt injection, and the real weak 
 
 i used claude code to build a production chatgpt app. 
 
-and in the back of my head I can't help but ask… ***is it secure?***
+and in the back of my head I couldn't help but ask… ***is it secure?***
 
 not the code that claude code produces. the system itself. 
 
@@ -60,7 +60,7 @@ this mirrors one promising pattern emerging in agentic systems: layered read/wri
 ### a theme is emerging… 
 claude code has many safeguards today. it will continue to add them around things like secret management and prompt injection detection. 
 
-however, ***the biggest risks are and will continue to be behavioral***. it is so easy (and dare i say.. fun!) to select auto-approve and watch claude code execute at will. 
+however, ***the biggest risks are and will continue to be behavioral***. it is so easy (and dare i say.. *fun!*) to select auto-approve and watch claude code execute at will. 
 
 but if teams and devs normalize auto-approve for writes and stop paying attention… the safety rails won't help.
 
