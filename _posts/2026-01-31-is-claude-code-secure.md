@@ -15,16 +15,16 @@ claude code is a software package. you run it in a folder on your computer, and 
 
 so in this case, secure means preventing unwanted data access, exfiltration, and writes.
 
-this isn’t a claude-specific problem — *it’s a new class of local-AI security risk*.
+this isn’t a claude-specific problem — *it’s a new class of local AI security risk*.
 
 ### don't trust claude with your secrets
-by design, claude code only accesses files in the directory where you run the claude command. so you have full control over what claude can read. 
+by design, claude code can only access files in the directory where you run the claude command. so you have full control over what claude can read. 
 
-this sounds great. but in practice, *many devs run it at the project repo root—precisely where secrets live*. secret leakage is the most obvious real-world risk. 
+this sounds great. but in practice, *many devs run it at the project repo root* — precisely where secrets live. secret leakage is the most obvious real-world risk. 
 
 depending on your project, a leaked secret could expose keys to llms, cloud providers, or databases. depending on the key, it could potentially grant full access to the system or data. for example, my project required api keys for claude, google cloud, and auth0.
 
-the blast radius can get large (and costly) fast. there could be legal and financial implications (especially if you are in a regulated industry). 
+the blast radius can get large (and costly) fast. there may be legal and financial implications (especially if you are in a regulated industry). 
 
 in a world where llms are accessing local file systems, the basics become more important than ever:
 
@@ -40,7 +40,7 @@ this is called prompt injection. hidden instructions are embedded in files read 
 
 this isn't theoretical. any file claude reads could contain injected instructions: a pr diff from a contributor, a dependency's readme, even a downloaded config file. the injected text could instruct claude to read your .env file and embed secrets in a commit message, a code comment, or a curl command.
 
-*the dangerous part: you might not notice*. the output looks like normal code. the commit looks routine. but the secret is now in your git history or sent to an external server.
+*the dangerous part*: you might not notice. the output looks like normal code. the commit looks routine. but the secret is now in your git history or sent to an external server.
 
 there is no full fix for this at the moment. it's an open problem across all AI coding tools. but there are a few things you can do to reduce the risk:
 
@@ -53,14 +53,16 @@ by default claude code asks for permission before writing data or executing a co
 
 this mirrors one promising pattern emerging in agentic systems: layered read/write controls with human-in-the-loop redundancy.
 
-— **i control Claude Code's read/write** at the file and execution level on my machine  
+— **i control claude code's read/write** at the file and execution level on my machine  
 — **i control mcp connector and tool read/write** inside of the LLM  
 — **the developer controls tool read/write** at the server level to control access to their database (maybe with fine grained permissions e.g., by role)  
 
 ## a theme is emerging… people are the weak link in the security chain
 claude code has many safeguards today. it will continue to add them around things like secret management and prompt injection detection. 
 
-however, ***the biggest risks are and will continue to be behavioral***. if teams and devs normalize auto-approve for writes and stop paying attention… the safety rails won't help.
+however, ***the biggest risks are and will continue to be behavioral***. it is so easy (and dare i say.. fun!) to select auto-approve and watch claude code execute at will. 
+
+but if teams and devs normalize auto-approve for writes and stop paying attention… the safety rails won't help.
 
 ---
 *david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*
