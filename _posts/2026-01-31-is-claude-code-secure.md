@@ -28,8 +28,11 @@ the blast radius can get large (and costly) fast. there may be legal and financi
 
 in a world where llms are accessing local file systems, the basics become more important than ever:
 
-— **secret management** new rule… never rely on local .env files for secret management. always manage secrets in a dedicated secret manager at the org level  
-— **fine grained permissions** don't use shared api keys that expose everything. each specific use case should have fine-grained, required only permissions to minimize the blast radius, make it more observable, and easier to isolate and control if leakage occurs  
+#### secret management 
+new rule… never rely on local .env files for secret management. always manage secrets in a dedicated secret manager at the org level  
+
+#### fine grained permissions
+don't use shared api keys that expose everything. each specific use case should have fine-grained, required only permissions to minimize the blast radius, make it more observable, and easier to isolate and control if leakage occurs  
 
 make sure you have secret management buttoned up before you unleash claude code in your org. 
 
