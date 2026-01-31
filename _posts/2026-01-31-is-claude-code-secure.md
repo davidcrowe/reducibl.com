@@ -3,6 +3,7 @@ layout: post
 title: "is claude code secure?"
 description: "first impressions on secrets, prompt injection, and the real weak link"
 ---
+  <img src="/assets/claude-code-security.png" alt="Claude Code responding to security concerns" />
 
 i used claude code to build a production chatgpt app. 
 
