@@ -44,25 +44,23 @@ this isn't theoretical. any file claude reads could contain injected instruction
 
 there is no full fix for this at the moment. it's an open problem across all AI coding tools. but there are a few things you can do to reduce the risk:
 
-— use .claudeignore to exclude sensitive files and directories from Claude's context entirely  
-— review diffs carefully before approving writes, especially when working with untrusted code  
-— never auto-approve in repos with external contributions or untrusted dependencies  
+— **use .claudeignore** to exclude sensitive files and directories from Claude's context entirely  
+— **review diffs carefully before approving writes**, especially when working with untrusted code  
+— **never auto-approve**, especially in repos with external contributions or untrusted dependencies  
 
 ### on the bright side
 by default claude code asks for permission before writing data or executing a command. you need to give it permission to write to a file or to another system. 
 
 this mirrors one promising pattern emerging in agentic systems: layered read/write controls with human-in-the-loop redundancy.
 
-— i control Claude Code's read/write at the file and execution level on my machine  
-— i control read/write for each mcp connector and tool inside of the LLM  
-— the developer controls read/write at the tool level for access to their database (maybe with fine grained permissions e.g., by role)  
+— **i control Claude Code's read/write** at the file and execution level on my machine  
+— **i control mcp connector and tool read/write** inside of the LLM  
+— **the developer controls tool read/write** at the server level to control access to their database (maybe with fine grained permissions e.g., by role)  
 
 ## a theme is emerging… people are the weak link in the security chain
 claude code has many safeguards today. it will continue to add them around things like secret management and prompt injection detection. 
 
-however, the biggest risks are and will continue to be behavioral. if teams and devs normalize auto-approve for writes and stop paying attention… the safety rails won't help.
-
-this is the kind of risk that gets worse as teams get more comfortable and stop reading what the AI produces.
+however, ***the biggest risks are and will continue to be behavioral***. if teams and devs normalize auto-approve for writes and stop paying attention… the safety rails won't help.
 
 ---
 *david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*
