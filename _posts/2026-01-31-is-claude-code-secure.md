@@ -57,7 +57,7 @@ this mirrors one promising pattern emerging in agentic systems: layered read/wri
 — **i control mcp connector and tool read/write** inside of the LLM  
 — **the developer controls tool read/write** at the server level to control access to their database (maybe with fine grained permissions e.g., by role)  
 
-## a theme is emerging… people are the weak link in the security chain
+### a theme is emerging… 
 claude code has many safeguards today. it will continue to add them around things like secret management and prompt injection detection. 
 
 however, ***the biggest risks are and will continue to be behavioral***. it is so easy (and dare i say.. fun!) to select auto-approve and watch claude code execute at will. 
