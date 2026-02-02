@@ -51,4 +51,4 @@ individually useful but designed to interlock, gatewaystack defines the emerging
 
 ### more
 
-[writing](/writing) · [github](https://github.com/davidcrowe) · [linkedin](https://www.linkedin.com/in/mrdavidcrowe) · [email](mailto:david.paul.crowe@gmail.com)
+[writing](/writing) · [daily build logs](/buildlogs) · [github](https://github.com/davidcrowe) · [linkedin](https://www.linkedin.com/in/mrdavidcrowe) · [email](mailto:david@reducibl.com)
