@@ -8,7 +8,13 @@ layout: default
 
   {{ content }}
 
-  <p style="margin-top: 2rem;">
-    <a href="{{ '/writing' | relative_url }}">← back to writing</a>
-  </p>
+  {% if page.categories contains "buildlog" %}
+    <p style="margin-top: 2rem;">
+      <a href="{{ '/buildlogs' | relative_url }}">← back to build logs</a>
+    </p>
+  {% else %}
+    <p style="margin-top: 2rem;">
+      <a href="{{ '/writing' | relative_url }}">← back to writing</a>
+    </p>
+  {% endif %}
 </article>

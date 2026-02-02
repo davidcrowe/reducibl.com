@@ -9,6 +9,7 @@ thoughts on applied AI, infrastructure, and building real systems
 
 <ul>
   {% for post in site.posts %}
+    {% if post.categories contains "buildlog" %}{% continue %}{% endif %}
     <li>
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
       <!-- <span> – {{ post.date | date: "%Y-%m-%d" }}</span>-->

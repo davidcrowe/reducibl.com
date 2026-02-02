@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      1-line jwt/jwks verification for mcp backends | reducibl
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.png" type="image/png" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="1-line jwt/jwks verification for mcp backends">
+    <meta property="og:description" content="npm i identifiabl — deploying gatewaystack's first layer into production">
+    <meta property="og:image" content="http://localhost:4000/assets/og-default.png">
+    <meta property="og:url" content="http://localhost:4000/2025/12/03/one-line-jwt-jwks-verification-for-mcp-backends.html">
+    <meta property="og:type" content="article">
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://analytics.reducibl.com/js/pa-qA_7AgRK0qdqoqvtJQ_jX.js"></script>
+    <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+    </script>
+
+    <style>
+      :root {
+        --bg: #E1E6F8;          /* Inner tertiary, periwinkle */
+        --text: #111827;        /* dark neutral */
+        --muted: #6B7280;       /* gray */
+        --heading: #231E5C;     /* Inner primary */
+        --link: #2563EB;        /* brighter blue for links */
+        --link-hover: #1D4ED8;  /* darker on hover */
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 32px 16px 80px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        font-size: 16px;
+      }
+
+      .page {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      a {
+        color: var(--link);
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: var(--link-hover);
+        text-decoration: underline;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
+        letter-spacing: -0.01em;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
+      }
+
+      h4 {
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.25rem;
+        color: var(--heading);
+      }
+
+      p {
+        margin: 0 0 1rem;
+      }
+
+      ul {
+        padding-left: 1.25rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1.25rem;
+      }
+
+      small {
+        color: var(--muted);
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 1.5em auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      }
+
+
+      .top-nav {
+        margin-bottom: 24px;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .top-nav a {
+        color: var(--muted);
+      }
+
+      .top-nav a:hover {
+        color: var(--link);
+      }
+
+      .top-nav .sep {
+        margin: 0 6px;
+      }
+
+      .meta {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-bottom: 1.25rem;
+      }
+
+      .post-image {
+        max-width: 720px;
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+
+
+      @media (max-width: 640px) {
+        body {
+          padding: 24px 12px 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      
+        <nav class="top-nav">
+          <a href="/">home</a>
+          
+            <span class="sep">·</span>
+            <a href="/writing">writing</a>
+          
+          
+            <span class="sep">·</span>
+            <a href="/buildlogs">build logs</a>
+          
+        </nav>
+      
+
+      <article>
+  <h2>1-line jwt/jwks verification for mcp backends</h2>
+  <p class="meta">2025-12-03</p>
+
+  <p>i have redeveloped the same 100-line jwt verification flow for every model context prptocol (mcp) server i have built. while somewhat boilerplate, the cognitive load of sorting out JWKS fetching, signature verification, scope mapping, etc. for every app is draining.</p>
+
+<p>these aren’t issues with my app. not a framework issue from something like firebase or swift. this is a common backend problem pervasive for mcp servers the moment you try to build something more than a prototype (e.g., multi-tenant or regulated).</p>
+
+<p>so i started writing a package to standardize this process for my new apps. and i realized that i wasn’t building an app anymore. i was reverse-engineering a trust and governance layer for AI model calls.</p>
+
+<blockquote>
+  <p><strong>tl;dr:</strong> here is how I replaced <strong>~100 lines of custom jwt/jose logic</strong> in my mcp server with a single <code class="language-plaintext highlighter-rouge">identifiablVerifier()</code> call. first production deployment of gatewaystack’s identity layer. zero changes to tool definitions, scopes, or firebase integration.</p>
+</blockquote>
+
+<p><strong>this post is for you if:</strong></p>
+<ul>
+  <li>you’re building an mcp server with oauth</li>
+  <li>you have custom jwt verification code you’d rather not write or maintain</li>
+  <li>you need to map oauth subjects to your app’s user ids</li>
+  <li>you’re planning to add rate limiting, audit trails, or policy enforcement later</li>
+</ul>
+
+<p><strong>time to read:</strong> 12 minutes<br />
+<strong>time to migrate:</strong> ~30 minutes</p>
+
+<h3 id="origins-of-gatewaystack">origins of gatewaystack</h3>
+
+<p>identity is fundamental to ai apps but it’s just the start. so I started designing and implementing what eventually became <a href="https://gatewaystack.com">gatewaystack</a>: a modular, open-source agentic control plane that adds identity, safety, validation, routing, limits, and auditability to AI calls. gatewaystack is a user-scoped trust and governance gateway for ai apps. it standardizes the layer that should exist between a user clicking “send” and the request hitting the model api.</p>
+
+<p>last night, the first piece of that vision went live.</p>
+
+<h3 id="identifiabl-gatewaystacks-first-production-module">identifiabl: gatewaystack’s first production module</h3>
+
+<p>every advanced llm integration has the same challenge…</p>
+
+<p>three parties are involved — the user, the llm, and your backend — but there is no shared identity between them.</p>
+
+<ul>
+  <li>chatgpt knows who the user is (via openai auth)</li>
+  <li>your backend knows who the user is (via your app’s auth e.g., firebase auth)</li>
+  <li>but your mcp server has no simple way to carry the user’s cryptographic identity across the boundary</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">identifiabl</code> makes it easy, repeatable, and secure to bridge that boundary… providing shared identity across the entire interaction.</p>
+
+<p>it binds user identity to AI-originated requests and exposes a normalized gatewaystack request context for other controls to plug into later (policy, limits, routing, audit, etc.).</p>
+
+<p><strong>get started:</strong> <code class="language-plaintext highlighter-rouge">npm i identifiabl</code><br />
+<a href="https://github.com/davidcrowe/GatewayStack/tree/main/packages/identifiabl">→ github</a><br />
+<a href="https://identifiabl.com">→ docs</a></p>
+
+<h4 id="who-needs-this">Who needs this?</h4>
+
+<p><em>if</em> you are building an mcp server that:</p>
+<ul>
+  <li>accepts oauth tokens from chatgpt, claude, or another AI platform</li>
+  <li>needs to verify user identity before calling your backend</li>
+  <li>wants to enforce scopes/permissions on tool calls</li>
+  <li>currently has 50-100 lines of custom jose/jwt logic</li>
+</ul>
+
+<p><em>then</em> you should check out <code class="language-plaintext highlighter-rouge">identifiabl</code>. it handles all of it.</p>
+
+<h3 id="how-exactly-did-my-mcp-server-code-change">how exactly did my mcp server code change?</h3>
+
+<p>after launching <code class="language-plaintext highlighter-rouge">identifiabl</code>, i immediately used it to replace my hand-rolled identity handling in the mcp server for my app inner.</p>
+
+<p>it was… easy. my mcp server used to contain ~100 lines of custom jose/jwt wiring to:</p>
+
+<ul>
+  <li>fetch jwks</li>
+  <li>verify signatures</li>
+  <li>check issuer and audience</li>
+  <li>normalize claims</li>
+  <li>extract scopes</li>
+  <li>map subjects</li>
+  <li>forward identity downstream</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">identifiabl</code> reduces all of this to a single call:</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">identifiablVerifier</span><span class="p">(</span><span class="nx">accessToken</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>everything else — your scopes, your uid mapping, your firebase plumbing — stays the same.</p>
+
+<p>more specifically, the main changes i made to my mcp server can be bucketed into three areas:</p>
+
+<h4 id="1-core-auth-helper-verifybearer">1. core auth helper: <code class="language-plaintext highlighter-rouge">verifyBearer</code></h4>
+
+<p><strong>before: ~100 lines of hand-rolled jose</strong></p>
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nf">verifyBearer</span><span class="p">(</span><span class="nx">req</span><span class="p">:</span> <span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">logAuthShape</span><span class="p">(</span><span class="dl">"</span><span class="s2">verifyBearer</span><span class="dl">"</span><span class="p">,</span> <span class="nx">req</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">auth</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">header</span><span class="p">(</span><span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">)</span> <span class="o">||</span> <span class="dl">""</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">auth</span><span class="p">.</span><span class="nf">startsWith</span><span class="p">(</span><span class="dl">"</span><span class="s2">Bearer </span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">err</span><span class="p">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">NO_AUTH</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">err</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="mi">401</span><span class="p">;</span>
+    <span class="nx">err</span><span class="p">.</span><span class="nx">www</span> <span class="o">=</span> <span class="nf">buildWwwAuthenticate</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, error=</span><span class="se">\"</span><span class="s2">invalid_token</span><span class="se">\"</span><span class="dl">"</span><span class="p">;</span>
+    <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">const</span> <span class="nx">accessToken</span> <span class="o">=</span> <span class="nx">auth</span><span class="p">.</span><span class="nf">slice</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">segments</span> <span class="o">=</span> <span class="nx">accessToken</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">.</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">header</span> <span class="o">=</span> <span class="nx">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">?</span> <span class="nf">b64urlDecodeToJson</span><span class="p">(</span><span class="nx">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">:</span> <span class="kc">undefined</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span>
+    <span class="dl">"</span><span class="s2">[auth:token] segments=%d header.alg=%s header.typ=%s</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nx">segments</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="nx">header</span><span class="p">?.</span><span class="nx">alg</span><span class="p">,</span> <span class="nx">header</span><span class="p">?.</span><span class="nx">typ</span>
+  <span class="p">);</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">segments</span><span class="p">.</span><span class="nx">length</span> <span class="o">!==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">e</span><span class="p">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Error</span><span class="p">(</span>
+      <span class="nx">segments</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">5</span>
+        <span class="p">?</span> <span class="dl">"</span><span class="s2">ACCESS_TOKEN_IS_ENCRYPTED_JWE</span><span class="dl">"</span>
+        <span class="p">:</span> <span class="dl">"</span><span class="s2">ACCESS_TOKEN_NOT_JWS</span><span class="dl">"</span>
+    <span class="p">);</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="mi">401</span><span class="p">;</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">www</span> <span class="o">=</span> <span class="nf">buildWwwAuthenticate</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, error=</span><span class="se">\"</span><span class="s2">invalid_token</span><span class="se">\"</span><span class="dl">"</span><span class="p">;</span>
+    <span class="k">throw</span> <span class="nx">e</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">createRemoteJWKSet</span><span class="p">,</span> <span class="nx">jwtVerify</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="k">import</span><span class="p">(</span><span class="dl">"</span><span class="s2">jose</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">JWKS</span> <span class="o">=</span> <span class="nf">createRemoteJWKSet</span><span class="p">(</span><span class="k">new</span> <span class="nc">URL</span><span class="p">(</span><span class="nx">JWKS_URI_FALLBACK</span><span class="p">));</span>
+  <span class="kd">const</span> <span class="nx">issuerNoSlash</span> <span class="o">=</span> <span class="nx">OAUTH_ISSUER</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\/</span><span class="sr">+$/</span><span class="p">,</span> <span class="dl">""</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">issuerWithSlash</span> <span class="o">=</span> <span class="nx">issuerNoSlash</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">;</span>
+
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">payload</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">jwtVerify</span><span class="p">(</span><span class="nx">accessToken</span><span class="p">,</span> <span class="nx">JWKS</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">issuer</span><span class="p">:</span> <span class="p">[</span><span class="nx">issuerNoSlash</span><span class="p">,</span> <span class="nx">issuerWithSlash</span><span class="p">],</span>
+      <span class="p">...(</span><span class="nx">OAUTH_AUDIENCE</span> <span class="p">?</span> <span class="p">{</span> <span class="na">audience</span><span class="p">:</span> <span class="nx">OAUTH_AUDIENCE</span> <span class="p">}</span> <span class="p">:</span> <span class="p">{})</span>
+    <span class="p">});</span>
+
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">sub</span><span class="p">,</span> <span class="nx">aud</span><span class="p">,</span> <span class="nx">exp</span><span class="p">,</span> <span class="nx">iat</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">payload</span> <span class="kd">as </span><span class="kr">any</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">[auth:postVerify]</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+      <span class="nx">sub</span><span class="p">,</span>
+      <span class="nx">aud</span><span class="p">,</span>
+      <span class="nx">exp</span><span class="p">,</span>
+      <span class="nx">iat</span><span class="p">,</span>
+      <span class="na">now</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span>
+      <span class="na">hasScope</span><span class="p">:</span> <span class="o">!!</span><span class="p">(</span><span class="nx">payload</span> <span class="kd">as </span><span class="kr">any</span><span class="p">).</span><span class="nx">scope</span><span class="p">,</span>
+    <span class="p">});</span>
+    <span class="nf">logTokenScopes</span><span class="p">(</span><span class="dl">"</span><span class="s2">postVerify</span><span class="dl">"</span><span class="p">,</span> <span class="nx">payload</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">payload</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch </span><span class="p">(</span><span class="nx">err</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">[auth:jwtVerify:error]</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">message</span><span class="p">:</span> <span class="nx">err</span><span class="p">?.</span><span class="nx">message</span><span class="p">,</span>
+      <span class="na">name</span><span class="p">:</span> <span class="nx">err</span><span class="p">?.</span><span class="nx">name</span><span class="p">,</span>
+      <span class="na">code</span><span class="p">:</span> <span class="nx">err</span><span class="p">?.</span><span class="nx">code</span><span class="p">,</span>
+    <span class="p">});</span>
+    <span class="kd">const</span> <span class="nx">e</span><span class="p">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">JWT_VERIFY_FAILED</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="mi">401</span><span class="p">;</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">www</span> <span class="o">=</span> <span class="nf">buildWwwAuthenticate</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, error=</span><span class="se">\"</span><span class="s2">invalid_token</span><span class="se">\"</span><span class="dl">"</span><span class="p">;</span>
+    <span class="k">throw</span> <span class="nx">e</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>after: delegates to identifiablVerifier</strong></p>
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nf">verifyBearer</span><span class="p">(</span><span class="nx">req</span><span class="p">:</span> <span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">logAuthShape</span><span class="p">(</span><span class="dl">"</span><span class="s2">verifyBearer</span><span class="dl">"</span><span class="p">,</span> <span class="nx">req</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">auth</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">header</span><span class="p">(</span><span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">)</span> <span class="o">||</span> <span class="dl">""</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">auth</span><span class="p">.</span><span class="nf">startsWith</span><span class="p">(</span><span class="dl">"</span><span class="s2">Bearer </span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">err</span><span class="p">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">NO_AUTH</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">err</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="mi">401</span><span class="p">;</span>
+    <span class="nx">err</span><span class="p">.</span><span class="nx">www</span> <span class="o">=</span> <span class="nf">buildWwwAuthenticate</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, error=</span><span class="se">\"</span><span class="s2">invalid_token</span><span class="se">\"</span><span class="dl">"</span><span class="p">;</span>
+    <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">const</span> <span class="nx">accessToken</span> <span class="o">=</span> <span class="nx">auth</span><span class="p">.</span><span class="nf">slice</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+
+  <span class="c1">// Log shape early, same as before</span>
+  <span class="kd">const</span> <span class="nx">segments</span> <span class="o">=</span> <span class="nx">accessToken</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">.</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">header</span> <span class="o">=</span> <span class="nx">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">?</span> <span class="nf">b64urlDecodeToJson</span><span class="p">(</span><span class="nx">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">:</span> <span class="kc">undefined</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span>
+    <span class="dl">"</span><span class="s2">[auth:token] segments=%d header.alg=%s header.typ=%s</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nx">segments</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="nx">header</span><span class="p">?.</span><span class="nx">alg</span><span class="p">,</span> <span class="nx">header</span><span class="p">?.</span><span class="nx">typ</span>
+  <span class="p">);</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">segments</span><span class="p">.</span><span class="nx">length</span> <span class="o">!==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">e</span><span class="p">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Error</span><span class="p">(</span>
+      <span class="nx">segments</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">5</span>
+        <span class="p">?</span> <span class="dl">"</span><span class="s2">ACCESS_TOKEN_IS_ENCRYPTED_JWE</span><span class="dl">"</span>
+        <span class="p">:</span> <span class="dl">"</span><span class="s2">ACCESS_TOKEN_NOT_JWS</span><span class="dl">"</span>
+    <span class="p">);</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="mi">401</span><span class="p">;</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">www</span> <span class="o">=</span> <span class="nf">buildWwwAuthenticate</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, error=</span><span class="se">\"</span><span class="s2">invalid_token</span><span class="se">\"</span><span class="dl">"</span><span class="p">;</span>
+    <span class="k">throw</span> <span class="nx">e</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Use identifiabl-core to verify + map identity</span>
+  <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">identifiablVerifier</span><span class="p">(</span><span class="nx">accessToken</span><span class="p">);</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">[auth:identifiabl:error]</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">error</span><span class="p">:</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">,</span>
+      <span class="na">detail</span><span class="p">:</span> <span class="nx">result</span><span class="p">.</span><span class="nx">detail</span><span class="p">,</span>
+    <span class="p">});</span>
+    <span class="kd">const</span> <span class="nx">e</span><span class="p">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">JWT_VERIFY_FAILED</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="mi">401</span><span class="p">;</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">www</span> <span class="o">=</span> <span class="nf">buildWwwAuthenticate</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, error=</span><span class="se">\"</span><span class="s2">invalid_token</span><span class="se">\"</span><span class="dl">"</span><span class="p">;</span>
+    <span class="k">throw</span> <span class="nx">e</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">identity</span><span class="p">,</span> <span class="nx">payload</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">result</span><span class="p">;</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">[auth:postVerify]</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">sub</span><span class="p">:</span> <span class="nx">identity</span><span class="p">.</span><span class="nx">sub</span><span class="p">,</span>
+    <span class="na">issuer</span><span class="p">:</span> <span class="nx">identity</span><span class="p">.</span><span class="nx">issuer</span><span class="p">,</span>
+    <span class="na">tenantId</span><span class="p">:</span> <span class="nx">identity</span><span class="p">.</span><span class="nx">tenantId</span><span class="p">,</span>
+    <span class="na">roles</span><span class="p">:</span> <span class="nx">identity</span><span class="p">.</span><span class="nx">roles</span><span class="p">,</span>
+    <span class="na">scopes</span><span class="p">:</span> <span class="nx">identity</span><span class="p">.</span><span class="nx">scopes</span><span class="p">,</span>
+    <span class="na">plan</span><span class="p">:</span> <span class="nx">identity</span><span class="p">.</span><span class="nx">plan</span><span class="p">,</span>
+  <span class="p">});</span>
+
+  <span class="nf">logTokenScopes</span><span class="p">(</span><span class="dl">"</span><span class="s2">postVerify</span><span class="dl">"</span><span class="p">,</span> <span class="nx">payload</span> <span class="kd">as </span><span class="kr">any</span><span class="p">);</span>
+
+  <span class="c1">// keep the same return shape as before so callers don't change:</span>
+  <span class="k">return</span> <span class="nx">payload</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="2-scope-verification-same-interface-new-foundation">2. scope verification: same interface, new foundation</h4>
+
+<p><strong>no api changes</strong> — <code class="language-plaintext highlighter-rouge">verifyBearerAndScopes</code> still returns <code class="language-plaintext highlighter-rouge">{ uid, gatewaySig }</code>, but now it’s built on <code class="language-plaintext highlighter-rouge">identifiabl</code>’s normalized identity layer instead of raw jose</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nf">verifyBearerAndScopes</span><span class="p">(</span><span class="nx">req</span><span class="p">:</span> <span class="nx">Request</span><span class="p">,</span> <span class="nx">toolName</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">payload</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">verifyBearer</span><span class="p">(</span><span class="nx">req</span><span class="p">);</span> <span class="c1">// ⬅ now uses identifiablVerifier under the hood</span>
+
+  <span class="kd">const</span> <span class="nx">sub</span> <span class="o">=</span> <span class="nc">String</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">sub</span> <span class="o">||</span> <span class="dl">""</span><span class="p">);</span>
+  <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">sub</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">err</span><span class="p">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">TOKEN_NO_SUB</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">err</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="mi">401</span><span class="p">;</span>
+    <span class="nx">err</span><span class="p">.</span><span class="nx">www</span> <span class="o">=</span> <span class="nf">buildWwwAuthenticate</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, error=</span><span class="se">\"</span><span class="s2">invalid_token</span><span class="se">\"</span><span class="dl">"</span><span class="p">;</span>
+    <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">const</span> <span class="nx">email</span> <span class="o">=</span>
+    <span class="k">typeof </span><span class="p">(</span><span class="nx">payload</span> <span class="kd">as </span><span class="kr">any</span><span class="p">).</span><span class="nx">email</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span> <span class="p">?</span> <span class="p">(</span><span class="nx">payload</span> <span class="kd">as </span><span class="kr">any</span><span class="p">).</span><span class="nx">email</span> <span class="p">:</span> <span class="kc">undefined</span><span class="p">;</span>
+
+  <span class="kd">const</span> <span class="nx">scopeStr</span> <span class="o">=</span>
+    <span class="k">typeof </span><span class="p">(</span><span class="nx">payload</span> <span class="kd">as </span><span class="kr">any</span><span class="p">).</span><span class="nx">scope</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span> <span class="p">?</span> <span class="p">(</span><span class="nx">payload</span> <span class="kd">as </span><span class="kr">any</span><span class="p">).</span><span class="nx">scope</span> <span class="p">:</span> <span class="dl">""</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">permissions</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nf">isArray</span><span class="p">((</span><span class="nx">payload</span> <span class="kd">as </span><span class="kr">any</span><span class="p">).</span><span class="nx">permissions</span><span class="p">)</span>
+    <span class="p">?</span> <span class="p">((</span><span class="nx">payload</span> <span class="kd">as </span><span class="kr">any</span><span class="p">).</span><span class="nx">permissions</span> <span class="kd">as </span><span class="kr">string</span><span class="p">[])</span>
+    <span class="p">:</span> <span class="p">[];</span>
+
+  <span class="kd">const</span> <span class="nx">scopes</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span>
+    <span class="k">new</span> <span class="nc">Set</span><span class="p">([...</span><span class="nx">scopeStr</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">).</span><span class="nf">filter</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">),</span> <span class="p">...</span><span class="nx">permissions</span><span class="p">])</span>
+  <span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">need</span> <span class="o">=</span> <span class="nx">TOOL_SCOPES</span><span class="p">[</span><span class="nx">toolName</span><span class="p">]</span> <span class="o">||</span> <span class="p">[];</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">need</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="nf">requireScopes</span><span class="p">(</span><span class="nx">scopes</span><span class="p">,</span> <span class="nx">need</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">uid</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">subjectToUid</span><span class="p">(</span><span class="nx">sub</span><span class="p">,</span> <span class="nx">email</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">gatewaySig</span> <span class="o">=</span> <span class="nf">signGatewayUid</span><span class="p">(</span><span class="nx">uid</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">uid</span><span class="p">,</span> <span class="nx">gatewaySig</span> <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="3-rest-endpoint-same-transformation">3. rest endpoint: same transformation</h4>
+
+<p><strong>before:</strong></p>
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// tools: POST only beyond this point</span>
+<span class="kd">const</span> <span class="nx">auth</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">header</span><span class="p">(</span><span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">)</span> <span class="o">||</span> <span class="dl">""</span><span class="p">;</span>
+<span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">auth</span><span class="p">.</span><span class="nf">startsWith</span><span class="p">(</span><span class="dl">"</span><span class="s2">Bearer </span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nf">setHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">WWW-Authenticate</span><span class="dl">"</span><span class="p">,</span> <span class="nf">buildWwwAuthenticate</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, error=</span><span class="se">\"</span><span class="s2">invalid_token</span><span class="se">\"</span><span class="dl">"</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nf">status</span><span class="p">(</span><span class="mi">401</span><span class="p">).</span><span class="nf">json</span><span class="p">({</span> <span class="na">ok</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="p">{</span> <span class="na">code</span><span class="p">:</span> <span class="dl">"</span><span class="s2">NO_AUTH</span><span class="dl">"</span><span class="p">,</span> <span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Missing Bearer token</span><span class="dl">"</span> <span class="p">},</span> <span class="nx">requestId</span> <span class="p">});</span>
+  <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">accessToken</span> <span class="o">=</span> <span class="nx">auth</span><span class="p">.</span><span class="nf">slice</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">parts</span> <span class="o">=</span> <span class="nx">accessToken</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">.</span><span class="dl">"</span><span class="p">);</span>
+<span class="k">if </span><span class="p">(</span><span class="nx">parts</span><span class="p">.</span><span class="nx">length</span> <span class="o">!==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nf">setHeader</span><span class="p">(</span>
+    <span class="dl">"</span><span class="s2">WWW-Authenticate</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nf">buildWwwAuthenticate</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, error=</span><span class="se">\"</span><span class="s2">invalid_token</span><span class="se">\"</span><span class="s2">, error_description=</span><span class="se">\"</span><span class="s2">Expecting JWS access token (3 parts)</span><span class="se">\"</span><span class="dl">"</span>
+  <span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nf">status</span><span class="p">(</span><span class="mi">401</span><span class="p">).</span><span class="nf">json</span><span class="p">({</span> <span class="na">ok</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="p">{</span> <span class="na">code</span><span class="p">:</span> <span class="dl">"</span><span class="s2">INVALID_TOKEN</span><span class="dl">"</span><span class="p">,</span> <span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Expecting JWT/JWS access token</span><span class="dl">"</span> <span class="p">},</span> <span class="nx">requestId</span> <span class="p">});</span>
+  <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nf">logTokenStructure</span><span class="p">(</span><span class="dl">"</span><span class="s2">rest.verify</span><span class="dl">"</span><span class="p">,</span> <span class="nx">accessToken</span><span class="p">);</span>
+<span class="nf">logJwtClaims</span><span class="p">(</span><span class="dl">"</span><span class="s2">rest.claimsPreview</span><span class="dl">"</span><span class="p">,</span> <span class="nx">accessToken</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">createRemoteJWKSet</span><span class="p">,</span> <span class="nx">jwtVerify</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="k">import</span><span class="p">(</span><span class="dl">"</span><span class="s2">jose</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">JWKS</span> <span class="o">=</span> <span class="nf">createRemoteJWKSet</span><span class="p">(</span><span class="k">new</span> <span class="nc">URL</span><span class="p">(</span><span class="nx">JWKS_URI_FALLBACK</span><span class="p">));</span>
+<span class="kd">const</span> <span class="nx">issuerNoSlash</span> <span class="o">=</span> <span class="nx">OAUTH_ISSUER</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\/</span><span class="sr">+$/</span><span class="p">,</span> <span class="dl">""</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">issuerWithSlash</span> <span class="o">=</span> <span class="nx">issuerNoSlash</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">payload</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">jwtVerify</span><span class="p">(</span><span class="nx">accessToken</span><span class="p">,</span> <span class="nx">JWKS</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">issuer</span><span class="p">:</span> <span class="p">[</span><span class="nx">issuerNoSlash</span><span class="p">,</span> <span class="nx">issuerWithSlash</span><span class="p">],</span>
+  <span class="p">...(</span><span class="nx">OAUTH_AUDIENCE</span> <span class="p">?</span> <span class="p">{</span> <span class="na">audience</span><span class="p">:</span> <span class="nx">OAUTH_AUDIENCE</span> <span class="p">}</span> <span class="p">:</span> <span class="p">{})</span>
+<span class="p">});</span>
+
+<span class="c1">// then: sub/scope extraction, TOOL_SCOPES check, subjectToUid, signGatewayUid, Firebase ID token, forwarding…</span>
+</code></pre></div></div>
+
+<p><strong>after: delegates to identifiablVerifier</strong></p>
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// tools: POST only beyond this point</span>
+<span class="kd">const</span> <span class="nx">auth</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">header</span><span class="p">(</span><span class="dl">"</span><span class="s2">authorization</span><span class="dl">"</span><span class="p">)</span> <span class="o">||</span> <span class="dl">""</span><span class="p">;</span>
+<span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">auth</span><span class="p">.</span><span class="nf">startsWith</span><span class="p">(</span><span class="dl">"</span><span class="s2">Bearer </span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nf">setHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">WWW-Authenticate</span><span class="dl">"</span><span class="p">,</span> <span class="nf">buildWwwAuthenticate</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, error=</span><span class="se">\"</span><span class="s2">invalid_token</span><span class="se">\"</span><span class="dl">"</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nf">status</span><span class="p">(</span><span class="mi">401</span><span class="p">).</span><span class="nf">json</span><span class="p">({</span> <span class="na">ok</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="p">{</span> <span class="na">code</span><span class="p">:</span> <span class="dl">"</span><span class="s2">NO_AUTH</span><span class="dl">"</span><span class="p">,</span> <span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Missing Bearer token</span><span class="dl">"</span> <span class="p">},</span> <span class="nx">requestId</span> <span class="p">});</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">warn</span><span class="p">(</span><span class="dl">"</span><span class="s2">[rest] no Authorization header; sending WWW-Authenticate</span><span class="dl">"</span><span class="p">);</span>
+  <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">accessToken</span> <span class="o">=</span> <span class="nx">auth</span><span class="p">.</span><span class="nf">slice</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">parts</span> <span class="o">=</span> <span class="nx">accessToken</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">.</span><span class="dl">"</span><span class="p">);</span>
+<span class="k">if </span><span class="p">(</span><span class="nx">parts</span><span class="p">.</span><span class="nx">length</span> <span class="o">!==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nf">setHeader</span><span class="p">(</span>
+    <span class="dl">"</span><span class="s2">WWW-Authenticate</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nf">buildWwwAuthenticate</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, error=</span><span class="se">\"</span><span class="s2">invalid_token</span><span class="se">\"</span><span class="s2">, error_description=</span><span class="se">\"</span><span class="s2">Expecting JWS access token (3 parts)</span><span class="se">\"</span><span class="dl">"</span>
+  <span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">warn</span><span class="p">(</span><span class="dl">"</span><span class="s2">[rest] non-JWS token (parts=%d); prompting OAuth</span><span class="dl">"</span><span class="p">,</span> <span class="nx">parts</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nf">status</span><span class="p">(</span><span class="mi">401</span><span class="p">).</span><span class="nf">json</span><span class="p">({</span> <span class="na">ok</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">error</span><span class="p">:</span> <span class="p">{</span> <span class="na">code</span><span class="p">:</span> <span class="dl">"</span><span class="s2">INVALID_TOKEN</span><span class="dl">"</span><span class="p">,</span> <span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Expecting JWT/JWS access token</span><span class="dl">"</span> <span class="p">},</span> <span class="nx">requestId</span> <span class="p">});</span>
+  <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nf">logTokenStructure</span><span class="p">(</span><span class="dl">"</span><span class="s2">rest.verify</span><span class="dl">"</span><span class="p">,</span> <span class="nx">accessToken</span><span class="p">);</span>
+<span class="nf">logJwtClaims</span><span class="p">(</span><span class="dl">"</span><span class="s2">rest.claimsPreview</span><span class="dl">"</span><span class="p">,</span> <span class="nx">accessToken</span><span class="p">);</span>
+
+<span class="c1">// Use identifiabl-core instead of inline jose logic</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">identifiablVerifier</span><span class="p">(</span><span class="nx">accessToken</span><span class="p">);</span>
+
+<span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">[rest:jwtVerify:error]</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">error</span><span class="p">:</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">,</span>
+    <span class="na">detail</span><span class="p">:</span> <span class="nx">result</span><span class="p">.</span><span class="nx">detail</span><span class="p">,</span>
+  <span class="p">});</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nf">setHeader</span><span class="p">(</span>
+    <span class="dl">"</span><span class="s2">WWW-Authenticate</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nf">buildWwwAuthenticate</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, error=</span><span class="se">\"</span><span class="s2">invalid_token</span><span class="se">\"</span><span class="dl">"</span>
+  <span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nf">status</span><span class="p">(</span><span class="mi">401</span><span class="p">).</span><span class="nf">json</span><span class="p">({</span>
+    <span class="na">ok</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">error</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">code</span><span class="p">:</span> <span class="dl">"</span><span class="s2">JWT_VERIFY_FAILED</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">message</span><span class="p">:</span> <span class="nx">result</span><span class="p">.</span><span class="nx">detail</span> <span class="o">||</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="nx">requestId</span><span class="p">,</span>
+  <span class="p">});</span>
+  <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">identity</span><span class="p">,</span> <span class="nx">payload</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">result</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">sub</span> <span class="o">=</span> <span class="nc">String</span><span class="p">(</span><span class="nx">identity</span><span class="p">.</span><span class="nx">sub</span> <span class="o">||</span> <span class="dl">""</span><span class="p">);</span>
+<span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">sub</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nf">setHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">WWW-Authenticate</span><span class="dl">"</span><span class="p">,</span> <span class="nf">buildWwwAuthenticate</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, error=</span><span class="se">\"</span><span class="s2">invalid_token</span><span class="se">\"</span><span class="dl">"</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nf">status</span><span class="p">(</span><span class="mi">401</span><span class="p">).</span><span class="nf">json</span><span class="p">({</span>
+    <span class="na">ok</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">error</span><span class="p">:</span> <span class="p">{</span> <span class="na">code</span><span class="p">:</span> <span class="dl">"</span><span class="s2">TOKEN_NO_SUB</span><span class="dl">"</span><span class="p">,</span> <span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Missing sub</span><span class="dl">"</span> <span class="p">},</span>
+    <span class="nx">requestId</span><span class="p">,</span>
+  <span class="p">});</span>
+  <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">scopeStr</span> <span class="o">=</span> <span class="k">typeof </span><span class="p">(</span><span class="nx">payload</span> <span class="kd">as </span><span class="kr">any</span><span class="p">).</span><span class="nx">scope</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span> <span class="p">?</span> <span class="p">(</span><span class="nx">payload</span> <span class="kd">as </span><span class="kr">any</span><span class="p">).</span><span class="nx">scope</span> <span class="p">:</span> <span class="dl">""</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">scopeList</span> <span class="o">=</span> <span class="nx">scopeStr</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">).</span><span class="nf">filter</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">permissions</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nf">isArray</span><span class="p">((</span><span class="nx">payload</span> <span class="kd">as </span><span class="kr">any</span><span class="p">).</span><span class="nx">permissions</span><span class="p">)</span>
+  <span class="p">?</span> <span class="p">((</span><span class="nx">payload</span> <span class="kd">as </span><span class="kr">any</span><span class="p">).</span><span class="nx">permissions</span> <span class="kd">as </span><span class="kr">string</span><span class="p">[])</span>
+  <span class="p">:</span> <span class="p">[];</span>
+<span class="kd">const</span> <span class="nx">scopes</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="k">new</span> <span class="nc">Set</span><span class="p">([...</span><span class="nx">scopeList</span><span class="p">,</span> <span class="p">...</span><span class="nx">permissions</span><span class="p">]));</span>
+
+<span class="c1">// same TOOL_SCOPES, subjectToUid, signGatewayUid, Firebase mint, etc.</span>
+</code></pre></div></div>
+
+<h4 id="4-what-stayed-the-same-everything-else">4. what stayed the same (everything else)</h4>
+
+<ul>
+  <li>TOOL_SCOPES + REQUIRED_SCOPES</li>
+  <li>subjectToUid(sub) → still mapping to auth0:${sub}</li>
+  <li>signGatewayUid(uid) hmac scheme</li>
+  <li>firebase admin init + getFirebaseIdTokenForUid custom token exchange</li>
+  <li>tool schemas, titles, descriptions, and the entire inner widget plumbing</li>
+</ul>
+
+<h3 id="the-real-payload-a-standardized-request-context-primed-for-ai-model-governance">the real payload: a standardized request context primed for AI model governance</h3>
+
+<p><code class="language-plaintext highlighter-rouge">identifiabl</code> doesn’t just say “this jwt is valid.”</p>
+
+<p>it normalizes everything you care about into a <strong>request context</strong> that the rest of gatewaystack can plug into: identity, scopes, roles, tenant/plan, plus the derived <code class="language-plaintext highlighter-rouge">uid</code> and hmac signature you already use to call firebase functions.</p>
+
+<p>in other words: it standardizes the structure to track “who is this, what are they allowed to do, and how should downstream services trust this call?”</p>
+
+<h4 id="the-gatewaystack-request-context">the gatewaystack request context</h4>
+
+<p>this is what the request context code looks like:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">GatewayRequestContext</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Who this request is "running as" inside your app</span>
+  <span class="na">uid</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">gatewaySig</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="c1">// HMAC over uid + timestamp for your functions</span>
+  
+  <span class="c1">// Normalized identity from identifiabl</span>
+  <span class="nl">identity</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">sub</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>           <span class="c1">// Raw subject from IdP (e.g. auth0|abc123)</span>
+    <span class="nl">issuer</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>        <span class="c1">// Cleaned issuer URL</span>
+    <span class="nl">scopes</span><span class="p">:</span> <span class="kr">string</span><span class="p">[];</span>      <span class="c1">// Merged from `scope` + `permissions`</span>
+    <span class="nl">roles</span><span class="p">:</span> <span class="kr">string</span><span class="p">[];</span>       <span class="c1">// Role/permission names</span>
+    <span class="nl">tenantId</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>     <span class="c1">// Optional org/workspace</span>
+    <span class="nl">plan</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>         <span class="c1">// Optional billing tier</span>
+  <span class="p">};</span>
+  
+  <span class="c1">// Raw JWT claims if you ever need to dig deeper</span>
+  <span class="nl">claims</span><span class="p">:</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nx">unknown</span><span class="o">&gt;</span><span class="p">;</span>
+  
+  <span class="c1">// Optional: what tool is being invoked</span>
+  <span class="nl">tool</span><span class="p">?:</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+    <span class="nl">requiredScopes</span><span class="p">:</span> <span class="kr">string</span><span class="p">[];</span>
+  <span class="p">};</span>
+  
+  <span class="c1">// Optional: trace info for logging/audit</span>
+  <span class="nl">trace</span><span class="p">?:</span> <span class="p">{</span>
+    <span class="na">requestId</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+    <span class="nl">receivedAt</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="c1">// ISO timestamp</span>
+    <span class="nl">ip</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+    <span class="nl">userAgent</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="a-concrete-example">a concrete example</h4>
+
+<p>here’s what a real <code class="language-plaintext highlighter-rouge">saveMemoryOrb</code> call looks like flowing through the system — chatgpt → inner mcp server → firebase:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth0:auth0|abc123"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gatewaySig"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth0:auth0|abc123.1733190000.0b9c0f…"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"identity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth0|abc123"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"issuer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://dev-e2r87v477lvku60t.us.auth0.com/"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scopes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"openid"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"inner.dreams:read"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"inner.memories:write"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"user"</span><span class="p">],</span><span class="w">
+    </span><span class="nl">"tenantId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org_7Yk9pQ3"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"plan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"claims"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://dev-e2r87v477lvku60t.us.auth0.com/"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth0|abc123"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"aud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://inner-api"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openid profile email inner.dreams:read"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"inner.memories:write"</span><span class="p">],</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"you@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1733193600</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1733186400</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"tool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"saveMemoryOrb"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"requiredScopes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"inner.memories:write"</span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"trace"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b5a76d7b-5f5a-4d7f-9d3b-1c6d5f2e3a91"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"receivedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-12-02T07:20:43.511Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>everything downstream becomes easier: validation, limits, audit trails, routing, policy, usage metering. they all start with the same normalized identity and request metadata.</p>
+
+<h3 id="try-it-yourself">try it yourself</h3>
+<p>i deployed <code class="language-plaintext highlighter-rouge">identifiabl</code> inside inner’s mcp server. this is the first live, production instance of gatewaystack.</p>
+
+<p>if you’re running an mcp server with oauth, the migration is straightforward:</p>
+
+<ol>
+  <li>install: <code class="language-plaintext highlighter-rouge">npm i identifiabl</code></li>
+  <li>replace your <code class="language-plaintext highlighter-rouge">jwtVerify()</code> logic with <code class="language-plaintext highlighter-rouge">createIdentifiablVerifier()</code></li>
+  <li>update your auth helper to use the result</li>
+  <li>everything else stays the same</li>
+</ol>
+
+<p>reach out if you hit any roadblocks - i would be happy to help you migrate.</p>
+
+<h3 id="follow-along">follow along</h3>
+<p><strong>next up:</strong> <code class="language-plaintext highlighter-rouge">proxyabl</code> and <code class="language-plaintext highlighter-rouge">limitabl</code> - gatewaystack’s routing and limiting layers — are under active development. follow along at <a href="https://gatewaystack.com">gatewaystack.com</a> or <a href="https://github.com/davidcrowe/GatewayStack">star the repo</a> for updates.</p>
+
+<p>this isn’t just about replacing 100 lines with 1 line. It’s about <strong>standardizing how identity flows through AI applications</strong>.</p>
+
+<p>when every mcp server speaks the same identity language — the same request context — the next layers—policy enforcement, rate limiting, audit trails—become plug-and-play.</p>
+
+<p>that’s the real win: a composable governance stack instead of bespoke middleware in every project.</p>
+
+<hr />
+<p><em>david crowe - <a href="https://reducibl.com">reducibl.com</a> - <a href="https://gatewaystack.com">gatewaystack.com</a></em></p>
+
+
+  
+    <p style="margin-top: 2rem;">
+      <a href="/writing">← back to writing</a>
+    </p>
+  
+</article>
+
+    </div>
+  </body>
+</html>

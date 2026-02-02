@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>
-      {% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}
+      build logs | reducibl
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png" type="image/png" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
-    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-    <meta property="og:image" content="{% if page.og_image %}{{ page.og_image | absolute_url }}{% else %}{{ '/assets/og-default.png' | absolute_url }}{% endif %}">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
-    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:title" content="build logs">
+    <meta property="og:description" content="Applied AI systems and infrastructure.">
+    <meta property="og:image" content="http://localhost:4000/assets/og-default.png">
+    <meta property="og:url" content="http://localhost:4000/buildlogs.html">
+    <meta property="og:type" content="website">
 
     <!-- Privacy-friendly analytics by Plausible -->
     <script async src="https://analytics.reducibl.com/js/pa-qA_7AgRK0qdqoqvtJQ_jX.js"></script>
@@ -156,21 +156,71 @@
   </head>
   <body>
     <div class="page">
-      {% if page.url != "/" %}
+      
         <nav class="top-nav">
-          <a href="{{ '/' | relative_url }}">home</a>
-          {% if page.url != '/writing/' %}
+          <a href="/">home</a>
+          
             <span class="sep">·</span>
-            <a href="{{ '/writing' | relative_url }}">writing</a>
-          {% endif %}
-          {% if page.url != '/buildlogs/' %}
+            <a href="/writing">writing</a>
+          
+          
             <span class="sep">·</span>
-            <a href="{{ '/buildlogs' | relative_url }}">build logs</a>
-          {% endif %}
+            <a href="/buildlogs">build logs</a>
+          
         </nav>
-      {% endif %}
+      
 
-      {{ content }}
+      <h1 id="build-logs">build logs</h1>
+
+<p>daily notes on what i’m building, what broke, and what i learned</p>
+
+<ul>
+  
+    
+    <li>
+      <a href="/buildlog/2026/02/02/build-log.html">build log: feb 2</a>
+      <br />
+      <small>automated build logs, an apprentice web app, and a security scare.</small>
+    </li>
+  
+    
+    <li>
+      <a href="/buildlog/2026/02/01/build-log.html">build log: feb 1</a>
+      <br />
+      <small>launched two websites, automated gtm insights, and bought a domain... all in a day's work.</small>
+    </li>
+  
+    
+    
+    <li>
+      <a href="/buildlog/2026/01/31/build-log.html">build log: jan 31</a>
+      <br />
+      <small>shipped a major feature set for the apprentice art learning app, but auth0 almost took me down.</small>
+    </li>
+  
+    
+    <li>
+      <a href="/buildlog/2026/01/30/build-log.html">build log: jan 30</a>
+      <br />
+      <small>i shipped the decision intelligence suite, and grappled with claude's oauth quirks.</small>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</ul>
+
     </div>
   </body>
 </html>

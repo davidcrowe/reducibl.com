@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Inner MCP Documentation | reducibl
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.png" type="image/png" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Inner MCP Documentation">
+    <meta property="og:description" content="Applied AI systems and infrastructure.">
+    <meta property="og:image" content="http://localhost:4000/assets/og-default.png">
+    <meta property="og:url" content="http://localhost:4000/inner-mcp-docs.html">
+    <meta property="og:type" content="website">
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://analytics.reducibl.com/js/pa-qA_7AgRK0qdqoqvtJQ_jX.js"></script>
+    <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+    </script>
+
+    <style>
+      :root {
+        --bg: #E1E6F8;          /* Inner tertiary, periwinkle */
+        --text: #111827;        /* dark neutral */
+        --muted: #6B7280;       /* gray */
+        --heading: #231E5C;     /* Inner primary */
+        --link: #2563EB;        /* brighter blue for links */
+        --link-hover: #1D4ED8;  /* darker on hover */
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 32px 16px 80px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        font-size: 16px;
+      }
+
+      .page {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      a {
+        color: var(--link);
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: var(--link-hover);
+        text-decoration: underline;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
+        letter-spacing: -0.01em;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
+      }
+
+      h4 {
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.25rem;
+        color: var(--heading);
+      }
+
+      p {
+        margin: 0 0 1rem;
+      }
+
+      ul {
+        padding-left: 1.25rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1.25rem;
+      }
+
+      small {
+        color: var(--muted);
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 1.5em auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      }
+
+
+      .top-nav {
+        margin-bottom: 24px;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .top-nav a {
+        color: var(--muted);
+      }
+
+      .top-nav a:hover {
+        color: var(--link);
+      }
+
+      .top-nav .sep {
+        margin: 0 6px;
+      }
+
+      .meta {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-bottom: 1.25rem;
+      }
+
+      .post-image {
+        max-width: 720px;
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+
+
+      @media (max-width: 640px) {
+        body {
+          padding: 24px 12px 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      
+        <nav class="top-nav">
+          <a href="/">home</a>
+          
+            <span class="sep">·</span>
+            <a href="/writing">writing</a>
+          
+          
+            <span class="sep">·</span>
+            <a href="/buildlogs">build logs</a>
+          
+        </nav>
+      
+
+      <h1 id="inner-mcp-documentation">Inner MCP Documentation</h1>
+
+<p><strong>Inner</strong> is a personal memory layer for LLMs. It helps users capture emotionally meaningful experiences, surface patterns over time, and learn what actually helps them.</p>
+
+<p>This page documents the Inner MCP server for integration with ChatGPT, Claude, and other MCP-compatible clients.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>Inner provides tools for storing and retrieving <strong>inner memories</strong> — structured records of emotionally significant moments. Each memory captures:</p>
+
+<ul>
+  <li><strong>What happened</strong> (title, summary)</li>
+  <li><strong>How it felt</strong> (primary emotion, intensity, secondary emotions)</li>
+  <li><strong>Physical sensations</strong> (body signals like chest tightness, butterflies)</li>
+  <li><strong>Patterns</strong> (triggers, needs, relational dynamics)</li>
+  <li><strong>Resolution</strong> (what helped, current state)</li>
+</ul>
+
+<p>Memories progress through states: <strong>open</strong> → <strong>integrating</strong> → <strong>resolved</strong>.</p>
+
+<h2 id="authentication">Authentication</h2>
+
+<p>Inner uses OAuth 2.0 with Auth0. Required scopes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">inner.memories:read</code> — read and search memories</li>
+  <li><code class="language-plaintext highlighter-rouge">inner.memories:write</code> — create, update, and delete memories</li>
+</ul>
+
+<h2 id="tools">Tools</h2>
+
+<h3 id="savememoryorb">saveMemoryOrb</h3>
+
+<p>Create a new inner memory when the user shares an emotionally important experience.</p>
+
+<p><strong>Parameters:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">title</code> (required) — short human title</li>
+  <li><code class="language-plaintext highlighter-rouge">summary</code> (required) — 1-3 sentence summary</li>
+  <li><code class="language-plaintext highlighter-rouge">source</code> (required) — <code class="language-plaintext highlighter-rouge">{ type: "manual" | "dream" | "message" }</code></li>
+  <li><code class="language-plaintext highlighter-rouge">emotions</code> (required) — <code class="language-plaintext highlighter-rouge">{ primary: string, intensity: 0-1, secondary?: string[] }</code></li>
+  <li><code class="language-plaintext highlighter-rouge">triggers</code> — what triggered this state</li>
+  <li><code class="language-plaintext highlighter-rouge">needs</code> — what’s needed to resolve it</li>
+  <li><code class="language-plaintext highlighter-rouge">bodySignals</code> — physical sensations (e.g., “chest tightness”, “butterflies”)</li>
+  <li><code class="language-plaintext highlighter-rouge">symbols</code>, <code class="language-plaintext highlighter-rouge">dynamics</code> — thematic patterns</li>
+</ul>
+
+<p><strong>Example prompt:</strong> <em>“I’m feeling anxious before a job interview. My chest feels tight. Please save this as an Inner memory.”</em></p>
+
+<hr />
+
+<h3 id="listmemories">listMemories</h3>
+
+<p>List the user’s recent inner memories.</p>
+
+<p><strong>Parameters:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">limit</code> — max results (default 20)</li>
+  <li><code class="language-plaintext highlighter-rouge">state</code> — filter by “open”, “integrating”, or “resolved”</li>
+</ul>
+
+<p><strong>Example prompt:</strong> <em>“Show my Inner memories.”</em></p>
+
+<hr />
+
+<h3 id="recallmemories">recallMemories</h3>
+
+<p>Search memories by semantic similarity — find past experiences related to a feeling, situation, or theme.</p>
+
+<p><strong>Parameters:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">query</code> (required) — what to search for (e.g., “anxiety”, “work stress”)</li>
+  <li><code class="language-plaintext highlighter-rouge">limit</code> — max results (default 10)</li>
+</ul>
+
+<p><strong>Example prompt:</strong> <em>“Find Inner memories related to anxiety.”</em></p>
+
+<hr />
+
+<h3 id="addorbevent">addOrbEvent</h3>
+
+<p>Add an observation or update to an existing memory. Use this when the user notices something new or takes a step.</p>
+
+<p><strong>Parameters:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">orbId</code> (required) — memory ID</li>
+  <li><code class="language-plaintext highlighter-rouge">type</code> (required) — “observe”, “learn”, or “act”</li>
+  <li><code class="language-plaintext highlighter-rouge">note</code> — what happened</li>
+  <li><code class="language-plaintext highlighter-rouge">delta</code> — optional state or intensity changes</li>
+</ul>
+
+<p><strong>Example prompt:</strong> <em>“Add an observation to my most recent memory: after breathing exercises, my anxiety decreased.”</em></p>
+
+<hr />
+
+<h3 id="updateorb">updateOrb</h3>
+
+<p>Edit a memory’s details (title, summary, emotions, etc.).</p>
+
+<p><strong>Parameters:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">orbId</code> (required) — memory ID</li>
+  <li>Any fields to update: <code class="language-plaintext highlighter-rouge">title</code>, <code class="language-plaintext highlighter-rouge">summary</code>, <code class="language-plaintext highlighter-rouge">emotions</code>, <code class="language-plaintext highlighter-rouge">triggers</code>, <code class="language-plaintext highlighter-rouge">needs</code>, <code class="language-plaintext highlighter-rouge">bodySignals</code>, <code class="language-plaintext highlighter-rouge">resolutionState</code></li>
+</ul>
+
+<p><strong>Example prompt:</strong> <em>“Update the title of my most recent memory to ‘job interview nerves’.”</em></p>
+
+<hr />
+
+<h3 id="resolveorb">resolveOrb</h3>
+
+<p>Mark a memory as resolved and capture what helped.</p>
+
+<p><strong>Parameters:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">orbId</code> (required) — memory ID</li>
+  <li><code class="language-plaintext highlighter-rouge">whatHelped</code> — what specifically helped resolve this</li>
+  <li><code class="language-plaintext highlighter-rouge">note</code> — optional additional context</li>
+</ul>
+
+<p><strong>Example prompt:</strong> <em>“Resolve this memory. What helped was preparation and breathing exercises.”</em></p>
+
+<hr />
+
+<h3 id="deleteorb">deleteOrb</h3>
+
+<p>Permanently delete a memory.</p>
+
+<p><strong>Parameters:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">orbId</code> (required) — memory ID</li>
+</ul>
+
+<hr />
+
+<h2 id="example-workflow">Example Workflow</h2>
+
+<ol>
+  <li><strong>Capture:</strong> User shares an anxious moment → <code class="language-plaintext highlighter-rouge">saveMemoryOrb</code></li>
+  <li><strong>Review:</strong> User asks to see their memories → <code class="language-plaintext highlighter-rouge">listMemories</code></li>
+  <li><strong>Pattern:</strong> User searches for similar experiences → <code class="language-plaintext highlighter-rouge">recallMemories</code></li>
+  <li><strong>Observe:</strong> User notices what helps → <code class="language-plaintext highlighter-rouge">addOrbEvent</code></li>
+  <li><strong>Refine:</strong> User updates the title → <code class="language-plaintext highlighter-rouge">updateOrb</code></li>
+  <li><strong>Resolve:</strong> User marks it resolved with learnings → <code class="language-plaintext highlighter-rouge">resolveOrb</code></li>
+</ol>
+
+<h2 id="support">Support</h2>
+
+<p>For questions or issues, contact <a href="mailto:reducibl@gmail.com">reducibl@gmail.com</a>.</p>
+
+    </div>
+  </body>
+</html>

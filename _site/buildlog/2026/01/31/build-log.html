@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>
-      {% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}
+      build log: jan 31 | reducibl
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png" type="image/png" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
-    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-    <meta property="og:image" content="{% if page.og_image %}{{ page.og_image | absolute_url }}{% else %}{{ '/assets/og-default.png' | absolute_url }}{% endif %}">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
-    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:title" content="build log: jan 31">
+    <meta property="og:description" content="shipped a major feature set for the apprentice art learning app, but auth0 almost took me down.">
+    <meta property="og:image" content="http://localhost:4000/assets/og-default.png">
+    <meta property="og:url" content="http://localhost:4000/buildlog/2026/01/31/build-log.html">
+    <meta property="og:type" content="article">
 
     <!-- Privacy-friendly analytics by Plausible -->
     <script async src="https://analytics.reducibl.com/js/pa-qA_7AgRK0qdqoqvtJQ_jX.js"></script>
@@ -156,21 +156,52 @@
   </head>
   <body>
     <div class="page">
-      {% if page.url != "/" %}
+      
         <nav class="top-nav">
-          <a href="{{ '/' | relative_url }}">home</a>
-          {% if page.url != '/writing/' %}
+          <a href="/">home</a>
+          
             <span class="sep">·</span>
-            <a href="{{ '/writing' | relative_url }}">writing</a>
-          {% endif %}
-          {% if page.url != '/buildlogs/' %}
+            <a href="/writing">writing</a>
+          
+          
             <span class="sep">·</span>
-            <a href="{{ '/buildlogs' | relative_url }}">build logs</a>
-          {% endif %}
+            <a href="/buildlogs">build logs</a>
+          
         </nav>
-      {% endif %}
+      
 
-      {{ content }}
+      <article>
+  <h2>build log: jan 31</h2>
+  <p class="meta">2026-01-31</p>
+
+  <h3 id="what-i-shipped-today">what i shipped today</h3>
+<p>today was all about phase two of the apprentice app. user profiles, named learning lists, and a tool to auto-curate those lists. feels like it’s finally becoming more than just a reference tool. plus, i finally squashed a gnarly auth0 bug that was blocking everything.</p>
+
+<h3 id="auth0-scope-hell">auth0 scope hell</h3>
+<p>spent way too long wrestling with auth0. the scopes weren’t being granted to the chatgpt client properly. i could’ve hacked around it, but i decided to fix the root cause. it’s always tempting to take shortcuts, but in the long run, fixing the underlying issue is worth it.</p>
+
+<p><img src="/assets/screenshots/2026-01-31/screenshot-4.png" alt="ChatGPT showing a 403 error when calling the apprentice tool" /></p>
+
+<h3 id="datasets-vs-llms">datasets vs. llms</h3>
+<p>building out the learning list curation, i realized i didn’t need to call the llm every time. instead, i built a firestore-driven system. it’s faster, cheaper, and more reliable. sometimes the best solution isn’t the flashiest one.</p>
+
+<p><img src="/assets/screenshots/2026-01-31/screenshot-2.png" alt="Claude Monet" /></p>
+
+<h3 id="the-distribution-risk">the distribution risk</h3>
+<p>started thinking hard about distribution. the risk isn’t the idea, it’s distribution. i’m planning a landing page with legal pages next. no need for a full saas version yet.</p>
+
+<hr />
+<p>david crowe — <a href="https://reducibl.com">reducibl.com</a></p>
+
+
+
+  
+    <p style="margin-top: 2rem;">
+      <a href="/buildlogs">← back to build logs</a>
+    </p>
+  
+</article>
+
     </div>
   </body>
 </html>

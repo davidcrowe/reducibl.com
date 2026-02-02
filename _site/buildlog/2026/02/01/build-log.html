@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>
-      {% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}
+      build log: feb 1 | reducibl
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png" type="image/png" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
-    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-    <meta property="og:image" content="{% if page.og_image %}{{ page.og_image | absolute_url }}{% else %}{{ '/assets/og-default.png' | absolute_url }}{% endif %}">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
-    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:title" content="build log: feb 1">
+    <meta property="og:description" content="launched two websites, automated gtm insights, and bought a domain... all in a day's work.">
+    <meta property="og:image" content="http://localhost:4000/assets/og-default.png">
+    <meta property="og:url" content="http://localhost:4000/buildlog/2026/02/01/build-log.html">
+    <meta property="og:type" content="article">
 
     <!-- Privacy-friendly analytics by Plausible -->
     <script async src="https://analytics.reducibl.com/js/pa-qA_7AgRK0qdqoqvtJQ_jX.js"></script>
@@ -156,21 +156,51 @@
   </head>
   <body>
     <div class="page">
-      {% if page.url != "/" %}
+      
         <nav class="top-nav">
-          <a href="{{ '/' | relative_url }}">home</a>
-          {% if page.url != '/writing/' %}
+          <a href="/">home</a>
+          
             <span class="sep">·</span>
-            <a href="{{ '/writing' | relative_url }}">writing</a>
-          {% endif %}
-          {% if page.url != '/buildlogs/' %}
+            <a href="/writing">writing</a>
+          
+          
             <span class="sep">·</span>
-            <a href="{{ '/buildlogs' | relative_url }}">build logs</a>
-          {% endif %}
+            <a href="/buildlogs">build logs</a>
+          
         </nav>
-      {% endif %}
+      
 
-      {{ content }}
+      <article>
+  <h2>build log: feb 1</h2>
+  <p class="meta">2026-02-01</p>
+
+  <h3 id="what-i-shipped-today">what i shipped today</h3>
+<p>today i launched basic websites for both inner and apprentice. i also designed an automated “daily digest” agent to give me gtm insights. plus, i grabbed the <code class="language-plaintext highlighter-rouge">learnart.app</code> domain for apprentice.</p>
+
+<h3 id="platform-thinking-websites-as-templates">platform thinking: websites as templates</h3>
+<p>i launched a basic website for the apprentice app. landing page, gallery, privacy policy, terms of use — the works. i’m treating it as a template. the key decision: the website code lives in a separate repo. this reflects a platform-centric approach.</p>
+
+<p><img src="/assets/screenshots/2026-02-01/screenshot-1.png" alt="Cloudflare Registrar showing learnart.app available" /></p>
+
+<h3 id="inners-dark-side-and-the-chatgpt-widget">inner’s dark side (and the chatgpt widget)</h3>
+<p>the inner website is live too. it showcases the chatgpt experience, with dummy data. the design is dark and introspective, matching the app’s emotional theme. but i had to iterate a lot. the chatgpt widget has constraints — system colors only. this meant significant adjustments to align with the app’s brand.</p>
+
+<p><img src="/assets/screenshots/2026-02-01/screenshot-2.png" alt="Inner website landing page" /></p>
+
+<h3 id="automating-gtm-insights-with-a-daily-digest">automating gtm insights with a daily digest</h3>
+<p>i’m building an automated “daily digest” agent. it’ll give me a summary of key metrics, content ideas, and alerts. the goal is to automate gtm insights. no more manually checking dashboards. it’s config-driven, so i can easily add/remove data sources. the apps are the flywheel, the data is the asset.</p>
+
+<hr />
+<p>david crowe — <a href="https://reducibl.com">reducibl.com</a></p>
+
+
+  
+    <p style="margin-top: 2rem;">
+      <a href="/buildlogs">← back to build logs</a>
+    </p>
+  
+</article>
+
     </div>
   </body>
 </html>

@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-02-02T10:56:26-08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">reducibl</title><subtitle>Applied AI systems and infrastructure.</subtitle><entry><title type="html">build log: feb 2</title><link href="http://localhost:4000/buildlog/2026/02/02/build-log.html" rel="alternate" type="text/html" title="build log: feb 2" /><published>2026-02-02T00:00:00-08:00</published><updated>2026-02-02T00:00:00-08:00</updated><id>http://localhost:4000/buildlog/2026/02/02/build-log</id><content type="html" xml:base="http://localhost:4000/buildlog/2026/02/02/build-log.html"><![CDATA[<h3 id="what-i-shipped-today">what i shipped today</h3>
+<p>i automated the daily build log process, including drafting the blog post from claude code transcripts. i also shipped a new apprentice web app showcasing ai-guided art study. and, i had a security scare that highlighted the importance of careful secret management.</p>
+
+<h3 id="automated-build-logs-mean-less-work">automated build logs mean less work</h3>
+<p>the biggest win today was automating these build logs. it’s a system that grabs claude code transcripts, synthesizes them into a draft blog post with gemini, commits it to a jekyll repo, and emails me an approval link. it’s built with cron jobs syncing transcripts to gcs, a cloud function using gemini for synthesis, and an approval function that moves the draft to the published posts folder. the goal is a portfolio of shipped projects, driving awareness for jobs, consulting, and app users.</p>
+
+<p>i chose gcs over firestore for storing transcripts because of size limitations. i also found that a two-pass gemini synthesis improved content quality. the first pass identifies the key points, and the second pass fleshes them out. this prevents gemini from just regurgitating the transcript.</p>
+
+<h3 id="apprentice-web-app-makes-art-more-accessible">apprentice web app makes art more accessible</h3>
+<p>i launched a new apprentice web app. it has a collections page with infinite scroll and filters, learning series pages with artwork details and study guides, and a series preview on the landing page. it’s all about showcasing ai-guided art study and providing a platform for users to explore and learn.</p>
+
+<p><img src="/assets/screenshots/2026-02-02/screenshot-4.png" alt="study instructions" /></p>
+
+<p><img src="/assets/screenshots/2026-02-02/screenshot-6.png" alt="landing page" /></p>
+
+<p>i opted for firebase hosting over cloudflare pages for better integration with firebase auth. client-side search was skipped due to the large artwork catalog. i did learn that next.js 15 requires <code class="language-plaintext highlighter-rouge">params</code> to be a <code class="language-plaintext highlighter-rouge">promise</code>.</p>
+
+<h3 id="security-first-always">security first, always</h3>
+<p>i implemented some security measures to protect against prompt injection and secret leakage. i used a combination of .claudeignore, careful diff reviews, and secret management to mitigate risks. the big takeaway? people are the weak link in the security chain. you can have all the fancy tools in the world, but if someone isn’t paying attention, it all falls apart.</p>
+
+<hr />
+<p>david crowe — <a href="https://reducibl.com">reducibl.com</a></p>]]></content><author><name></name></author><category term="buildlog" /><summary type="html"><![CDATA[automated build logs, an apprentice web app, and a security scare.]]></summary></entry><entry><title type="html">build log: feb 1</title><link href="http://localhost:4000/buildlog/2026/02/01/build-log.html" rel="alternate" type="text/html" title="build log: feb 1" /><published>2026-02-01T00:00:00-08:00</published><updated>2026-02-01T00:00:00-08:00</updated><id>http://localhost:4000/buildlog/2026/02/01/build-log</id><content type="html" xml:base="http://localhost:4000/buildlog/2026/02/01/build-log.html"><![CDATA[<h3 id="what-i-shipped-today">what i shipped today</h3>
+<p>today i launched basic websites for both inner and apprentice. i also designed an automated “daily digest” agent to give me gtm insights. plus, i grabbed the <code class="language-plaintext highlighter-rouge">learnart.app</code> domain for apprentice.</p>
+
+<h3 id="platform-thinking-websites-as-templates">platform thinking: websites as templates</h3>
+<p>i launched a basic website for the apprentice app. landing page, gallery, privacy policy, terms of use — the works. i’m treating it as a template. the key decision: the website code lives in a separate repo. this reflects a platform-centric approach.</p>
+
+<p><img src="/assets/screenshots/2026-02-01/screenshot-1.png" alt="Cloudflare Registrar showing learnart.app available" /></p>
+
+<h3 id="inners-dark-side-and-the-chatgpt-widget">inner’s dark side (and the chatgpt widget)</h3>
+<p>the inner website is live too. it showcases the chatgpt experience, with dummy data. the design is dark and introspective, matching the app’s emotional theme. but i had to iterate a lot. the chatgpt widget has constraints — system colors only. this meant significant adjustments to align with the app’s brand.</p>
+
+<p><img src="/assets/screenshots/2026-02-01/screenshot-2.png" alt="Inner website landing page" /></p>
+
+<h3 id="automating-gtm-insights-with-a-daily-digest">automating gtm insights with a daily digest</h3>
+<p>i’m building an automated “daily digest” agent. it’ll give me a summary of key metrics, content ideas, and alerts. the goal is to automate gtm insights. no more manually checking dashboards. it’s config-driven, so i can easily add/remove data sources. the apps are the flywheel, the data is the asset.</p>
+
+<hr />
+<p>david crowe — <a href="https://reducibl.com">reducibl.com</a></p>]]></content><author><name></name></author><category term="buildlog" /><summary type="html"><![CDATA[launched two websites, automated gtm insights, and bought a domain... all in a day's work.]]></summary></entry><entry><title type="html">build log: jan 31</title><link href="http://localhost:4000/buildlog/2026/01/31/build-log.html" rel="alternate" type="text/html" title="build log: jan 31" /><published>2026-01-31T00:00:00-08:00</published><updated>2026-01-31T00:00:00-08:00</updated><id>http://localhost:4000/buildlog/2026/01/31/build-log</id><content type="html" xml:base="http://localhost:4000/buildlog/2026/01/31/build-log.html"><![CDATA[<h3 id="what-i-shipped-today">what i shipped today</h3>
+<p>today was all about phase two of the apprentice app. user profiles, named learning lists, and a tool to auto-curate those lists. feels like it’s finally becoming more than just a reference tool. plus, i finally squashed a gnarly auth0 bug that was blocking everything.</p>
+
+<h3 id="auth0-scope-hell">auth0 scope hell</h3>
+<p>spent way too long wrestling with auth0. the scopes weren’t being granted to the chatgpt client properly. i could’ve hacked around it, but i decided to fix the root cause. it’s always tempting to take shortcuts, but in the long run, fixing the underlying issue is worth it.</p>
+
+<p><img src="/assets/screenshots/2026-01-31/screenshot-4.png" alt="ChatGPT showing a 403 error when calling the apprentice tool" /></p>
+
+<h3 id="datasets-vs-llms">datasets vs. llms</h3>
+<p>building out the learning list curation, i realized i didn’t need to call the llm every time. instead, i built a firestore-driven system. it’s faster, cheaper, and more reliable. sometimes the best solution isn’t the flashiest one.</p>
+
+<p><img src="/assets/screenshots/2026-01-31/screenshot-2.png" alt="Claude Monet" /></p>
+
+<h3 id="the-distribution-risk">the distribution risk</h3>
+<p>started thinking hard about distribution. the risk isn’t the idea, it’s distribution. i’m planning a landing page with legal pages next. no need for a full saas version yet.</p>
+
+<hr />
+<p>david crowe — <a href="https://reducibl.com">reducibl.com</a></p>]]></content><author><name></name></author><category term="buildlog" /><summary type="html"><![CDATA[shipped a major feature set for the apprentice art learning app, but auth0 almost took me down.]]></summary></entry><entry><title type="html">is claude code secure?</title><link href="http://localhost:4000/2026/01/31/is-claude-code-secure.html" rel="alternate" type="text/html" title="is claude code secure?" /><published>2026-01-31T00:00:00-08:00</published><updated>2026-01-31T00:00:00-08:00</updated><id>http://localhost:4000/2026/01/31/is-claude-code-secure</id><content type="html" xml:base="http://localhost:4000/2026/01/31/is-claude-code-secure.html"><![CDATA[<p><img src="/assets/claude-code-security.png" alt="Claude Code responding to security concerns" /></p>
+
+<p>i used claude code to build a production chatgpt app.</p>
+
+<p>and in the back of my head I couldn’t help but ask… <strong><em>is it secure?</em></strong></p>
+
+<p>not the code that claude code produces. the system itself.</p>
+
+<p>claude code is a software package. you run it in a folder on your computer, and it gives claude access to all of the files in that folder.</p>
+
+<p>so in this case, secure means preventing unwanted data access, exfiltration, and writes.</p>
+
+<p>this isn’t a claude-specific problem — <em>it’s a new class of local AI security risk</em>.</p>
+
+<h3 id="dont-trust-claude-with-your-secrets">don’t trust claude with your secrets</h3>
+<p>by design, claude code can only access files in the directory where you run the claude command. so you have full control over what claude can read.</p>
+
+<p>this sounds great. but in practice, <em>many devs run it at the project repo root</em> — precisely where secrets live. secret leakage is the most obvious real-world risk.</p>
+
+<p>depending on your project, a leaked secret could expose keys to llms, cloud providers, or databases. depending on the key, it could potentially grant full access to the system or data. for example, my project required api keys for claude, google cloud, and auth0.</p>
+
+<p>the blast radius can get large (and costly) fast. there may be legal and financial implications (especially if you are in a regulated industry).</p>
+
+<p>in a world where llms are accessing local file systems, the basics become more important than ever:</p>
+
+<h4 id="secret-management">secret management</h4>
+<p>new rule… never rely on local .env files for secret management. always manage secrets in a dedicated secret manager at the org level</p>
+
+<h4 id="fine-grained-permissions">fine grained permissions</h4>
+<p>don’t use shared api keys that expose everything. each specific use case should have fine-grained, required only permissions to minimize the blast radius, make it more observable, and easier to isolate and control if leakage occurs</p>
+
+<p>make sure you have secret management buttoned up before you unleash claude code in your org.</p>
+
+<h3 id="the-risk-hidden-in-plain-sight-prompt-injection">the risk hidden in plain sight… prompt injection</h3>
+<p>claude code reads your files to understand your codebase. but what if one of those files contains instructions designed to manipulate the AI?</p>
+
+<p>this is called prompt injection. hidden instructions are embedded in files read by the AI, which the AI follows as if they were your commands.</p>
+
+<p>this isn’t theoretical. any file claude reads could contain injected instructions: a pr diff from a contributor, a dependency’s readme, even a downloaded config file. the injected text could instruct claude to read your .env file and embed secrets in a commit message, a code comment, or a curl command.</p>
+
+<p><em>the dangerous part</em>: you might not notice. the output looks like normal code. the commit looks routine. but the secret is now in your git history or sent to an external server.</p>
+
+<p>there is no full fix for this at the moment. it’s an open problem across all AI coding tools. but there are a few things you can do to reduce the risk:</p>
+
+<p>— <strong>use .claudeignore</strong> to exclude sensitive files and directories from Claude’s context entirely<br />
+— <strong>review diffs carefully before approving writes</strong>, especially when working with untrusted code<br />
+— <strong>never auto-approve</strong>, especially in repos with external contributions or untrusted dependencies</p>
+
+<h3 id="on-the-bright-side">on the bright side</h3>
+<p>by default claude code asks for permission before writing data or executing a command. you need to give it permission to write to a file or to another system.</p>
+
+<p>this mirrors one promising pattern emerging in agentic systems: layered read/write controls with human-in-the-loop redundancy.</p>
+
+<p>— <strong>i control claude code’s read/write</strong> at the file and execution level on my machine<br />
+— <strong>i control mcp connector and tool read/write</strong> inside of the LLM<br />
+— <strong>the developer controls tool read/write</strong> at the server level to control access to their database (maybe with fine grained permissions e.g., by role)</p>
+
+<h3 id="people-are-the-weak-link-in-the-security-chain">people are the weak link in the security chain</h3>
+<p>claude code has many safeguards today. it will continue to add them around things like secret management and prompt injection detection.</p>
+
+<p>however, <strong><em>the biggest risks are and will continue to be behavioral</em></strong>. it is so easy (and dare i say.. <em>fun!</em>) to select auto-approve and watch claude code execute at will.</p>
+
+<p>but if teams and devs normalize auto-approve for writes and stop paying attention… the safety rails won’t help.</p>
+
+<hr />
+<p><em>david crowe - <a href="https://reducibl.com">reducibl.com</a> - <a href="https://gatewaystack.com">gatewaystack.com</a></em></p>]]></content><author><name></name></author><summary type="html"><![CDATA[first impressions on secrets, prompt injection, and the real weak link]]></summary></entry><entry><title type="html">build log: jan 30</title><link href="http://localhost:4000/buildlog/2026/01/30/build-log.html" rel="alternate" type="text/html" title="build log: jan 30" /><published>2026-01-30T00:00:00-08:00</published><updated>2026-01-30T00:00:00-08:00</updated><id>http://localhost:4000/buildlog/2026/01/30/build-log</id><content type="html" xml:base="http://localhost:4000/buildlog/2026/01/30/build-log.html"><![CDATA[<h3 id="what-i-shipped-today">what i shipped today</h3>
+<p>the loop, hunch, and fork apps are live on the inner mcp server—that’s my decision intelligence suite. i also spent a chunk of time wrestling with claude integration, specifically some oauth oddities. plus, i started planning a new app for personalized activity recommendations.</p>
+
+<h3 id="claudes-oauth-demands-client_id-in-metadata">claude’s oauth demands client_id in metadata</h3>
+<p>integrating with claude wasn’t as smooth as i’d hoped. i kept hitting authentication walls. turns out, claude needs the client id exposed in the oauth metadata. who knew? i had to expose it to get it working.</p>
+
+<p>it’s a reminder that even standard protocols like oauth can have quirks depending on the implementation.</p>
+
+<h3 id="shipping-the-decision-intelligence-suite">shipping the decision intelligence suite</h3>
+<p>loop, hunch, and fork are live. that meant creating new handlers, tweaking existing files, and setting up per-app tool filtering. i chose path-based routing over separate functions for each app—simpler deployment and management.</p>
+
+<p>security was top of mind. i added rate limiting to the mcp handler to prevent abuse, and addressed wildcard cors and query length validation. i also wrote a comprehensive test suite—111 tests covering unit, handler, and integration aspects.</p>
+
+<h3 id="new-app-personalized-activity-recommendations">new app: personalized activity recommendations</h3>
+<p>i’m sketching out a new app that recommends real-life activities. think personalized suggestions for things to do in your local area. i’m starting with content-based filtering for v1, then moving to collaborative filtering in v2.</p>
+
+<p>the challenge is the cold start problem—how do you provide recommendations when you know nothing about the user? and how do you differentiate in the crowded location-based recommendation market?</p>
+
+<hr />
+<p>david crowe — <a href="https://reducibl.com">reducibl.com</a></p>]]></content><author><name></name></author><category term="buildlog" /><summary type="html"><![CDATA[i shipped the decision intelligence suite, and grappled with claude's oauth quirks.]]></summary></entry><entry><title type="html">how ai exposes poorly defined human systems</title><link href="http://localhost:4000/2026/01/23/how-ai-exposes-poorly-defined-human-systems.html" rel="alternate" type="text/html" title="how ai exposes poorly defined human systems" /><published>2026-01-23T00:00:00-08:00</published><updated>2026-01-23T00:00:00-08:00</updated><id>http://localhost:4000/2026/01/23/how-ai-exposes-poorly-defined-human-systems</id><content type="html" xml:base="http://localhost:4000/2026/01/23/how-ai-exposes-poorly-defined-human-systems.html"><![CDATA[<p><em>originally posted to linkedin</em></p>
+
+<p>the biggest risk in enterprise AI? exposing how poorly defined our human systems actually are.</p>
+
+<p>when i talk to real AI practitioners about what holds back their initiatives, they don’t talk about what you might expect.</p>
+
+<p>not the conceptual risk of targeting novel use cases. 
+not the execution risk of scaling a new technology.</p>
+
+<p>instead, <strong>they talk about how hard it is to translate informal, socially enforced human decision-making into formally specified and documented AI systems</strong>.</p>
+
+<p>think about trying to align your organization around how to prioritize and resource a portfolio of projects. are the objectively most promising projects prioritized, or the highest paid person in the room’s pet project?</p>
+
+<p>that’s because many human systems rely on informality, ambiguity, and implicit authority.
+they work because judgment flows through trust, relationships, and social context.</p>
+
+<p>AI doesn’t operate that way.</p>
+
+<p>to make AI work in these environments, decision-making has to be made explicit. Rules, authority, and accountability need to be formalized.</p>
+
+<p>sometimes that’s possible.
+<em>sometimes it isn’t.</em></p>
+
+<p>so the next time an AI initiative fails, don’t just ask whether the technology was lacking.</p>
+
+<p>ask whether the human system it was built on was ever clearly defined in the first place.</p>
+
+<hr />
+<p><em>david crowe - <a href="https://reducibl.com">reducibl.com</a> - <a href="https://gatewaystack.com">gatewaystack.com</a></em></p>]]></content><author><name></name></author><summary type="html"><![CDATA[automate informal systems at your peril]]></summary></entry><entry><title type="html">what does ‘relevant context’ really mean for LLM applications?</title><link href="http://localhost:4000/2026/01/22/what-does-relevant-context-mean-for-llms.html" rel="alternate" type="text/html" title="what does ‘relevant context’ really mean for LLM applications?" /><published>2026-01-22T00:00:00-08:00</published><updated>2026-01-22T00:00:00-08:00</updated><id>http://localhost:4000/2026/01/22/what-does-relevant-context-mean-for-llms</id><content type="html" xml:base="http://localhost:4000/2026/01/22/what-does-relevant-context-mean-for-llms.html"><![CDATA[<p><em>originally posted to linkedin</em></p>
+
+<p>quick experiment: how long can you stand on one leg with your eyes closed? now try with your eyes open.</p>
+
+<p>a lot easier with your eyes open, huh? <strong>when your eyes are closed, you’re missing a critical input.</strong></p>
+
+<p>everyone knows that getting the inputs right matters. for llms that input is context. providing relevant context results in better llm responses.</p>
+
+<h3 id="what-does-relevant-context-mean-exactly">what does relevant context mean exactly?</h3>
+
+<p>given a data set, there are technical strategies to determine the most relevant context to include.</p>
+
+<p>but what if the context you need sits outside of the given data set?</p>
+
+<p><em>how do you know what you don’t know?</em></p>
+
+<h3 id="learn-from-a-human">learn from a human</h3>
+
+<p>many AI applications automate something that was previously done manually.</p>
+
+<p><strong>if you want to assess whether you’re giving an AI comprehensive inputs, learn from a human. consider what context they use to do the job manually.</strong></p>
+
+<p><em>are you providing all of that context to the AI system when you ask it to do the job?</em></p>
+
+<p>if not, the system may appear to work while missing critical context a human relies on – making early success potentially misleading and increasing exposure to edge failures.</p>
+
+<h3 id="lets-make-this-concrete">let’s make this concrete</h3>
+
+<p>last year when we launched <a href="https://www.innerdreamapp.com/app">inner</a> — an emotional intelligence coaching app — our LLM responses returned technically strong content, but they didn’t quite “feel” right. whether it was tone or otherwise, something was off.</p>
+
+<p>so we thought through how our AI workflow compared to similar manual workflows.</p>
+
+<p>the key insight: <em>emotional intelligence coaching requires context across many chat sessions</em>. the relationship between events over time mattered and limiting context to a single session limited performance.</p>
+
+<p>once we began providing context from relevant past conversations — not just the current session — the response quality increased dramatically.</p>
+
+<p>so even if your application seems to be performing well today, it’s worth asking…</p>
+
+<p><strong>how robust is your system to the range of situations a human would naturally adapt to for the use case?</strong></p>
+
+<hr />
+<p><em>david crowe - <a href="https://reducibl.com">reducibl.com</a> - <a href="https://gatewaystack.com">gatewaystack.com</a></em></p>]]></content><author><name></name></author><summary type="html"><![CDATA[want to know? learn from a human]]></summary></entry><entry><title type="html">user identity isn’t a first-order AI system design principle</title><link href="http://localhost:4000/2026/01/21/user-identity-as-ai-system-first-order-design-principle.html" rel="alternate" type="text/html" title="user identity isn’t a first-order AI system design principle" /><published>2026-01-21T00:00:00-08:00</published><updated>2026-01-21T00:00:00-08:00</updated><id>http://localhost:4000/2026/01/21/user-identity-as-ai-system-first-order-design-principle</id><content type="html" xml:base="http://localhost:4000/2026/01/21/user-identity-as-ai-system-first-order-design-principle.html"><![CDATA[<p><em>originally posted to linkedin</em></p>
+
+<p><strong>most AI systems are deployed without user identity as a first-order design principle.</strong></p>
+
+<p>this matters more than is immediately apparent. especially when you move from pilot to production.</p>
+
+<p>because when something goes wrong and compliance calls, you can’t reliably answer the most basic questions:</p>
+
+<p>– who triggered a model call?
+– what data was accessed and supplied as context?
+– was the user actually allowed to do this?
+– who is accountable for the outcome?</p>
+
+<p>no shared identity context across the AI system flow means no clear owner. worst case, that means shared access. best case, it means unclear accountability.</p>
+
+<h3 id="so-how-did-we-get-here">so how did we get here?</h3>
+
+<p>most AI systems are built around <em>model access</em>, not <em>user identity</em>.</p>
+
+<p>that made sense early on. the first wave of genAI systems weren’t designed to be multi-tenant.</p>
+
+<p>today many teams still rely on shared API keys. others glue identity into their app logic in bespoke ways that aren’t their core competency. either way, identity still isn’t the center of the system or the llm workflow.</p>
+
+<p><strong>i view this as a fundamental architectural mistake in production AI systems.</strong></p>
+
+<p>curious how others are handling this today.</p>
+
+<hr />
+<p><em>david crowe - <a href="https://reducibl.com">reducibl.com</a> - <a href="https://gatewaystack.com">gatewaystack.com</a></em></p>]]></content><author><name></name></author><summary type="html"><![CDATA[and why this is as a fundamental architectural mistake]]></summary></entry><entry><title type="html">resourcing genai initiatives</title><link href="http://localhost:4000/2026/01/12/resourcing-genai-initiatives.html" rel="alternate" type="text/html" title="resourcing genai initiatives" /><published>2026-01-12T00:00:00-08:00</published><updated>2026-01-12T00:00:00-08:00</updated><id>http://localhost:4000/2026/01/12/resourcing-genai-initiatives</id><content type="html" xml:base="http://localhost:4000/2026/01/12/resourcing-genai-initiatives.html"><![CDATA[<p align="center">
+  <img src="/assets/GenAI-Initiative-Funnel.png" alt="genAI initiative funnel" />
+</p>
+
+<p><em>originally posted to linkedin</em></p>
+
+<p><strong>don’t resource genAI projects. resource learning.</strong></p>
+
+<p>it used to be that dev resources were the bottleneck. writing detailed product specs was costly but necessary to mitigate even more expensive dev failure. you needed a high degree of confidence the product would achieve its business goals before starting development.</p>
+
+<p>things have changed. mvp cost has plummeted. you can now build working prototypes faster than teams used to design mockups.</p>
+
+<p>but genAI projects are risky. the tech is immature, use cases are still being discovered, and what works for early adopters doesn’t always work for later users.</p>
+
+<h3 id="instead-of-design--develop-think-explore--exploit">instead of design → develop, think explore → exploit</h3>
+
+<p>in this environment we need to balance:</p>
+
+<p>— validating concepts &amp; use cases
+— controlling risk</p>
+
+<p><strong>explore phase is about proving out the use case and minimizing conceptual risk.</strong><br />
+small, time-boxed teams pilot the concept with real users. if it works, advance. if not, kill it fast, learn from it, and redeploy resources.</p>
+
+<p><strong>exploit phase is about scaling the product and minimizing execution risk.</strong><br />
+greater investment is required to make it production-ready and drive adoption.</p>
+
+<p>learning is a first-order priority at both stages. postmortems for both successful and retired projects feed directly back into idea sourcing and prioritization.</p>
+
+<h3 id="operationalizing-genai-is-more-than-models-and-math">operationalizing genAI is more than models and math</h3>
+
+<p>it’s designing business systems for learning velocity, decision making, and efficient capital allocation. it’s moving projects from intake to scoped pilots to scaled products, with clear success criteria, stage gates, and separate resource pools at each stage. it’s systematically feeding what you learned back into idea sourcing and prioritization.</p>
+
+<p>many teams fund genAI as if it were a traditional project that is guaranteed to succeed with proper execution.</p>
+
+<p>the best teams know better. they understand that many won’t succeed and design to be successful anyway.</p>
+
+<h3 id="how-do-you-resource-genai-projects">how do you resource genAI projects?</h3>
+
+<p>one big bet… or a portfolio of small, time-boxed bets designed to learn and systematically fund the winners?</p>
+
+<hr />
+<p><em>david crowe - <a href="https://reducibl.com">reducibl.com</a> - <a href="https://gatewaystack.com">gatewaystack.com</a></em></p>]]></content><author><name></name></author><summary type="html"><![CDATA[don’t resource genAI projects. resource learning]]></summary></entry><entry><title type="html">prioritizing genai initiatives</title><link href="http://localhost:4000/2026/01/09/prioritizing-genai-initiatives.html" rel="alternate" type="text/html" title="prioritizing genai initiatives" /><published>2026-01-09T00:00:00-08:00</published><updated>2026-01-09T00:00:00-08:00</updated><id>http://localhost:4000/2026/01/09/prioritizing-genai-initiatives</id><content type="html" xml:base="http://localhost:4000/2026/01/09/prioritizing-genai-initiatives.html"><![CDATA[<p align="center">
+  <img src="/assets/genai-portfolio-management.png" alt="Stack overflow posts by month" />
+</p>
+
+<p><em>originally posted to linkedin</em></p>
+
+<p>if your team only uses roi to prioritize genAI initiatives, you’re probably getting suboptimal results.</p>
+
+<p>how can that be?</p>
+
+<h3 id="roi-doesnt-factor-in-your-appetite-for-risk">roi doesn’t factor in your appetite for risk.</h3>
+
+<p>let’s borrow some useful concepts from finance:</p>
+
+<p>— ROI can be equal for projects with different risk levels<br />
+— the efficient frontier of portfolios that maximize expected return for a given risk level<br />
+— diversifying your portfolio helps maximize expected return for a given risk level</p>
+
+<p>this type of portfolio thinking introduces a million dollar question:</p>
+
+<p><strong>how much risk will your org accept for genAI initiatives?</strong> after all, the greater the risk, the greater the reward.</p>
+
+<p>the point on the efficient frontier that matters most isn’t a project. it is the portfolio of projects:</p>
+
+<ul>
+  <li>where your portfolio lands on the efficient frontier depends on your org’s risk appetite</li>
+  <li>how you prioritize genAI projects depends on where you want to land on the efficient frontier</li>
+</ul>
+
+<p>for example: a customer-facing AI chatbot might have high reward but high risk (brand damage if it hallucinates), while an internal doc search tool might have lower reward but also lower risk. both might show similar roi, but they fit different portfolio strategies. they might even be complementary in the right portfolio.</p>
+
+<p>the exact mechanics matter less than the mental model: prioritization decisions should be made with visibility into how each initiative shifts the risk/reward profile of the overall portfolio.</p>
+
+<h3 id="what-is-risk-anyway">what is risk, anyway?</h3>
+
+<p>at the project level, risk is the variance of expected outcomes for the project. at the portfolio level, you need to account for covariance… how the failure modes of individual projects are correlated.</p>
+
+<p>if two projects share a dependency on the same data or are both exposed to the same regulation, they have some shared risk that should be considered. the last thing you want is all of your genAI initiatives failing at once.</p>
+
+<p>and that’s why prioritization decisions shouldn’t be made in isolation based solely on project-level roi, but as part of a genAI portfolio strategy.</p>
+
+<h3 id="how-does-this-work-in-practice">how does this work in practice?</h3>
+
+<p>to be clear, i’m not proposing that you literally calculate covariance for your genAI projects. rather, use the efficient frontier and portfolio theory as mental models.</p>
+
+<p>in practice, you might set things up to estimate risk and reward from your genAI project intake form. plot risk vs. reward for accepted, under consideration, and rejected projects. consider where your overall portfolio sits on the efficient frontier, and where you want it to be.</p>
+
+<p>have a leadership discussion about proposed projects at the individual level, then discuss them at the portfolio level. make sure there is a “single threaded owner” with full ownership of the final prioritization decision for the portfolio.</p>
+
+<p>optimize roi? yes. and be sure to consider your risk appetite too.</p>
+
+<p>does your team prioritize genAI initiatives at the project or portfolio level?</p>
+
+<p>are your risk appetite and portfolio risk explicitly considered in prioritization decisions?</p>
+
+<hr />
+<p><em>david crowe - <a href="https://reducibl.com">reducibl.com</a> - <a href="https://gatewaystack.com">gatewaystack.com</a></em></p>]]></content><author><name></name></author><summary type="html"><![CDATA[portfolio theory for genai]]></summary></entry></feed>

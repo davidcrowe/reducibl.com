@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>
-      {% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}
+      how ai exposes poorly defined human systems | reducibl
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png" type="image/png" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
-    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-    <meta property="og:image" content="{% if page.og_image %}{{ page.og_image | absolute_url }}{% else %}{{ '/assets/og-default.png' | absolute_url }}{% endif %}">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
-    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:title" content="how ai exposes poorly defined human systems">
+    <meta property="og:description" content="automate informal systems at your peril">
+    <meta property="og:image" content="http://localhost:4000/assets/og-default.png">
+    <meta property="og:url" content="http://localhost:4000/2026/01/23/how-ai-exposes-poorly-defined-human-systems.html">
+    <meta property="og:type" content="article">
 
     <!-- Privacy-friendly analytics by Plausible -->
     <script async src="https://analytics.reducibl.com/js/pa-qA_7AgRK0qdqoqvtJQ_jX.js"></script>
@@ -156,21 +156,62 @@
   </head>
   <body>
     <div class="page">
-      {% if page.url != "/" %}
+      
         <nav class="top-nav">
-          <a href="{{ '/' | relative_url }}">home</a>
-          {% if page.url != '/writing/' %}
+          <a href="/">home</a>
+          
             <span class="sep">·</span>
-            <a href="{{ '/writing' | relative_url }}">writing</a>
-          {% endif %}
-          {% if page.url != '/buildlogs/' %}
+            <a href="/writing">writing</a>
+          
+          
             <span class="sep">·</span>
-            <a href="{{ '/buildlogs' | relative_url }}">build logs</a>
-          {% endif %}
+            <a href="/buildlogs">build logs</a>
+          
         </nav>
-      {% endif %}
+      
 
-      {{ content }}
+      <article>
+  <h2>how ai exposes poorly defined human systems</h2>
+  <p class="meta">2026-01-23</p>
+
+  <p><em>originally posted to linkedin</em></p>
+
+<p>the biggest risk in enterprise AI? exposing how poorly defined our human systems actually are.</p>
+
+<p>when i talk to real AI practitioners about what holds back their initiatives, they don’t talk about what you might expect.</p>
+
+<p>not the conceptual risk of targeting novel use cases. 
+not the execution risk of scaling a new technology.</p>
+
+<p>instead, <strong>they talk about how hard it is to translate informal, socially enforced human decision-making into formally specified and documented AI systems</strong>.</p>
+
+<p>think about trying to align your organization around how to prioritize and resource a portfolio of projects. are the objectively most promising projects prioritized, or the highest paid person in the room’s pet project?</p>
+
+<p>that’s because many human systems rely on informality, ambiguity, and implicit authority.
+they work because judgment flows through trust, relationships, and social context.</p>
+
+<p>AI doesn’t operate that way.</p>
+
+<p>to make AI work in these environments, decision-making has to be made explicit. Rules, authority, and accountability need to be formalized.</p>
+
+<p>sometimes that’s possible.
+<em>sometimes it isn’t.</em></p>
+
+<p>so the next time an AI initiative fails, don’t just ask whether the technology was lacking.</p>
+
+<p>ask whether the human system it was built on was ever clearly defined in the first place.</p>
+
+<hr />
+<p><em>david crowe - <a href="https://reducibl.com">reducibl.com</a> - <a href="https://gatewaystack.com">gatewaystack.com</a></em></p>
+
+
+  
+    <p style="margin-top: 2rem;">
+      <a href="/writing">← back to writing</a>
+    </p>
+  
+</article>
+
     </div>
   </body>
 </html>

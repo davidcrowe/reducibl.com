@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>
-      {% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}
+      build your AI app idea — live in 1 hour | reducibl
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png" type="image/png" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
-    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-    <meta property="og:image" content="{% if page.og_image %}{{ page.og_image | absolute_url }}{% else %}{{ '/assets/og-default.png' | absolute_url }}{% endif %}">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
-    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:title" content="build your AI app idea — live in 1 hour">
+    <meta property="og:description" content="submit your app idea. i'll build a working prototype with you in a live 1-hour session.">
+    <meta property="og:image" content="http://localhost:4000/assets/og-default.png">
+    <meta property="og:url" content="http://localhost:4000/build.html">
+    <meta property="og:type" content="website">
 
     <!-- Privacy-friendly analytics by Plausible -->
     <script async src="https://analytics.reducibl.com/js/pa-qA_7AgRK0qdqoqvtJQ_jX.js"></script>
@@ -156,21 +156,44 @@
   </head>
   <body>
     <div class="page">
-      {% if page.url != "/" %}
+      
         <nav class="top-nav">
-          <a href="{{ '/' | relative_url }}">home</a>
-          {% if page.url != '/writing/' %}
+          <a href="/">home</a>
+          
             <span class="sep">·</span>
-            <a href="{{ '/writing' | relative_url }}">writing</a>
-          {% endif %}
-          {% if page.url != '/buildlogs/' %}
+            <a href="/writing">writing</a>
+          
+          
             <span class="sep">·</span>
-            <a href="{{ '/buildlogs' | relative_url }}">build logs</a>
-          {% endif %}
+            <a href="/buildlogs">build logs</a>
+          
         </nav>
-      {% endif %}
+      
 
-      {{ content }}
+      <h1 style="font-size:2.2rem; margin-bottom:0.25rem;">build your AI app idea</h1>
+<p style="font-size:1.1rem; color:var(--muted); margin-bottom:0.5rem;">live. in 1 hour. on camera. for free.</p>
+
+<p>submit your idea in the chatbot below. it takes less than 60 seconds</p>
+  
+<p>i'll review it and reach out if it's a fit.</p>
+
+<p><strong>what you get:</strong></p>
+<ul>
+  <li>a working prototype of your idea or feature, built live in one session</li>
+  <li>a recording of the full build process</li>
+  <li>a clear picture of what AI tools can actually do today</li>
+</ul>
+
+<p><strong>what I get:</strong></p>
+<ul>
+  <li>content for my "build in public" series</li>
+  <li>real-world signal on what people want built</li>
+</ul>
+
+<div id="chatflow" data-chatflow="build-session-intake" data-chatflow-source="reducibl.com" style="margin-top:2rem;"></div>
+
+<script src="/assets/js/chatflow.bundle.js"></script>
+
     </div>
   </body>
 </html>

@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      what does ‘relevant context’ really mean for LLM applications? | reducibl
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.png" type="image/png" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="what does ‘relevant context’ really mean for LLM applications?">
+    <meta property="og:description" content="want to know? learn from a human">
+    <meta property="og:image" content="http://localhost:4000/assets/og-default.png">
+    <meta property="og:url" content="http://localhost:4000/2026/01/22/what-does-relevant-context-mean-for-llms.html">
+    <meta property="og:type" content="article">
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://analytics.reducibl.com/js/pa-qA_7AgRK0qdqoqvtJQ_jX.js"></script>
+    <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+    </script>
+
+    <style>
+      :root {
+        --bg: #E1E6F8;          /* Inner tertiary, periwinkle */
+        --text: #111827;        /* dark neutral */
+        --muted: #6B7280;       /* gray */
+        --heading: #231E5C;     /* Inner primary */
+        --link: #2563EB;        /* brighter blue for links */
+        --link-hover: #1D4ED8;  /* darker on hover */
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 32px 16px 80px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        font-size: 16px;
+      }
+
+      .page {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      a {
+        color: var(--link);
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: var(--link-hover);
+        text-decoration: underline;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
+        letter-spacing: -0.01em;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
+      }
+
+      h4 {
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.25rem;
+        color: var(--heading);
+      }
+
+      p {
+        margin: 0 0 1rem;
+      }
+
+      ul {
+        padding-left: 1.25rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1.25rem;
+      }
+
+      small {
+        color: var(--muted);
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 1.5em auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      }
+
+
+      .top-nav {
+        margin-bottom: 24px;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .top-nav a {
+        color: var(--muted);
+      }
+
+      .top-nav a:hover {
+        color: var(--link);
+      }
+
+      .top-nav .sep {
+        margin: 0 6px;
+      }
+
+      .meta {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-bottom: 1.25rem;
+      }
+
+      .post-image {
+        max-width: 720px;
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+
+
+      @media (max-width: 640px) {
+        body {
+          padding: 24px 12px 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      
+        <nav class="top-nav">
+          <a href="/">home</a>
+          
+            <span class="sep">·</span>
+            <a href="/writing">writing</a>
+          
+          
+            <span class="sep">·</span>
+            <a href="/buildlogs">build logs</a>
+          
+        </nav>
+      
+
+      <article>
+  <h2>what does ‘relevant context’ really mean for LLM applications?</h2>
+  <p class="meta">2026-01-22</p>
+
+  <p><em>originally posted to linkedin</em></p>
+
+<p>quick experiment: how long can you stand on one leg with your eyes closed? now try with your eyes open.</p>
+
+<p>a lot easier with your eyes open, huh? <strong>when your eyes are closed, you’re missing a critical input.</strong></p>
+
+<p>everyone knows that getting the inputs right matters. for llms that input is context. providing relevant context results in better llm responses.</p>
+
+<h3 id="what-does-relevant-context-mean-exactly">what does relevant context mean exactly?</h3>
+
+<p>given a data set, there are technical strategies to determine the most relevant context to include.</p>
+
+<p>but what if the context you need sits outside of the given data set?</p>
+
+<p><em>how do you know what you don’t know?</em></p>
+
+<h3 id="learn-from-a-human">learn from a human</h3>
+
+<p>many AI applications automate something that was previously done manually.</p>
+
+<p><strong>if you want to assess whether you’re giving an AI comprehensive inputs, learn from a human. consider what context they use to do the job manually.</strong></p>
+
+<p><em>are you providing all of that context to the AI system when you ask it to do the job?</em></p>
+
+<p>if not, the system may appear to work while missing critical context a human relies on – making early success potentially misleading and increasing exposure to edge failures.</p>
+
+<h3 id="lets-make-this-concrete">let’s make this concrete</h3>
+
+<p>last year when we launched <a href="https://www.innerdreamapp.com/app">inner</a> — an emotional intelligence coaching app — our LLM responses returned technically strong content, but they didn’t quite “feel” right. whether it was tone or otherwise, something was off.</p>
+
+<p>so we thought through how our AI workflow compared to similar manual workflows.</p>
+
+<p>the key insight: <em>emotional intelligence coaching requires context across many chat sessions</em>. the relationship between events over time mattered and limiting context to a single session limited performance.</p>
+
+<p>once we began providing context from relevant past conversations — not just the current session — the response quality increased dramatically.</p>
+
+<p>so even if your application seems to be performing well today, it’s worth asking…</p>
+
+<p><strong>how robust is your system to the range of situations a human would naturally adapt to for the use case?</strong></p>
+
+<hr />
+<p><em>david crowe - <a href="https://reducibl.com">reducibl.com</a> - <a href="https://gatewaystack.com">gatewaystack.com</a></em></p>
+
+
+  
+    <p style="margin-top: 2rem;">
+      <a href="/writing">← back to writing</a>
+    </p>
+  
+</article>
+
+    </div>
+  </body>
+</html>

@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>
-      {% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}
+      how is an llm like a financial advisor? | reducibl
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.png" type="image/png" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
-    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-    <meta property="og:image" content="{% if page.og_image %}{{ page.og_image | absolute_url }}{% else %}{{ '/assets/og-default.png' | absolute_url }}{% endif %}">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
-    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:title" content="how is an llm like a financial advisor?">
+    <meta property="og:description" content="mcp servers are three party systems">
+    <meta property="og:image" content="http://localhost:4000/assets/og-default.png">
+    <meta property="og:url" content="http://localhost:4000/2025/12/11/how-is-an-llm-like-a-financial-advisor.html">
+    <meta property="og:type" content="article">
 
     <!-- Privacy-friendly analytics by Plausible -->
     <script async src="https://analytics.reducibl.com/js/pa-qA_7AgRK0qdqoqvtJQ_jX.js"></script>
@@ -156,21 +156,71 @@
   </head>
   <body>
     <div class="page">
-      {% if page.url != "/" %}
+      
         <nav class="top-nav">
-          <a href="{{ '/' | relative_url }}">home</a>
-          {% if page.url != '/writing/' %}
+          <a href="/">home</a>
+          
             <span class="sep">·</span>
-            <a href="{{ '/writing' | relative_url }}">writing</a>
-          {% endif %}
-          {% if page.url != '/buildlogs/' %}
+            <a href="/writing">writing</a>
+          
+          
             <span class="sep">·</span>
-            <a href="{{ '/buildlogs' | relative_url }}">build logs</a>
-          {% endif %}
+            <a href="/buildlogs">build logs</a>
+          
         </nav>
-      {% endif %}
+      
 
-      {{ content }}
+      <article>
+  <h2>how is an llm like a financial advisor?</h2>
+  <p class="meta">2025-12-11</p>
+
+  <p><em>originally posted to linkedin</em></p>
+
+<p>i couldn’t figure out why user-scoped data access was so tricky in model context protocol servers. this is basic stuff in traditional apps. then it dawned on me.</p>
+
+<p><strong>mcp servers are different… they are three-party systems</strong>. similar to a financial advisor accessing your bank records:</p>
+
+<p>— <strong>the user</strong> → person soliciting financial advice<br />
+— <strong>the llm</strong> → financial advisor acting on their behalf<br />
+— <strong>your backend</strong> → the bank holding the records</p>
+
+<h3 id="dont-give-an-llm-power-of-attorney">don’t give an llm power of attorney</h3>
+
+<p>why does this matter? imagine a financial advisor asking for bank records with no power of attorney to prove they represent the client.</p>
+
+<p>traditional apps are two-party systems. the user logs in and the backend knows who they are.</p>
+
+<p>trust in three-party systems is different:</p>
+
+<ol>
+  <li>the user logs in to chatgpt</li>
+  <li>chatgpt calls your backend</li>
+  <li>your backend has no way to verify which specific user the llm is calling on behalf of</li>
+</ol>
+
+<h3 id="the-user-to-backend-identity-link-is-missing">the user to backend identity link is missing</h3>
+
+<p>for many apps this becomes a security risk. you can’t:</p>
+
+<p>— filter data per-user (“show me my calendar” → returns everyone’s calendar)<br />
+— enforce policies (“only doctors can access patient records” → anyone can)<br />
+— audit by user (“who made this query?” → not sure)</p>
+
+<p><strong>i call this the <em>three-party problem</em></strong>. i tackled it while integrating my own app into chatgpt.</p>
+
+<p>if you’ve built mcp servers, have you hit this too? how did you approach it?</p>
+
+<hr />
+<p><em>david crowe - <a href="https://reducibl.com">reducibl.com</a> - <a href="https://gatewaystack.com">gatewaystack.com</a></em></p>
+
+
+  
+    <p style="margin-top: 2rem;">
+      <a href="/writing">← back to writing</a>
+    </p>
+  
+</article>
+
     </div>
   </body>
 </html>

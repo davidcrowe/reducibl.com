@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      the three-party identity problem in mcp servers | reducibl
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.png" type="image/png" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="the three-party identity problem in mcp servers">
+    <meta property="og:description" content="thoughts around an agentic control plane for ai model access">
+    <meta property="og:image" content="http://localhost:4000/assets/og-default.png">
+    <meta property="og:url" content="http://localhost:4000/2025/12/01/the-three-party-identity-problem-in-mcp-servers.html">
+    <meta property="og:type" content="article">
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://analytics.reducibl.com/js/pa-qA_7AgRK0qdqoqvtJQ_jX.js"></script>
+    <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+    </script>
+
+    <style>
+      :root {
+        --bg: #E1E6F8;          /* Inner tertiary, periwinkle */
+        --text: #111827;        /* dark neutral */
+        --muted: #6B7280;       /* gray */
+        --heading: #231E5C;     /* Inner primary */
+        --link: #2563EB;        /* brighter blue for links */
+        --link-hover: #1D4ED8;  /* darker on hover */
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 32px 16px 80px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        font-size: 16px;
+      }
+
+      .page {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      a {
+        color: var(--link);
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: var(--link-hover);
+        text-decoration: underline;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
+        letter-spacing: -0.01em;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
+      }
+
+      h4 {
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.25rem;
+        color: var(--heading);
+      }
+
+      p {
+        margin: 0 0 1rem;
+      }
+
+      ul {
+        padding-left: 1.25rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1.25rem;
+      }
+
+      small {
+        color: var(--muted);
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 1.5em auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      }
+
+
+      .top-nav {
+        margin-bottom: 24px;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .top-nav a {
+        color: var(--muted);
+      }
+
+      .top-nav a:hover {
+        color: var(--link);
+      }
+
+      .top-nav .sep {
+        margin: 0 6px;
+      }
+
+      .meta {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-bottom: 1.25rem;
+      }
+
+      .post-image {
+        max-width: 720px;
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+
+
+      @media (max-width: 640px) {
+        body {
+          padding: 24px 12px 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      
+        <nav class="top-nav">
+          <a href="/">home</a>
+          
+            <span class="sep">·</span>
+            <a href="/writing">writing</a>
+          
+          
+            <span class="sep">·</span>
+            <a href="/buildlogs">build logs</a>
+          
+        </nav>
+      
+
+      <article>
+  <h2>the three-party identity problem in mcp servers</h2>
+  <p class="meta">2025-12-01</p>
+
+  <p>a few weeks ago i was building an mcp server to integrate an app into chatgpt. it took me days just to get user authentication working. turns out that binding cryptographic user identity to AI requests isn’t a solved problem. there’s no shared identity layer between the user, the llm, and your backend. this is what i call the “three-party problem”.</p>
+
+<p>here is the basic flow:</p>
+
+<ol>
+  <li>user logs into chatgpt (openai identity)</li>
+  <li>user initiates oauth flow from chatgpt to connect my app</li>
+  <li>chatgpt redirects to my oauth endpoint with standard PKCE flow</li>
+  <li><strong>the gap</strong>: cryptographically binding chatgpt’s user to my app’s user identity</li>
+  <li>i built a custom token exchange: validate the oauth callback, issue a firebase custom token, then inject verified identity (X-User-Id) into every subsequent request</li>
+</ol>
+
+<p>this works, but it’s fragile and not standardized. everyone is rolling their own version of this identity bridge inside their mcp server. and once you solve identity, you still need to build:</p>
+
+<ul>
+  <li>per-tool scope enforcement (only certain users can call certain tools)</li>
+  <li>rate limiting per user (not just per api key)</li>
+  <li>audit trails with cryptographic proof of who called what</li>
+  <li>policy routing (send doctors to medical models, analysts to financial models)</li>
+</ul>
+
+<h3 id="ai-model-access-governance---best-practice">ai model access governance - best practice</h3>
+
+<p>can you believe what oscar from accounting sent to chatgpt?!</p>
+
+<p>before oscar’s message gets through to chatgpt, ideally the dundler mifflin it team would make sure his message is:</p>
+
+<p>— <strong>identifiabl</strong> who is actually making the call? (e.g., oscar from accounting)<br />
+— <strong>validatabl</strong> is oscar allowed to call the model or share that data?<br />
+— <strong>transformabl</strong> e.g., remove customer names from the revenue forecast he pasted in, or tag the request as containing sensitive info and requiring vp approval<br />
+— <strong>limitabl</strong> has oscar exceeded his quota or budget?<br />
+— <strong>proxyabl</strong> e.g., forward the message to the correct model for Oscar’s role<br />
+— <strong>explicabl</strong> store + explain the interaction (for when corporate flies in from scranton with kpmg and wants an audit trail)</p>
+
+<h3 id="ai-model-access-governance---real-life">ai model access governance - real life</h3>
+
+<p>in many companies, llm usage still flows through a single org-wide api key. this means that when oscar pastes that revenue forecast into chatgpt:</p>
+
+<p>— you don’t know that it’s him<br />
+— you don’t know what is being sent<br />
+— you don’t know if he has permission to access that model or send that data<br />
+— you can’t audit the call or prove compliance e.g., with hipaa or sox</p>
+
+<p>there’s nothing preventing him from sending it, no cryptographic proof it was oscar. just a shared key that could be anyone.</p>
+
+<h3 id="why-this-matters-now">why this matters… now</h3>
+
+<p>mcp servers are becoming commonplace and making it easy to give llms access to tools and data. but the identity and governance layer is still being pieced together.</p>
+
+<p>this worked fine when llms were isolated experiments. but as they become:</p>
+<ul>
+  <li>multi-user production systems</li>
+  <li>integrated with sensitive data</li>
+  <li>subject to compliance requirements</li>
+  <li>billed per-user or per-call</li>
+</ul>
+
+<p>the lack of a standard trust layer becomes a risk and bottleneck.</p>
+
+<h3 id="what-im-thinking">what i’m thinking</h3>
+
+<p>it occurs to me that identity is just the first of a set of modular components of the same system - the trust and governance agentic control plane.</p>
+
+<p>the core insights are:</p>
+
+<ol>
+  <li>llm apps are three-party systems (user ↔ llm ↔ backend) with no standard identity layer binding them together</li>
+  <li>identity is a prerequisite for governance.</li>
+</ol>
+
+<p>and i am curious…</p>
+
+<ul>
+  <li>is there any known standard emerging to bridge user ↔ LLM ↔ backend identity?</li>
+  <li>or are most teams just rolling their own?</li>
+</ul>
+
+<p>curious what others are doing. is your team hitting these issues? how are you solving them?</p>
+
+<p>so… what did your team send to chatgpt today?</p>
+
+<hr />
+<p><em>david crowe - <a href="https://reducibl.com">reducibl.com</a> - <a href="https://gatewaystack.com">gatewaystack.com</a></em></p>
+
+
+  
+    <p style="margin-top: 2rem;">
+      <a href="/writing">← back to writing</a>
+    </p>
+  
+</article>
+
+    </div>
+  </body>
+</html>

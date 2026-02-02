@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      does your team use llms securely? | reducibl
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.png" type="image/png" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="does your team use llms securely?">
+    <meta property="og:description" content="why chatgpt enterprise alone isn't sufficient">
+    <meta property="og:image" content="http://localhost:4000/assets/og-default.png">
+    <meta property="og:url" content="http://localhost:4000/2025/12/14/are-you-confident-your-team-uses-llms-securely.html">
+    <meta property="og:type" content="article">
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://analytics.reducibl.com/js/pa-qA_7AgRK0qdqoqvtJQ_jX.js"></script>
+    <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+    </script>
+
+    <style>
+      :root {
+        --bg: #E1E6F8;          /* Inner tertiary, periwinkle */
+        --text: #111827;        /* dark neutral */
+        --muted: #6B7280;       /* gray */
+        --heading: #231E5C;     /* Inner primary */
+        --link: #2563EB;        /* brighter blue for links */
+        --link-hover: #1D4ED8;  /* darker on hover */
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 32px 16px 80px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        font-size: 16px;
+      }
+
+      .page {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      a {
+        color: var(--link);
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: var(--link-hover);
+        text-decoration: underline;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
+        letter-spacing: -0.01em;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading);
+      }
+
+      h4 {
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.25rem;
+        color: var(--heading);
+      }
+
+      p {
+        margin: 0 0 1rem;
+      }
+
+      ul {
+        padding-left: 1.25rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1.25rem;
+      }
+
+      small {
+        color: var(--muted);
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 1.5em auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      }
+
+
+      .top-nav {
+        margin-bottom: 24px;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .top-nav a {
+        color: var(--muted);
+      }
+
+      .top-nav a:hover {
+        color: var(--link);
+      }
+
+      .top-nav .sep {
+        margin: 0 6px;
+      }
+
+      .meta {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-bottom: 1.25rem;
+      }
+
+      .post-image {
+        max-width: 720px;
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+
+
+      @media (max-width: 640px) {
+        body {
+          padding: 24px 12px 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      
+        <nav class="top-nav">
+          <a href="/">home</a>
+          
+            <span class="sep">·</span>
+            <a href="/writing">writing</a>
+          
+          
+            <span class="sep">·</span>
+            <a href="/buildlogs">build logs</a>
+          
+        </nav>
+      
+
+      <article>
+  <h2>does your team use llms securely?</h2>
+  <p class="meta">2025-12-14</p>
+
+  <p align="center">
+  <img src="/assets/chatgpt-enterprise-linkedin-post.png" alt="Trust boundaries for ChatGPT tool access" />
+</p>
+
+<p><em>originally posted to linkedin</em></p>
+
+<p>a few weeks ago i asked a business leader if they are confident their team uses llms securely.</p>
+
+<p>their answer? <em>yes, because we use chatgpt enterprise</em>.</p>
+
+<p>it’s true that chatgpt enterprise is the right foundation for giving your team secure llm access. it addresses:</p>
+
+<ul>
+  <li>user and organizational access to ChatGPT</li>
+  <li>how data is retained by ChatGPT</li>
+  <li>data auditability inside of ChatGPT</li>
+</ul>
+
+<p>this is sufficient when your goal starts and ends with giving your team chatgpt access.</p>
+
+<h3 id="the-real-value-of-llms-lives-beyond-access">the real value of llms lives beyond access</h3>
+
+<p>the real value starts when employees can ask the llm to:</p>
+
+<ul>
+  <li>query internal systems</li>
+  <li>retrieve customer or operational data</li>
+  <li>update tickets, records, or workflows in production systems</li>
+</ul>
+
+<p><strong>these interactions introduce a new trust boundary</strong>. the boundary still includes the employee and chatgpt. but now it includes your backend systems and company data too:</p>
+
+<ul>
+  <li><em>when chatgpt accesses my backend systems and data on an employee’s behalf, what is it allowed to do?</em></li>
+</ul>
+
+<h3 id="why-chatgpt-enterprise-alone-isnt-sufficient-by-design">why chatgpt enterprise alone isn’t sufficient (by design)</h3>
+
+<p>once an llm can call your backend apis, security is no longer just about chatgpt access. it’s about:</p>
+
+<ul>
+  <li>identity propagation to your backend</li>
+  <li>user-scoped, least-privilege access to your data</li>
+  <li>auditability across system boundaries</li>
+</ul>
+
+<p>the linchpin? <strong>your backend needs a way to cryptographically identify the employee</strong>.</p>
+
+<p>This is the <strong>three-party problem</strong>: the user, the LLM, and your backend have no shared, verifiable identity context.</p>
+
+<p>without this, a manager could ask “<em>summarize performance review feedback for my team</em>” and the llm might pull reviews from across the entire organization, exposing sensitive feedback about employees in other departments.</p>
+
+<p>your backend doesn’t automatically know what “my team” means. it can’t query the right data without verifying their identity.</p>
+
+<p><strong>what’s missing is a clean, standardized way to let llms act on behalf of users without being trusted with authority themselves</strong>. this is a gap I see teams hit when moving from demo to production.</p>
+
+<h3 id="chatgpt-knows-who-the-user-is-you-dont">chatgpt knows who the user is. you don’t</h3>
+
+<p>here’s what actually happens if you were to only rely on chatgpt enterprise:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    user                    llm                     backend
+  (alice)              (chatgpt)               (hr system api)
+     │                      │                         │
+     │ "show my team's data"│                         │
+     ├─────────────────────►│                         │
+     │                      │                         │
+     │  (alice is logged in │   GET /perfReviewData   │
+     │   to chatgpt)        │   shared api Key        │
+     │                      ├────────────────────────►│
+     │                      │                         │
+     │                      │ ❌ no user identity     │
+     │                      │ ❌ can't filter         │
+     │                      │                         │
+     │                      │◄────────────────────────┤
+     │                      │  returns EVERYONE's     │
+     │                      │  performance review     │
+     │◄─────────────────────┤        data!            │
+     │ shows all perf data  │                         │
+</code></pre></div></div>
+
+<h3 id="you-need-to-cryptographically-verify-the-employee-on-your-backend">you need to cryptographically verify the employee on your backend</h3>
+
+<p>here’s the minimum architecture required to make this safe in production and enable:</p>
+
+<ul>
+  <li>per-user data filtering</li>
+  <li>cryptographically verified identity</li>
+  <li>audit trail: “alice accessed her calendar via chatgpt”</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    user                   llm             missing Layer      backend
+   (alice)              (chatgpt)            (identity       (hr system
+                                            injection)         api)
+     │                      │                    │                     │
+     │ "show my team's data"│                    │                     │
+     ├─────────────────────►│                    │                     │
+     │                      │                    │                     │
+     │  (alice is logged in │  oauth token       │                     │
+     │   to chatgpt)        │  for alice         │                     │
+     │                      ├───────────────────►│                     │
+     │                      │                    │                     │
+     │                      │                    │ ✓ verify            │
+     │                      │                    │   alice's id        │
+     │                      │                    │                     │
+     │                      │                    │ GET /perfReviewData │
+     │                      │                    │ X-User-Id:          │
+     │                      │                    │   alice_123         │
+     │                      │                    ├────────────────────►│
+     │                      │                    │                     │
+     │                      │                    │                     │ filter by
+     │                      │                    │                     │ alice_123
+     │                      │                    │◄────────────────────┤
+     │                      │◄───────────────────┤   alice's           │
+     │◄─────────────────────┤    alice's data    │   data only         │
+     │ only shows perf data │        only        │                     │
+     │  for alice's team    │                    │                     │
+</code></pre></div></div>
+
+<h3 id="what-end-to-end-governance-actually-requires">what end-to-end governance actually requires</h3>
+
+<p>to safely expose internal tools and data to llms, you need to ensure:</p>
+
+<ul>
+  <li>llms act only within a user’s real permissions</li>
+  <li>cross-user or cross-tenant access is impossible by design</li>
+  <li>authorization is enforced server-side, not via prompts</li>
+</ul>
+
+<p>in short… every tool call is <code class="language-plaintext highlighter-rouge">identifiabl</code>, <code class="language-plaintext highlighter-rouge">validatabl</code>, and <code class="language-plaintext highlighter-rouge">explicabl</code> across system boundaries.</p>
+
+<h3 id="curious-how-others-are-handling-this">curious how others are handling this</h3>
+
+<p>have you made internal tools or data available to your team from inside of chatgpt or another llm? if so…</p>
+
+<ul>
+  <li>did you hit this trust and governance gap?</li>
+  <li>did your security team push back? why?</li>
+  <li>are you building this internally, or waiting for standards and tooling that solve identity propagation at the platform level?</li>
+</ul>
+
+<hr />
+<p><em>david crowe - <a href="https://reducibl.com">reducibl.com</a> - <a href="https://gatewaystack.com">gatewaystack.com</a></em></p>
+
+
+  
+    <p style="margin-top: 2rem;">
+      <a href="/writing">← back to writing</a>
+    </p>
+  
+</article>
+
+    </div>
+  </body>
+</html>
