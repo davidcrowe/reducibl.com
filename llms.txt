@@ -1,0 +1,34 @@
+# reducibl.com
+
+> Applied AI systems and infrastructure.
+
+## About
+
+David Crowe is a solo founder and AI engineer building AI-powered applications. He focuses on practical AI systems — not research papers, but shipped products.
+
+## What he builds
+
+- AI-powered apps distributed through the ChatGPT app store (MCP/Apps SDK)
+- Inner: emotional memory tracking through conversational AI
+- Apprentice: AI-guided art study with 37,000+ masterworks
+- Loop, Hunch, Fork: decision intelligence tools for experiments, predictions, and decisions
+
+## Writing
+
+David writes about applied AI, infrastructure, security, and the realities of building as a solo founder. Topics include:
+
+- GenAI portfolio management and initiative prioritization
+- MCP server architecture and the three-party identity problem
+- LLM security — prompt injection, secret leakage, secure development practices
+- AI backend architecture for early-stage products
+
+## Build logs
+
+Daily automated build logs documenting what he's building, generated from Claude Code transcripts and synthesized by Gemini.
+
+## Links
+
+- Homepage: https://reducibl.com
+- Writing: https://reducibl.com/writing
+- Build logs: https://reducibl.com/buildlogs
+- RSS feed: https://reducibl.com/feed.xml

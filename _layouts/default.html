@@ -6,7 +6,9 @@
       {% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
     <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
 
     <!-- Open Graph -->
     <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
@@ -14,6 +16,43 @@
     <meta property="og:image" content="{% if page.og_image %}{{ page.og_image | absolute_url }}{% else %}{{ '/assets/og-default.png' | absolute_url }}{% endif %}">
     <meta property="og:url" content="{{ page.url | absolute_url }}">
     <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+
+    <!-- Structured data -->
+    {% if page.layout == 'post' %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "{{ page.title | escape }}",
+      "description": "{{ page.description | escape }}",
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "author": {
+        "@type": "Person",
+        "name": "David Crowe",
+        "url": "https://reducibl.com"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "David Crowe"
+      },
+      "mainEntityOfPage": "{{ page.url | absolute_url }}"
+    }
+    </script>
+    {% elsif page.url == '/' %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "David Crowe",
+      "url": "https://reducibl.com",
+      "jobTitle": "AI Engineer & Founder",
+      "description": "Solo founder building AI-powered apps — dream journaling, art study tools, memory tracking.",
+      "sameAs": [
+        "https://www.linkedin.com/in/davidcrowe"
+      ]
+    }
+    </script>
+    {% endif %}
 
     <!-- Privacy-friendly analytics by Plausible -->
     <script async src="https://analytics.reducibl.com/js/pa-qA_7AgRK0qdqoqvtJQ_jX.js"></script>
