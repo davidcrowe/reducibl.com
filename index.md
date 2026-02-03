@@ -18,17 +18,17 @@ i design and build AI products, agentic systems, and trust layers like gatewayst
 ### some things i've built
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 2rem 0;">
-  <a href="https://innerdreamapp.com" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px 20px; background: #231E5C; border-radius: 8px; text-decoration: none; min-height: 180px;">
+  <a href="https://innerdreamapp.com" onclick="plausible('Project Click', {props: {project: 'inner'}})" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px 20px; background: #231E5C; border-radius: 8px; text-decoration: none; min-height: 180px;">
     <img src="/assets/Inner%20App%20Store%20Icon%20+%20Design%20Trials-06.png" alt="inner" style="width: 60px; height: 60px; margin: 0 0 12px 0; border-radius: 8px; box-shadow: none; object-fit: contain;">
     <strong style="color: #fff; font-size: 1.1rem;">inner</strong>
     <p style="margin: 0.5rem 0 0; font-size: 0.9rem; color: rgba(255,255,255,0.8);">dream journaling and emotional memory for LLMs</p>
   </a>
-  <a href="https://learnart.app" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px 20px; background: linear-gradient(135deg, #d97706, #b45309); border-radius: 8px; text-decoration: none; min-height: 180px;">
+  <a href="https://learnart.app" onclick="plausible('Project Click', {props: {project: 'apprentice'}})" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px 20px; background: linear-gradient(135deg, #d97706, #b45309); border-radius: 8px; text-decoration: none; min-height: 180px;">
     <div style="font-size: 48px; margin: 0 0 12px 0; line-height: 60px;">🎨</div>
     <strong style="color: #fff; font-size: 1.1rem;">apprentice</strong>
     <p style="margin: 0.5rem 0 0; font-size: 0.9rem; color: rgba(255,255,255,0.8);">AI-powered art study and analysis</p>
   </a>
-  <a href="https://gatewaystack.com" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px 20px; background: #231E5C; border-radius: 8px; text-decoration: none; min-height: 180px;">
+  <a href="https://gatewaystack.com" onclick="plausible('Project Click', {props: {project: 'gatewaystack'}})" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px 20px; background: #231E5C; border-radius: 8px; text-decoration: none; min-height: 180px;">
     <img src="https://gatewaystack.com/favicon.png" alt="gatewaystack" style="width: 60px; height: 60px; margin: 0 0 12px 0; border-radius: 8px; box-shadow: none; object-fit: contain;">
     <strong style="color: #fff; font-size: 1.1rem;">gatewaystack</strong>
     <p style="margin: 0.5rem 0 0; font-size: 0.9rem; color: rgba(255,255,255,0.8);">trust and governance layer for AI systems</p>
