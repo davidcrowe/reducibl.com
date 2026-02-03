@@ -5,7 +5,7 @@ title: build logs
 
 # build logs
 
-**notes from building AI-native products in public**. what worked, what broke, and what i changed
+notes from building AI-native products in public. what worked, what broke, and what i changed
 
 *the build logs are automatically generated*
 
