@@ -66,3 +66,17 @@ bundle exec jekyll build # production build to _site/
 - never add co-authored-by or cite yourself in commits
 - lowercase aesthetic throughout
 - build logs are auto-generated from Claude Code transcripts via Gemini
+
+## Proactive Reviews
+
+After completing significant work, independently kick off reviews for:
+- **Security**: Review for XSS, injection, exposed secrets, auth issues
+- **Performance**: Check for unnecessary re-renders, large bundles, unoptimized images
+- **Edge cases**: What happens with empty states, errors, slow networks?
+- **Accessibility**: Keyboard navigation, screen reader support, color contrast
+
+Periodically audit the codebase for:
+- Dead code and unused dependencies
+- Inconsistent patterns that should be unified
+- Missing error boundaries or error handling
+- Opportunities to simplify
