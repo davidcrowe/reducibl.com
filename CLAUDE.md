@@ -80,3 +80,13 @@ Periodically audit the codebase for:
 - Inconsistent patterns that should be unified
 - Missing error boundaries or error handling
 - Opportunities to simplify
+
+## Self-Maintaining CLAUDE.md
+
+Proactively propose additions to this file when you notice:
+- **Architectural decisions** — Why something was built a certain way
+- **Anti-patterns** — Things that were tried and didn't work
+- **Domain knowledge** — User journeys, what matters most, product context
+- **Code patterns** — Conventions to follow for consistency
+- **Known tech debt** — Intentional shortcuts that should be fixed later
+- **Environment quirks** — Build steps, deployment gotchas, tooling issues
