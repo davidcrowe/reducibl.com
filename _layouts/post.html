@@ -6,6 +6,12 @@ layout: default
   <h2>{{ page.title }}</h2>
   <p class="meta">{{ page.date | date: "%Y-%m-%d" }}</p>
 
+  {% if page.categories contains "buildlog" %}
+    <p style="font-style: italic; color: var(--muted); margin-bottom: 1.5rem;">
+      this build log is <a href="{{ '/buildlogs' | relative_url }}">automatically generated</a>
+    </p>
+  {% endif %}
+
   {{ content }}
 
   {% if page.categories contains "buildlog" %}

@@ -18,9 +18,8 @@ notes from building AI-native products in public. what worked, what broke, and w
 
 [reach out](https://www.linkedin.com/in/mrdavidcrowe) and let's compare notes
 
-<br>
-<hr>
-<br> 
+<hr style="margin: 2rem 0;">
+
 <ul>
   {% for post in site.posts %}
     {% unless post.categories contains "buildlog" %}{% continue %}{% endunless %}
