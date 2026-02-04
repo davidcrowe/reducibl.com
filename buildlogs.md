@@ -9,10 +9,10 @@ notes from building AI-native products in public. what worked, what broke, and w
 
 *the build logs are automatically generated*
 
--- a cron job syncs my claude code transcripts to cloud storage
--- a cloud function reads the day's work
--- it runs it through gemini to extract the interesting parts and write a draft of the build log in my voice
--- once i approve, it commits the buildlog to this site's repo
+- a cron job syncs my claude code transcripts to cloud storage
+- a cloud function reads the day's work
+- it runs it through gemini to extract the interesting parts and write a draft of the build log in my voice
+- once i approve, it commits the buildlog to this site's repo
 
 **building (or *want to build*) something similar?** [let's talk](/build)
 
@@ -27,6 +27,3 @@ notes from building AI-native products in public. what worked, what broke, and w
   {% endfor %}
 </ul>
 
----
-
-interested in working together? [let's talk](/build)

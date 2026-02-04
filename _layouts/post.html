@@ -11,24 +11,29 @@ layout: default
       this build log is <a href="{{ '/buildlogs' | relative_url }}">automatically generated</a>
     </p>
     {% if page.projectsWorkedOn %}
-    <div style="margin-bottom: 1rem;">
-      <span style="color: var(--muted); font-size: 0.75rem; margin-right: 0.5rem;">projects:</span>
-      {% for project in page.projectsWorkedOn %}
-      <span style="background: rgba(35, 30, 92, 0.08); color: var(--heading, #231E5C); padding: 0.25rem 0.6rem; border-radius: 0.25rem; font-size: 0.75rem; margin-right: 0.3rem;">{{ project }}</span>
-      {% endfor %}
-    </div>
+    <details style="margin-bottom: 0.75rem;">
+      <summary style="cursor: pointer; color: var(--heading, #231E5C); font-size: 0.85rem; font-weight: 500;">projects</summary>
+      <div style="margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.4rem;">
+        {% for project in page.projectsWorkedOn %}
+        <span style="background: rgba(35, 30, 92, 0.08); color: var(--heading, #231E5C); padding: 0.25rem 0.6rem; border-radius: 0.25rem; font-size: 0.75rem;">{{ project }}</span>
+        {% endfor %}
+      </div>
+    </details>
     {% endif %}
     {% if page.toolCallCount %}
-    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem;">
-      <span style="background: var(--heading, #231E5C); color: white; padding: 0.35rem 0.75rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 500;">{{ page.toolCallCount | divided_by: 1000.0 | round: 1 }}k tool calls</span>
-      {% if page.filesWrittenCount %}<span style="background: var(--heading, #231E5C); color: white; padding: 0.35rem 0.75rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 500;">{{ page.filesWrittenCount }} files</span>{% endif %}
-      {% if page.sessionCount %}<span style="background: var(--heading, #231E5C); color: white; padding: 0.35rem 0.75rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 500;">{{ page.sessionCount }} sessions</span>{% endif %}
-    </div>
+    <details style="margin-bottom: 0.75rem;">
+      <summary style="cursor: pointer; color: var(--heading, #231E5C); font-size: 0.85rem; font-weight: 500;">session stats</summary>
+      <div style="margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <span style="background: var(--heading, #231E5C); color: white; padding: 0.35rem 0.75rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 500;">{{ page.toolCallCount | divided_by: 1000.0 | round: 1 }}k tool calls</span>
+        {% if page.filesWrittenCount %}<span style="background: var(--heading, #231E5C); color: white; padding: 0.35rem 0.75rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 500;">{{ page.filesWrittenCount }} files</span>{% endif %}
+        {% if page.sessionCount %}<span style="background: var(--heading, #231E5C); color: white; padding: 0.35rem 0.75rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 500;">{{ page.sessionCount }} sessions</span>{% endif %}
+      </div>
+    </details>
     {% if page.toolBreakdown %}
     {% assign max_tool_count = 0 %}
     {% for tool in page.toolBreakdown %}{% if tool[1] > max_tool_count %}{% assign max_tool_count = tool[1] %}{% endif %}{% endfor %}
     <details style="margin-bottom: 1.5rem;">
-      <summary style="cursor: pointer; color: var(--muted); font-size: 0.8rem; font-weight: 500;">tool breakdown</summary>
+      <summary style="cursor: pointer; color: var(--heading, #231E5C); font-size: 0.85rem; font-weight: 500;">tool breakdown</summary>
       <div style="margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.4rem; max-width: 400px;">
         {% for tool in page.toolBreakdown %}
         {% assign bar_width = tool[1] | times: 100 | divided_by: max_tool_count %}
