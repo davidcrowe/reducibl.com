@@ -27,11 +27,10 @@ layout: default
     {% if page.toolBreakdown %}
     {% assign max_tool_count = 0 %}
     {% for tool in page.toolBreakdown %}{% if tool[1] > max_tool_count %}{% assign max_tool_count = tool[1] %}{% endif %}{% endfor %}
-    {% assign sorted_tools = page.toolBreakdown | sort: "last" | reverse %}
     <details style="margin-bottom: 1.5rem;">
       <summary style="cursor: pointer; color: var(--muted); font-size: 0.8rem; font-weight: 500;">tool breakdown</summary>
       <div style="margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.4rem; max-width: 400px;">
-        {% for tool in sorted_tools %}
+        {% for tool in page.toolBreakdown %}
         {% assign bar_width = tool[1] | times: 100 | divided_by: max_tool_count %}
         <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem;">
           <span style="width: 70px; color: var(--muted); text-align: right;">{{ tool[0] }}</span>
