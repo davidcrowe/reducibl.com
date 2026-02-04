@@ -10,7 +10,7 @@ i've been building in public for a while now.
 
 writing build logs every day? that was never going to happen.
 
-so i automated it.
+*so i automated it.*
 
 ### the problem
 
@@ -48,8 +48,6 @@ the best automations don't replace what you do — they capture what you're alre
 i was already building. now i have a record of it, published daily, with zero extra effort.
 
 check out the build logs at [reducibl.com/buildlogs](https://reducibl.com/buildlogs).
-
-building something similar? [let's talk](https://reducibl.com/build).
 
 ---
 *david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

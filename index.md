@@ -52,9 +52,9 @@ i've helped teams go from prototype to production in weeks, not months.
 
 i build both the *apps* and the *infrastructure* behind modern agentic systems.
 
-my app [**inner**](https://innerdreamapp.com) helps users collect dreams and memories, map emotions over time, and explore personal meaning through an agentic llm interface.
+[**inner**](https://innerdreamapp.com) helps users collect dreams and memories, map emotions over time, and explore personal meaning through an agentic llm interface.
 
-my app [**apprentice**](https://learnart.app) offers guided study of 37,000+ masterworks — AI-powered analysis, step-by-step breakdowns, and personalized learning paths for art students and enthusiasts.
+[**apprentice**](https://learnart.app) offers guided study of 37,000+ masterworks — AI-powered analysis, step-by-step breakdowns, and personalized learning paths for art students and enthusiasts.
 
 most of my apps are available as web apps. a few are available as iOS apps. soon many will be available as chatgpt and claude apps too. 
 
