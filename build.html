@@ -32,9 +32,12 @@ description: "i work directly with founders and teams to build AI systems fast â
 <script src="/assets/js/chatflow.bundle.js"></script>
 <script>
   // Prevent chatflow autofocus from scrolling page
-  window.addEventListener('load', function() {
-    setTimeout(function() { window.scrollTo(0, 0); }, 100);
-  });
+  var scrollChecks = 0;
+  var scrollInterval = setInterval(function() {
+    window.scrollTo(0, 0);
+    scrollChecks++;
+    if (scrollChecks > 10) clearInterval(scrollInterval);
+  }, 200);
 </script>
 
 <hr style="border: none; border-top: 1px solid rgba(35,30,92,0.15); margin: 3rem 0 2rem;">
