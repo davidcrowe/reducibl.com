@@ -18,3 +18,7 @@ thoughts on applied AI, infrastructure, and building real systems
     </li>
   {% endfor %}
 </ul>
+
+---
+
+interested in working together? [let's talk](/build)

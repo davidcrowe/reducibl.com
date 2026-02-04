@@ -256,6 +256,10 @@
             <span class="sep">·</span>
             <a href="{{ '/buildlogs' | relative_url }}">build logs</a>
           {% endif %}
+          {% if page.url != '/build/' and page.url != '/build' %}
+            <span class="sep">·</span>
+            <a href="{{ '/build' | relative_url }}">work with me</a>
+          {% endif %}
         </nav>
       {% endif %}
 
