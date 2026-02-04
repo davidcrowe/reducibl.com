@@ -7,15 +7,43 @@ layout: default
   <p class="meta">{{ page.date | date: "%Y-%m-%d" }}</p>
 
   {% if page.categories contains "buildlog" %}
-    <p style="font-style: italic; color: var(--muted); margin-bottom: 1.5rem;">
+    <p style="font-style: italic; color: var(--muted); margin-bottom: 1rem;">
       this build log is <a href="{{ '/buildlogs' | relative_url }}">automatically generated</a>
     </p>
+    <!-- DEBUG: toolCallCount = {{ page.toolCallCount | default: "NOT SET" }} -->
+    {% if page.toolCallCount %}
+    <div style="background: #f8f9fa; border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; font-size: 0.9rem;">
+      <div style="display: flex; flex-wrap: wrap; gap: 1.5rem;">
+        <div title="Tool calls"><strong>🔧 {{ page.toolCallCount }}</strong> tool calls</div>
+        {% if page.totalTokens %}<div title="Tokens"><strong>📊 {{ page.totalTokens | divided_by: 1000 }}k</strong> tokens</div>{% endif %}
+        {% if page.filesWrittenCount %}<div title="Files modified"><strong>📝 {{ page.filesWrittenCount }}</strong> files modified</div>{% endif %}
+        {% if page.filesReadCount %}<div title="Files read"><strong>📖 {{ page.filesReadCount }}</strong> files read</div>{% endif %}
+        {% if page.sessionCount %}<div title="Sessions"><strong>💬 {{ page.sessionCount }}</strong> sessions</div>{% endif %}
+      </div>
+      {% if page.projectsWorkedOn %}
+      <div style="margin-top: 0.75rem; color: #666;">
+        <strong>Projects:</strong> {{ page.projectsWorkedOn | join: ", " }}
+      </div>
+      {% endif %}
+      {% if page.toolBreakdown %}
+      <details style="margin-top: 0.75rem;">
+        <summary style="cursor: pointer; color: #666;">Tool breakdown</summary>
+        <div style="margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          {% for tool in page.toolBreakdown %}
+          <span style="background: #e9ecef; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem;">{{ tool[0] }}: {{ tool[1] }}</span>
+          {% endfor %}
+        </div>
+      </details>
+      {% endif %}
+    </div>
+    {% endif %}
   {% endif %}
 
   {{ content }}
 
   {% if page.categories contains "buildlog" %}
-      <p style="color: var(--muted);">
+  <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--muted);">
+    <p style="color: var(--muted);">
       interested in working together? <a href="{{ '/build' | relative_url }}">let's talk</a>
     </p>  
     <p style="margin-top: 2rem;">
