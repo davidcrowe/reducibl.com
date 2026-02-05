@@ -7,13 +7,11 @@ title: reducibl
 
 **applied AI lab** — from idea to production in weeks. built live.
 
-AI is no longer an experiment. it's infrastructure. 
-
 ## recent builds
 
 - deployed a saas product as chatgpt app in 7 days
-- implemented mcp auth live in a single session
-- integrated internal database with chatgpt enterprise in hours
+- implemented mcp auth live in a single session — with role level scopes
+- integrated internal database with chatgpt enterprise in hours — with auditability for each call
 
 previously aws, dell · harvard, uchicago · [github](https://github.com/davidcrowe) · [linkedin](https://www.linkedin.com/in/mrdavidcrowe) · [email](mailto:david@reducibl.com)
 
@@ -23,7 +21,7 @@ i build AI products with founders and teams — live, on-camera, collaboratively
 
 from zero to working production system in *weeks*, not months.
 
-you walk away with a real system. not a prototype, not slides. ready to deploy or iterate on. something your teams can use immediately.
+you walk away with a real system your team can use immediately. not a prototype, not slides. ready to deploy or iterate on.
 
 best fit for founders or small operating teams -- including those in enterprise and pe-backed environments -- serious about shipping ai. 
 
