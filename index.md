@@ -5,20 +5,31 @@ title: reducibl
 
 # reducibl
 
-**applied AI studio** — i help teams ship AI systems fast
+**applied AI lab** — from idea to production in weeks. built live.
+
+AI is no longer an experiment. it's infrastructure. 
+
+## recent builds
+
+- deployed a saas product as chatgpt app in 7 days
+- implemented mcp auth live in a single session
+- integrated internal database with chatgpt enterprise in hours
+
+previously aws, dell · harvard, uchicago · [github](https://github.com/davidcrowe) · [linkedin](https://www.linkedin.com/in/mrdavidcrowe) · [email](mailto:david@reducibl.com)
 
 ## work with me
 
-i build AI products with founders and teams — live, on-camera, in focused sessions. 
+i build AI products with founders and teams — live, on-camera, collaboratively, in focused sessions. 
 
-- chatgpt apps
-- mcp servers
-- model gateways
-- internal copilots
+from zero to working production system in *weeks*, not months.
 
-prototype to production in *weeks*, not months.
+you walk away with a real system. not a prototype, not slides. ready to deploy or iterate on. something your teams can use immediately.
 
-[**book an intro call**](/build) — 45 minutes, no cost, we'll build a working prototype — live
+best fit for founders or small operating teams -- including those in enterprise and pe-backed environments -- serious about shipping ai. 
+
+i work equally well with technical and non-technical clients. 
+
+[**book an intro call**](/build) — 45 minutes, no cost, we'll build together — live
 
 ### what i've shipped
 
@@ -26,7 +37,7 @@ prototype to production in *weeks*, not months.
 
 [apprentice](https://learnart.app) — AI-powered art study across 37,000+ masterworks
 
-both run on [gatewaystack](https://gatewaystack.com), the trust and governance layer i built for user-scoped AI access.
+both run on [gatewaystack](https://gatewaystack.com), the trust and governance layer i built for user-scoped AI access. it handles identity, permissions, and auditability.
 
 ### writing
 
@@ -40,12 +51,8 @@ both run on [gatewaystack](https://gatewaystack.com), the trust and governance l
 
 ### build logs
 
-i publish daily notes on what i'm building, auto-generated from claude code transcripts.
+notes from building AI-native systems in public.
 
 [latest logs →](/buildlogs)
-
-### more
-
-previously aws, dell · harvard, uchicago · [github](https://github.com/davidcrowe) · [linkedin](https://www.linkedin.com/in/mrdavidcrowe) · [email](mailto:david@reducibl.com)
 
 {% include subscribe.html label="get updates by email" source="homepage" %}
