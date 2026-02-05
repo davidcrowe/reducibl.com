@@ -5,16 +5,17 @@ title: build logs
 
 # build logs
 
-notes from building AI-native products in public. what worked, what broke, and what i changed
+notes from building AI-native products in public. what worked, what broke, and what i changed.
 
-*the build logs are automatically generated*
+if you're building AI-native products, these logs show the real day-to-day: the dead ends, the pivots, and what actually works.
 
-- a cron job syncs my claude code transcripts to cloud storage
-- a cloud function reads the day's work
-- it runs it through gemini to extract the interesting parts and write a draft of the build log in my voice
-- once i approve, it commits the buildlog to this site's repo
-
-**building (or *want to build*) something similar?** [let's talk](/build)
+<details style="margin: 1rem 0;">
+<summary style="cursor: pointer; color: var(--muted);">how the automation works</summary>
+<div style="margin-top: 0.75rem; padding-left: 1rem; border-left: 2px solid rgba(35, 30, 92, 0.15);">
+<p>a cron job syncs my claude code transcripts to cloud storage. a cloud function reads the day's work, gemini extracts the interesting parts and drafts the log in my voice, and once i approve it commits to this site's repo.</p>
+<p><a href="/build">let's talk</a> if you're building something similar.</p>
+</div>
+</details>
 
 <ul>
   {% for post in site.posts %}
@@ -27,3 +28,4 @@ notes from building AI-native products in public. what worked, what broke, and w
   {% endfor %}
 </ul>
 
+{% include subscribe.html label="get build logs by email" source="buildlogs" %}
