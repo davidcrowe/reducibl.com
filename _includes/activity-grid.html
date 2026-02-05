@@ -1,0 +1,193 @@
+<!-- GitHub-style activity grid based on toolCallCount -->
+<div class="activity-grid-container">
+  <div class="activity-months" id="activityMonths"></div>
+  <div class="activity-grid" id="activityGrid"></div>
+</div>
+
+<style>
+.activity-grid-container {
+  margin: 1rem 0 0.5rem 0;
+  width: 100%;
+}
+
+.activity-months {
+  display: flex;
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-bottom: 4px;
+  padding-left: 2px;
+}
+
+.activity-month {
+  text-align: left;
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 3px;
+  width: 100%;
+  aspect-ratio: 53 / 7;
+}
+
+.activity-cell {
+  border-radius: 2px;
+  background: rgba(35, 30, 92, 0.06);
+  aspect-ratio: 1;
+}
+
+.activity-cell[data-level="1"] { background: rgba(35, 30, 92, 0.2); }
+.activity-cell[data-level="2"] { background: rgba(35, 30, 92, 0.4); }
+.activity-cell[data-level="3"] { background: rgba(35, 30, 92, 0.6); }
+.activity-cell[data-level="4"] { background: rgba(35, 30, 92, 0.9); }
+
+.activity-cell:hover {
+  outline: 1px solid var(--heading, #231E5C);
+  cursor: pointer;
+}
+
+.activity-tooltip {
+  position: fixed;
+  background: var(--heading, #231E5C);
+  color: white;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  pointer-events: none;
+  z-index: 100;
+  white-space: nowrap;
+}
+</style>
+
+<script>
+(function() {
+  // Build log data from Jekyll
+  const buildLogs = [
+    {% for post in site.posts %}
+      {% if post.categories contains "buildlog" %}
+      {
+        date: "{{ post.date | date: '%Y-%m-%d' }}",
+        toolCalls: {{ post.toolCallCount | default: 0 }},
+        title: "{{ post.title | escape }}",
+        url: "{{ post.url | relative_url }}"
+      },
+      {% endif %}
+    {% endfor %}
+  ];
+
+  // Create lookup by date and find earliest log
+  const logsByDate = {};
+  let maxCalls = 0;
+  let earliestDate = null;
+  buildLogs.forEach(log => {
+    logsByDate[log.date] = log;
+    if (log.toolCalls > maxCalls) maxCalls = log.toolCalls;
+    if (!earliestDate || log.date < earliestDate) earliestDate = log.date;
+  });
+
+  // Generate last 52 weeks (365 days) of dates in Pacific time
+  const grid = document.getElementById('activityGrid');
+  const monthsContainer = document.getElementById('activityMonths');
+
+  // Get current date in Pacific timezone
+  const pacificNow = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
+  const today = new Date(pacificNow);
+  const weeks = 52;
+
+  // Start from Sunday of the week (weeks * 7) days ago
+  const startDate = new Date(today);
+  startDate.setDate(startDate.getDate() - (weeks * 7) - startDate.getDay());
+
+  // Track months for labels
+  const monthNames = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+  const monthPositions = [];
+  let lastMonth = -1;
+  let weekIndex = 0;
+
+  // Create tooltip
+  const tooltip = document.createElement('div');
+  tooltip.className = 'activity-tooltip';
+  tooltip.style.display = 'none';
+  document.body.appendChild(tooltip);
+
+  // Generate cells
+  for (let i = 0; i < weeks * 7 + today.getDay() + 1; i++) {
+    const cellDate = new Date(startDate);
+    cellDate.setDate(startDate.getDate() + i);
+
+    if (cellDate > today) break;
+
+    // Track month changes (on first day of each week column)
+    if (i % 7 === 0) {
+      const month = cellDate.getMonth();
+      if (month !== lastMonth) {
+        monthPositions.push({ month: monthNames[month], week: weekIndex });
+        lastMonth = month;
+      }
+      weekIndex++;
+    }
+
+    // Format date as YYYY-MM-DD in Pacific time
+    const dateStr = cellDate.toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
+    const log = logsByDate[dateStr];
+
+    const cell = document.createElement('div');
+    cell.className = 'activity-cell';
+
+    if (log && log.toolCalls > 0) {
+      // Calculate level (0-4) based on tool calls
+      const ratio = log.toolCalls / maxCalls;
+      let level = 0;
+      if (ratio > 0) level = 1;
+      if (ratio > 0.25) level = 2;
+      if (ratio > 0.5) level = 3;
+      if (ratio > 0.75) level = 4;
+
+      cell.dataset.level = level;
+      cell.dataset.url = log.url;
+      cell.dataset.tooltip = `${dateStr}: ${log.toolCalls.toLocaleString()} tool calls`;
+
+      cell.addEventListener('click', () => {
+        window.location.href = log.url;
+      });
+    } else if (earliestDate && dateStr >= earliestDate) {
+      cell.dataset.tooltip = `${dateStr}: no activity`;
+    } else {
+      cell.dataset.tooltip = `${dateStr}: no data`;
+    }
+
+    // Tooltip events
+    cell.addEventListener('mouseenter', (e) => {
+      tooltip.textContent = cell.dataset.tooltip;
+      tooltip.style.display = 'block';
+      tooltip.style.left = e.pageX + 10 + 'px';
+      tooltip.style.top = e.pageY - 30 + 'px';
+    });
+
+    cell.addEventListener('mouseleave', () => {
+      tooltip.style.display = 'none';
+    });
+
+    grid.appendChild(cell);
+  }
+
+  // Render month labels
+  const totalWeeks = weekIndex;
+  const weekWidth = 100 / totalWeeks;
+
+  monthPositions.forEach((pos, idx) => {
+    const span = document.createElement('span');
+    span.className = 'activity-month';
+    span.textContent = pos.month;
+
+    // Calculate width to next month or end
+    const nextWeek = idx < monthPositions.length - 1 ? monthPositions[idx + 1].week : totalWeeks;
+    const spanWeeks = nextWeek - pos.week;
+    span.style.width = (spanWeeks * weekWidth) + '%';
+
+    monthsContainer.appendChild(span);
+  });
+})();
+</script>

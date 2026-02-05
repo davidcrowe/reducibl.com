@@ -9,6 +9,8 @@ notes from building AI-native products in public. what worked, what broke, and w
 
 if you're building AI-native products, these logs show the real day-to-day: the dead ends, the pivots, and what actually works.
 
+{% include activity-grid.html %}
+
 <details style="margin: 1rem 0;">
 <summary style="cursor: pointer; color: var(--muted);">how the automation works</summary>
 <div style="margin-top: 0.75rem; padding-left: 1rem; border-left: 2px solid rgba(35, 30, 92, 0.15);">
