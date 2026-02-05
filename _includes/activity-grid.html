@@ -190,6 +190,12 @@
     grid.appendChild(cell);
   }
 
+  // Auto-scroll to the right (most recent) on mobile
+  const container = document.querySelector('.activity-grid-container');
+  if (container) {
+    container.scrollLeft = container.scrollWidth;
+  }
+
   // Render month labels
   const totalWeeks = weekIndex;
   const weekWidth = 100 / totalWeeks;
