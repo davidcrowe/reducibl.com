@@ -8,6 +8,8 @@
 .activity-grid-container {
   margin: 1rem 0 0.5rem 0;
   width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .activity-months {
@@ -16,6 +18,7 @@
   color: var(--muted);
   margin-bottom: 4px;
   padding-left: 2px;
+  min-width: 700px;
 }
 
 .activity-month {
@@ -24,12 +27,26 @@
 
 .activity-grid {
   display: grid;
-  grid-template-rows: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 12px);
   grid-auto-flow: column;
-  grid-auto-columns: 1fr;
+  grid-auto-columns: 12px;
   gap: 3px;
-  width: 100%;
-  aspect-ratio: 53 / 7;
+  min-width: 700px;
+}
+
+@media (min-width: 800px) {
+  .activity-grid-container {
+    overflow-x: visible;
+  }
+  .activity-months {
+    min-width: 100%;
+  }
+  .activity-grid {
+    grid-template-rows: repeat(7, 1fr);
+    grid-auto-columns: 1fr;
+    min-width: 100%;
+    aspect-ratio: 53 / 7;
+  }
 }
 
 .activity-cell {
