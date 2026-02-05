@@ -1,0 +1,148 @@
+<!-- Version toggle - auto-detects versions from .version-content divs -->
+<div class="version-toggle" id="versionToggle" style="display: none;">
+  <span class="version-label">version:</span>
+  <div class="version-buttons" id="versionButtons"></div>
+</div>
+
+<style>
+.version-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.version-label {
+  color: var(--muted);
+}
+
+.version-buttons {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.version-btn {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  border: 1px solid rgba(35, 30, 92, 0.2);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.version-btn:hover {
+  border-color: var(--heading);
+  color: var(--heading);
+}
+
+.version-btn.active {
+  background: var(--heading);
+  color: white;
+  border-color: var(--heading);
+}
+
+/* Version content sections */
+.version-content {
+  display: none;
+}
+
+.version-content.active {
+  display: block;
+}
+</style>
+
+<script>
+(function() {
+  // Platform display names and order
+  const PLATFORMS = {
+    linkedin: { name: 'LinkedIn', description: 'Original version' },
+    hn: { name: 'HN', description: 'Hacker News version' },
+    twitter: { name: 'Twitter', description: 'Thread format' },
+    reddit: { name: 'Reddit', description: 'Community discussion' },
+    devto: { name: 'Dev.to', description: 'Tutorial format' }
+  };
+
+  const PLATFORM_ORDER = ['linkedin', 'hn', 'twitter', 'reddit', 'devto'];
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const contents = document.querySelectorAll('.version-content');
+
+    // If no version content, don't show toggle
+    if (contents.length === 0) return;
+
+    // If only one version, don't show toggle (just show the content)
+    if (contents.length === 1) {
+      contents[0].classList.add('active');
+      return;
+    }
+
+    // Get available versions from content divs
+    const availableVersions = Array.from(contents).map(c => c.dataset.version);
+
+    // Sort by platform order
+    availableVersions.sort((a, b) => {
+      const aIdx = PLATFORM_ORDER.indexOf(a);
+      const bIdx = PLATFORM_ORDER.indexOf(b);
+      return (aIdx === -1 ? 999 : aIdx) - (bIdx === -1 ? 999 : bIdx);
+    });
+
+    // Build buttons
+    const buttonsContainer = document.getElementById('versionButtons');
+    availableVersions.forEach(versionId => {
+      const platform = PLATFORMS[versionId] || { name: versionId, description: '' };
+      const btn = document.createElement('button');
+      btn.className = 'version-btn';
+      btn.dataset.version = versionId;
+      btn.title = platform.description;
+      btn.textContent = platform.name;
+      btn.addEventListener('click', () => showVersion(versionId));
+      buttonsContainer.appendChild(btn);
+    });
+
+    // Show the toggle
+    document.getElementById('versionToggle').style.display = 'flex';
+
+    // Get version from URL param or default to first available (prefer linkedin)
+    const params = new URLSearchParams(window.location.search);
+    const requestedVersion = params.get('v');
+    const defaultVersion = availableVersions.includes('linkedin') ? 'linkedin' : availableVersions[0];
+    const initialVersion = (requestedVersion && availableVersions.includes(requestedVersion))
+      ? requestedVersion
+      : defaultVersion;
+
+    function showVersion(versionId) {
+      // Update content visibility
+      contents.forEach(c => {
+        c.classList.toggle('active', c.dataset.version === versionId);
+      });
+
+      // Update button states
+      document.querySelectorAll('.version-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.version === versionId);
+      });
+
+      // Update URL without reload
+      const url = new URL(window.location);
+      if (versionId === defaultVersion) {
+        url.searchParams.delete('v');
+      } else {
+        url.searchParams.set('v', versionId);
+      }
+      window.history.replaceState({}, '', url);
+
+      // Track in Plausible
+      if (window.plausible) {
+        plausible('Version Toggle', { props: { version: versionId } });
+      }
+    }
+
+    // Initialize
+    showVersion(initialVersion);
+  });
+})();
+</script>

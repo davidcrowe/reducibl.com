@@ -1,0 +1,103 @@
+<!-- Email subscribe form -->
+<div class="subscribe-form" id="subscribeForm">
+  <form id="subscribeFormEl" class="subscribe-row">
+    <span class="subscribe-label">{{ include.label | default: "get new posts by email" }}</span>
+    <input type="email" id="subscribeEmail" placeholder="you@example.com" required>
+    <button type="submit">subscribe</button>
+  </form>
+  <p id="subscribeSuccess" style="display: none; color: var(--muted); margin: 0;">thanks — you're on the list.</p>
+  <p id="subscribeError" style="display: none; color: #b91c1c; margin: 0;">something went wrong. try again?</p>
+</div>
+
+<style>
+.subscribe-form {
+  margin: 1rem 0;
+}
+
+.subscribe-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.subscribe-label {
+  color: var(--muted);
+}
+
+.subscribe-form input {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid rgba(35, 30, 92, 0.2);
+  border-radius: 4px;
+  font-family: inherit;
+  min-width: 180px;
+}
+
+.subscribe-form input:focus {
+  outline: none;
+  border-color: var(--heading, #231E5C);
+}
+
+.subscribe-form button {
+  padding: 0.4rem 0.75rem;
+  background: var(--heading, #231E5C);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.subscribe-form button:hover {
+  opacity: 0.9;
+}
+</style>
+
+<script>
+(function() {
+  var form = document.getElementById('subscribeFormEl');
+  var emailInput = document.getElementById('subscribeEmail');
+  var successMsg = document.getElementById('subscribeSuccess');
+  var errorMsg = document.getElementById('subscribeError');
+
+  if (!form) return;
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var email = emailInput.value.trim();
+    if (!email) return;
+
+    // Disable form while submitting
+    emailInput.disabled = true;
+    form.querySelector('button').disabled = true;
+    form.querySelector('button').textContent = '...';
+
+    fetch('https://us-central1-trim-glazing-445021-n8.cloudfunctions.net/joinWaitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        source: 'reducibl-newsletter'
+      })
+    })
+    .then(function(res) {
+      if (res.ok) {
+        form.style.display = 'none';
+        successMsg.style.display = 'block';
+        if (window.plausible) {
+          plausible('Newsletter Signup', { props: { source: '{{ include.source | default: "post" }}' } });
+        }
+      } else {
+        throw new Error('Request failed');
+      }
+    })
+    .catch(function() {
+      errorMsg.style.display = 'block';
+      emailInput.disabled = false;
+      form.querySelector('button').disabled = false;
+      form.querySelector('button').textContent = 'subscribe';
+    });
+  });
+})();
+</script>

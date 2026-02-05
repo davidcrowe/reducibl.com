@@ -52,7 +52,7 @@ bundle exec jekyll build # production build to _site/
 
 - Plausible (self-hosted at analytics.reducibl.com)
 - Domain: reducibl.com
-- Events: Project Click, Form: Submission, Waitlist Signup, Outbound Link: Click
+- Events: Project Click, Form: Submission, Waitlist Signup, Newsletter Signup, Outbound Link: Click
 - Goal: `/build` pageview
 
 ## Consulting Model

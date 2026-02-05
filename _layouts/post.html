@@ -6,6 +6,8 @@ layout: default
   <h2>{{ page.title }}</h2>
   <p class="meta">{{ page.date | date: "%Y-%m-%d" }}</p>
 
+  {% include version-toggle.html %}
+
   {% if page.categories contains "buildlog" %}
     <p style="font-style: italic; color: var(--muted); margin-bottom: 1rem;">
       this build log is <a href="{{ '/buildlogs' | relative_url }}">automatically generated</a>
@@ -53,16 +55,19 @@ layout: default
 
   {{ content }}
 
+  <hr style="margin: 2rem 0; border: none; border-top: 1px solid rgba(35, 30, 92, 0.15);">
+
   {% if page.categories contains "buildlog" %}
-  <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--muted);">
-    <p style="color: var(--muted);">
+    {% include subscribe.html label="follow along — get build logs by email" source="buildlog" %}
+    <p style="color: var(--muted); margin-top: 1.5rem;">
       interested in working together? <a href="{{ '/build' | relative_url }}">let's talk</a>
-    </p>  
+    </p>
     <p style="margin-top: 2rem;">
       <a href="{{ '/buildlogs' | relative_url }}">← back to build logs</a>
     </p>
   {% else %}
-    <p style="color: var(--muted);">
+    {% include subscribe.html label="get new posts by email" source="writing" %}
+    <p style="color: var(--muted); margin-top: 1.5rem;">
       interested in working together? <a href="{{ '/build' | relative_url }}">let's talk</a>
     </p>
     <p style="margin-top: 2rem;">
