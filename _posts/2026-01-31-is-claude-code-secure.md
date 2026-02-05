@@ -2,6 +2,7 @@
 layout: post
 title: "is claude code secure?"
 description: "first impressions on secrets, prompt injection, and the real weak link"
+permalink: /writing/is-claude-code-secure
 ---
   <img src="/assets/claude-code-security.png" alt="Claude Code responding to security concerns" />
 
