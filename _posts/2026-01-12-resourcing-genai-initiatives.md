@@ -44,6 +44,3 @@ the best teams know better. they understand that many won’t succeed and design
 ### how do you resource genAI projects?
 
 one big bet… or a portfolio of small, time-boxed bets designed to learn and systematically fund the winners?
-
----
-*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

@@ -41,6 +41,3 @@ pro tip: include open ended questions as part of the intake form. this leads to 
 how does your team source GenAI ideas? 
 
 and when is the last time you piloted an idea submitted by someone besides the executives?
-
----
-*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

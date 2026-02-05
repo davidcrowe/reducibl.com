@@ -23,6 +23,3 @@ walk them through the workflow live. even if it’s not perfect, you will get va
 this approach has limitations — custom gpts don’t connect to backends, so they can’t personalize deeply — but they are more than enough for many no-code mvps. and as a bonus, they become great reference material if you later team up with a technical partner.
 
 does this resonate? how are you validating AI apps and workflows before investing in development?
-
----
-*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

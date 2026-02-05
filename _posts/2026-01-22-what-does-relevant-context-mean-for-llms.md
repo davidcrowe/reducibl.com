@@ -43,6 +43,3 @@ once we began providing context from relevant past conversations — not just th
 so even if your application seems to be performing well today, it’s worth asking…
 
 **how robust is your system to the range of situations a human would naturally adapt to for the use case?**
-
----
-*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

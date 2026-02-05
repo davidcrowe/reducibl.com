@@ -66,6 +66,3 @@ claude code has many safeguards today. it will continue to add them around thing
 however, ***the biggest risks are and will continue to be behavioral***. it is so easy (and dare i say.. *fun!*) to select auto-approve and watch claude code execute at will. 
 
 but if teams and devs normalize auto-approve for writes and stop paying attention… the safety rails won't help.
-
----
-*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

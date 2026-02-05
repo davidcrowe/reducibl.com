@@ -483,6 +483,3 @@ this isn't just about replacing 100 lines with 1 line. It's about **standardizin
 when every mcp server speaks the same identity language — the same request context — the next layers—policy enforcement, rate limiting, audit trails—become plug-and-play.
  
 that's the real win: a composable governance stack instead of bespoke middleware in every project.
-
----
-*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

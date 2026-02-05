@@ -49,5 +49,3 @@ i was already building. now i have a record of it, published daily, with zero ex
 
 check out the build logs at [reducibl.com/buildlogs](https://reducibl.com/buildlogs).
 
----
-*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

@@ -34,6 +34,3 @@ so these are the lessons if you are a business leader:
 - target workflow displacement, not just augmentation
 
 how does your team measure return on genAI investment?
-
----
-*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

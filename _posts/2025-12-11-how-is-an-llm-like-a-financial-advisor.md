@@ -37,6 +37,3 @@ for many apps this becomes a security risk. you can't:
 **i call this the *three-party problem***. i tackled it while integrating my own app into chatgpt. 
 
 if you’ve built mcp servers, have you hit this too? how did you approach it?
-
----
-*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

@@ -42,7 +42,4 @@ if the answer is yes, it's worth building — even if the first version is rough
 
 what's your moat?
 
----
-*david crowe — [reducibl.com](https://reducibl.com)*
-
 </div>

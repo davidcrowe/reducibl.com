@@ -74,6 +74,3 @@ and i am curious...
 curious what others are doing. is your team hitting these issues? how are you solving them?
 
 so… what did your team send to chatgpt today?
-
----
-*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

@@ -30,6 +30,3 @@ sometimes that’s possible.
 so the next time an AI initiative fails, don’t just ask whether the technology was lacking.
 
 ask whether the human system it was built on was ever clearly defined in the first place.
-
----
-*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

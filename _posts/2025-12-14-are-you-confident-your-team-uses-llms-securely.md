@@ -131,6 +131,3 @@ have you made internal tools or data available to your team from inside of chatg
 - did you hit this trust and governance gap?
 - did your security team push back? why?
 - are you building this internally, or waiting for standards and tooling that solve identity propagation at the platform level?
-
----
-*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

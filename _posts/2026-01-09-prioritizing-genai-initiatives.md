@@ -56,6 +56,3 @@ optimize roi? yes. and be sure to consider your risk appetite too.
 does your team prioritize genAI initiatives at the project or portfolio level?
 
 are your risk appetite and portfolio risk explicitly considered in prioritization decisions?
-
----
-*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*

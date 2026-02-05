@@ -30,6 +30,3 @@ today many teams still rely on shared API keys. others glue identity into their 
 **i view this as a fundamental architectural mistake in production AI systems.**
 
 curious how others are handling this today.
-
----
-*david crowe - [reducibl.com](https://reducibl.com) - [gatewaystack.com](https://gatewaystack.com)*
