@@ -10,7 +10,7 @@ description: "live, on demand applied ai strategy and engineering — from idea 
 
 *from idea to production in weeks*
 
-most AI projects don't fail because models are bad. they fail because nobody owns identity, permissions, or the path to production.
+most AI projects don't fail because of the models. they fail because nobody owns identity, permissions, or the path to production.
 
 ## recent builds
 
@@ -38,34 +38,55 @@ i work equally well with technical and non-technical clients.
 
 i also offer fixed-price packages for scoped deliverables starting at $10k
 
-**strategy**
+**assess → build → harden**
 
-[**genai initiative prioritization**](/offers/genai-prioritization-workshop)  
-stop guessing which AI projects to fund. source, score, and prioritize as a portfolio  
+***assess***
 
-[**build vs buy analysis**](/offers/build-vs-buy-analysis)  
-a structured analysis of whether to build or buy AI capabilities — with cost models and a clear recommendation  
+[***genai initiative prioritization***](/offers/genai-prioritization-workshop)  
+stop guessing which AI projects to fund. source, score, and prioritize as a portfolio
 
-**execution**
+[***ai architecture audit***](/offers/ai-architecture-audit)  
+a focused review of your AI stack with a prioritized action plan
 
-[**ai architecture audit**](/offers/ai-architecture-audit)  
-a focused review of your AI stack with a prioritized action plan  
+[***build vs buy analysis***](/offers/build-vs-buy-analysis)  
+a structured analysis of whether to build or buy AI capabilities — with cost models and a clear recommendation
 
-[**mcp server build sprint**](/offers/mcp-server-sprint)  
-zero to production mcp server in one week. deployed, documented, yours  
+**build**
 
-[**pilot-to-production sprint**](/offers/pilot-to-production-sprint)  
-two weeks of half day sprints to ship your stalled AI pilot — or kill it with a clear post-mortem. 
+[***idea-to-pilot sprint***](/offers/idea-to-pilot-sprint)  
+one week to turn your AI idea into a working pilot — validated, functional, ready to demo
 
-[**ai governance layer setup**](/offers/ai-governance-setup)  
+[***mcp server build sprint***](/offers/mcp-server-sprint)  
+zero to production mcp server in one week. deployed, documented, yours
+
+[***pilot-to-production sprint***](/offers/pilot-to-production-sprint)  
+two weeks of half day sprints to ship your stalled AI pilot — or kill it with a clear post-mortem
+
+**harden**
+
+[***ai governance layer setup***](/offers/ai-governance-setup)  
 identity, permissions, and audit trails for your AI systems — powered by [gatewaystack](https://gatewaystack.com)
 
-**not sure which package fits?**  
-you have a pilot that's stalled → [pilot-to-production sprint](/offers/pilot-to-production-sprint)  
-you need AI tools talking to real systems → [mcp server build sprint](/offers/mcp-server-sprint)  
-you're worried about identity, permissions, audit → [ai governance layer setup](/offers/ai-governance-setup)  
-you're unsure what's fragile in your AI stack → [ai architecture audit](/offers/ai-architecture-audit)  
-you're making funding or build/buy decisions → [genai prioritization](/offers/genai-prioritization-workshop) or [build vs buy](/offers/build-vs-buy-analysis)  
+<details>
+<summary><strong><em>not sure where to start?</em></strong></summary>
+<p>you're spinning up a genai program and need to decide what to prioritize → <a href="/offers/genai-prioritization-workshop">genai initiative prioritization</a><br>
+you're want to design and architect an internal ai platform or product → <a href="/offers/ai-architecture-audit">ai architecture audit</a><br>
+you're deciding whether to build or buy → <a href="/offers/build-vs-buy-analysis">build vs buy analysis</a><br>
+you have an AI idea that needs to become real → <a href="/offers/idea-to-pilot-sprint">idea-to-pilot sprint</a><br>
+you need AI tools talking to real systems → <a href="/offers/mcp-server-sprint">mcp server build sprint</a><br>
+you have a pilot that's stalled → <a href="/offers/pilot-to-production-sprint">pilot-to-production sprint</a><br>
+you're worried about identity, permissions, audit → <a href="/offers/ai-governance-setup">ai governance layer setup</a>
+</p>
+
+</details>
+<details>
+<summary><strong><em>not ready for a package?</em></strong></summary>
+<p>start with a single sprint session. we'll pick one problem, build live, and you'll see how i work — no commitment beyond the session. if it leads somewhere, great. if not, you walk away with working code. 
+
+→ book an <a href="/build">intro call</a><br>
+</p>
+
+</details>
 
 ## what i've shipped
 
