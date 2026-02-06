@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<article>
+  <h1 style="font-size:2.2rem; margin-bottom:0.25rem;">{{ page.title }}</h1>
+  {% if page.pullquote %}
+  <p style="font-size:1.1rem; font-weight:600; color:var(--heading); margin:0.75rem 0 1rem; line-height:1.4;">{{ page.pullquote }}</p>
+  {% endif %}
+  <p style="font-size:0.95rem; color:var(--muted); margin-bottom:1.5rem;">
+    <strong>package:</strong> {{ page.package }}
+    {% if page.client %} · <strong>client:</strong> {{ page.client }}{% endif %}
+    {% if page.industry %} · <strong>industry:</strong> {{ page.industry }}{% endif %}
+    {% if page.timeline %} · <strong>timeline:</strong> {{ page.timeline }}{% endif %}
+  </p>
+
+  {{ content }}
+
+  <hr style="margin: 2rem 0; border: none; border-top: 1px solid rgba(35, 30, 92, 0.15);">
+
+  {% include subscribe.html label="get new posts by email" source="case-study" %}
+  <p style="color: var(--muted); margin-top: 1.5rem;">
+    interested in working together? <a href="{{ '/build' | relative_url }}">let's talk</a>
+  </p>
+</article>

@@ -40,7 +40,7 @@ i also offer fixed-price packages for scoped deliverables starting at $10k
 
 **assess → build → harden**
 
-***assess***
+**assess**
 
 [***genai initiative prioritization***](/offers/genai-prioritization-workshop)  
 stop guessing which AI projects to fund. source, score, and prioritize as a portfolio
@@ -54,10 +54,12 @@ a structured analysis of whether to build or buy AI capabilities — with cost m
 **build**
 
 [***idea-to-pilot sprint***](/offers/idea-to-pilot-sprint)  
-one week to turn your AI idea into a working pilot — validated, functional, ready to demo
+one week to turn your AI idea into a working pilot — validated, functional, ready to demo  
+[*see how this worked for apprentice →*](/case-studies/apprentice-pilot)
 
 [***mcp server build sprint***](/offers/mcp-server-sprint)  
-zero to production mcp server in one week. deployed, documented, yours
+zero to production mcp server in one week. deployed, documented, yours  
+[*see how this worked for apprentice →*](/case-studies/apprentice-mcp)
 
 [***pilot-to-production sprint***](/offers/pilot-to-production-sprint)  
 two weeks of half day sprints to ship your stalled AI pilot — or kill it with a clear post-mortem
@@ -65,7 +67,8 @@ two weeks of half day sprints to ship your stalled AI pilot — or kill it with 
 **harden**
 
 [***ai governance layer setup***](/offers/ai-governance-setup)  
-identity, permissions, and audit trails for your AI systems — powered by [gatewaystack](https://gatewaystack.com)
+identity, permissions, and audit trails for your AI systems — powered by [gatewaystack](https://gatewaystack.com)  
+[*see how this worked for inner →*](/case-studies/inner-governance)
 
 <details>
 <summary><strong><em>not sure where to start?</em></strong></summary>
