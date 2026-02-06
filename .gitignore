@@ -11,3 +11,6 @@ _drafts/
 
 # Internal playbooks (not for public)
 _playbooks/
+
+# Playwright screenshots
+screenshots/

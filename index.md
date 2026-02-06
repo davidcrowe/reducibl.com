@@ -73,7 +73,7 @@ identity, permissions, and audit trails for your AI systems — powered by [gate
 <details>
 <summary><strong><em>not sure where to start?</em></strong></summary>
 <p>you're spinning up a genai program and need to decide what to prioritize → <a href="/offers/genai-prioritization-workshop">genai initiative prioritization</a><br>
-you're want to design and architect an internal ai platform or product → <a href="/offers/ai-architecture-audit">ai architecture audit</a><br>
+you want to design and architect an internal ai platform or product → <a href="/offers/ai-architecture-audit">ai architecture audit</a><br>
 you're deciding whether to build or buy → <a href="/offers/build-vs-buy-analysis">build vs buy analysis</a><br>
 you have an AI idea that needs to become real → <a href="/offers/idea-to-pilot-sprint">idea-to-pilot sprint</a><br>
 you need AI tools talking to real systems → <a href="/offers/mcp-server-sprint">mcp server build sprint</a><br>
@@ -82,13 +82,21 @@ you're worried about identity, permissions, audit → <a href="/offers/ai-govern
 </p>
 
 </details>
+
 <details>
 <summary><strong><em>not ready for a package?</em></strong></summary>
 <p>start with a single sprint session. we'll pick one problem, build live, and you'll see how i work — no commitment beyond the session. if it leads somewhere, great. if not, you walk away with working code. 
 
 → book an <a href="/build">intro call</a><br>
 </p>
+</details>
 
+<details>
+<summary><strong><em>still not sure?</em></strong></summary>
+<p>book a slot
+
+→  <a href="/office-hours">weekly office hours</a><br>
+</p>
 </details>
 
 ## what i've shipped
