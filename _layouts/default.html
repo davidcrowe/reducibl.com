@@ -16,6 +16,13 @@
     <meta property="og:image" content="{% if page.og_image %}{{ page.og_image | absolute_url }}{% else %}{{ '/assets/og-default.png' | absolute_url }}{% endif %}">
     <meta property="og:url" content="{{ page.url | absolute_url }}">
     <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="twitter:image" content="{% if page.og_image %}{{ page.og_image | absolute_url }}{% else %}{{ '/assets/og-default.png' | absolute_url }}{% endif %}">
 
     <!-- Structured data -->
     {% if page.layout == 'post' %}
@@ -26,6 +33,7 @@
       "headline": "{{ page.title | escape }}",
       "description": "{{ page.description | escape }}",
       "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
       "author": {
         "@type": "Person",
         "name": "David Crowe",
@@ -45,10 +53,11 @@
       "@type": "Person",
       "name": "David Crowe",
       "url": "https://reducibl.com",
-      "jobTitle": "AI Engineer & Founder",
-      "description": "Solo founder building AI-powered apps — dream journaling, art study tools, memory tracking.",
+      "jobTitle": "AI Engineer & Consultant",
+      "description": "Live, on demand applied AI strategy and engineering — from idea to production in weeks.",
       "sameAs": [
-        "https://www.linkedin.com/in/davidcrowe"
+        "https://www.linkedin.com/in/mrdavidcrowe",
+        "https://github.com/davidcrowe"
       ]
     }
     </script>
@@ -265,5 +274,6 @@
 
       {{ content }}
     </div>
+    <script>document.querySelectorAll('img').forEach(function(img){img.loading='lazy'})</script>
   </body>
 </html>

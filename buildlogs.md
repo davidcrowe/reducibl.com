@@ -1,6 +1,7 @@
 ---
 layout: default
 title: build logs
+description: "notes from building AI-native products in public — what worked, what broke, and what changed."
 ---
 
 # build logs

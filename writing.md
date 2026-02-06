@@ -1,6 +1,7 @@
 ---
 layout: default
 title: writing
+description: "thoughts on applied AI, infrastructure, and building real systems."
 ---
 
 # writing

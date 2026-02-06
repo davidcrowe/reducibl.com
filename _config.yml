@@ -1,7 +1,15 @@
 title: "reducibl"
-description: "Applied AI systems and infrastructure."
-url: "https://reducibl.com"   # <-- important
-baseurl: ""                   # <-- EMPTY for a root-domain site
+description: "live, on demand applied ai strategy and engineering — from idea to production in weeks."
+url: "https://reducibl.com"
+baseurl: ""
+
+author:
+  name: "David Crowe"
+  url: "https://reducibl.com"
+
+social:
+  linkedin: "https://www.linkedin.com/in/mrdavidcrowe"
+  github: "https://github.com/davidcrowe"
 
 markdown: kramdown
 theme: minima

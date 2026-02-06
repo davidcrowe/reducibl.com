@@ -1,34 +1,61 @@
-# reducibl.com
+# reducibl
 
-> Applied AI systems and infrastructure.
+> live, on demand applied ai strategy and engineering — from idea to production in weeks.
 
-## About
+reducibl is the applied AI practice of david crowe. he works directly with founders and teams to build AI systems — live, on-camera, in focused sessions. previously aws, dell. harvard, uchicago.
 
-David Crowe is a solo founder and AI engineer building AI-powered applications. He focuses on practical AI systems — not research papers, but shipped products.
+## services
 
-## What he builds
+### sprint sessions
+live collaborative building sessions. 4 hours ($1,200) or 8 hours ($2,000). start with a free 45-minute intro call where we build something together live.
 
-- AI-powered apps distributed through the ChatGPT app store (MCP/Apps SDK)
-- Inner: emotional memory tracking through conversational AI
-- Apprentice: AI-guided art study with 37,000+ masterworks
-- Loop, Hunch, Fork: decision intelligence tools for experiments, predictions, and decisions
+### fixed-price packages (starting at $10k)
 
-## Writing
+strategy:
+- genai initiative prioritization ($10,000): source, score, and prioritize AI initiatives as a portfolio. 3-week engagement with stakeholder interviews and leadership workshop.
+- build vs buy analysis ($10,000): structured analysis of whether to build or buy AI capabilities with cost models, vendor evaluation, and a clear recommendation. 3-week engagement.
 
-David writes about applied AI, infrastructure, security, and the realities of building as a solo founder. Topics include:
+execution:
+- ai architecture audit ($10,000): focused review of your AI stack — model integration, identity, data flow, security — with a prioritized action plan. two sessions plus written deliverable.
+- mcp server build sprint ($10,000): zero to production mcp server in one week. deployed, documented, with user-scoped auth and role-based access control.
+- pilot-to-production sprint ($10,000): two weeks of half-day sprints to ship a stalled AI pilot to production — or kill it with a clear post-mortem.
+- ai governance layer setup ($10,000): identity, permissions, and audit trails for AI systems. built on gatewaystack.
 
-- GenAI portfolio management and initiative prioritization
-- MCP server architecture and the three-party identity problem
-- LLM security — prompt injection, secret leakage, secure development practices
-- AI backend architecture for early-stage products
+### fractional
+ongoing arrangements for AI strategy, architecture, and shipping. 8-20 hours/week on monthly retainer.
 
-## Build logs
+## products
 
-Daily automated build logs documenting what he's building, generated from Claude Code transcripts and synthesized by Gemini.
+- inner (https://innerdreamapp.com): emotional memory for LLMs, available as a chatgpt app and on iOS
+- apprentice (https://learnart.app): AI-powered art study across 37,000+ masterworks
+- gatewaystack (https://gatewaystack.com): trust and governance layer for user-scoped AI access — handles identity, permissions, and auditability
 
-## Links
+## writing
 
-- Homepage: https://reducibl.com
-- Writing: https://reducibl.com/writing
-- Build logs: https://reducibl.com/buildlogs
-- RSS feed: https://reducibl.com/feed.xml
+- apps are the flywheel, data is the asset: building a portfolio of AI apps? bet on the data (https://reducibl.com/writing/apps-are-the-flywheel-data-is-the-asset)
+- the three-party identity problem in mcp servers: the architectural challenge every agent system hits (https://reducibl.com/writing/the-three-party-identity-problem-in-mcp-servers)
+- is claude code secure?: secrets, prompt injection, and the real weak link (https://reducibl.com/writing/is-claude-code-secure)
+
+## build logs
+
+daily automated build logs documenting what's being built, generated from claude code transcripts and synthesized by gemini.
+
+## contact
+
+- email: david@reducibl.com
+- linkedin: https://www.linkedin.com/in/mrdavidcrowe
+- github: https://github.com/davidcrowe
+
+## links
+
+- homepage: https://reducibl.com
+- work with me: https://reducibl.com/build
+- writing: https://reducibl.com/writing
+- build logs: https://reducibl.com/buildlogs
+- rss feed: https://reducibl.com/feed.xml
+- ai architecture audit: https://reducibl.com/offers/ai-architecture-audit
+- mcp server build sprint: https://reducibl.com/offers/mcp-server-sprint
+- pilot-to-production sprint: https://reducibl.com/offers/pilot-to-production-sprint
+- ai governance layer setup: https://reducibl.com/offers/ai-governance-setup
+- genai initiative prioritization: https://reducibl.com/offers/genai-prioritization-workshop
+- build vs buy analysis: https://reducibl.com/offers/build-vs-buy-analysis
