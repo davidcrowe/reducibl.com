@@ -21,6 +21,7 @@ thoughts on applied AI, infrastructure, and building real systems
 <ul>
   {% for post in site.posts %}
     {% if post.categories contains "buildlog" %}{% continue %}{% endif %}
+    {% if post.layout == "case-study" %}{% continue %}{% endif %}
     <li>
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
       <br/>
