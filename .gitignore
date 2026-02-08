@@ -14,3 +14,7 @@ _playbooks/
 
 # Playwright screenshots
 screenshots/
+
+.claude/
+report.html
+claude-md-drafts/
