@@ -61,10 +61,10 @@ one week to turn your AI idea into a working pilot — validated, functional, re
 zero to production mcp server in one week. deployed, documented, yours  
 [*see how this worked for apprentice →*](/case-studies/apprentice-mcp)
 
+**harden**
+
 [***pilot-to-production sprint***](/offers/pilot-to-production-sprint)  
 two weeks of half day sprints to ship your stalled AI pilot — or kill it with a clear post-mortem
-
-**harden**
 
 [***ai governance layer setup***](/offers/ai-governance-setup)  
 identity, permissions, and audit trails for your AI systems — powered by [gatewaystack](https://gatewaystack.com)  

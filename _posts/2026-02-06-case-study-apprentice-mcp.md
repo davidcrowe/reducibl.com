@@ -1,9 +1,9 @@
 ---
 layout: case-study
-title: "apprentice: building an MCP-native app from day one"
-pullquote: "designed as a set of tools that AI clients call — not a web app with an AI integration bolted on."
+title: "mcp server build sprint: production MCP server with auth in one week"
+pullquote: "governance setup took hours, not days."
 package: mcp server build sprint
-client: "apprentice — reducibl internal product"
+client: "an AI-powered learning app exposing tools through MCP (reference available on request)"
 industry: education / consumer AI
 timeline: 1 week
 permalink: /case-studies/apprentice-mcp
@@ -11,36 +11,39 @@ permalink: /case-studies/apprentice-mcp
 
 ## the situation
 
-apprentice is an AI-powered art study tool with 25,000+ enriched masterworks. the goal was to build it as an MCP-native app from day one — not a web app that later gets an AI integration, but a system designed from the ground up to be used through AI clients.
+you have internal tools or a dataset that should be accessible through AI agents — chatgpt, claude, or whatever comes next. the product works. but exposing it as an MCP server means solving auth, scoping, and multi-client identity in a way that doesn't collapse when a second AI client shows up.
 
-the dataset and enrichment pipeline were already built ([that story here](/case-studies/apprentice-pilot)). the question was: how do you turn a curated dataset into a production MCP server with auth, scoping, and multi-client support — in a week?
+this app had a curated dataset of 25,000+ enriched items ([built in a prior sprint](/case-studies/apprentice-pilot)). the goal: turn it into a production MCP server with proper auth, scope-based access control, and multi-client support — in one week.
 
 ## what we did
 
-four MCP tools, each with scope-based access control through gatewaystack:
+built four MCP tools, each with scope-based access control:
 
-- **study plan generation** — creates personalized learning sequences based on skill level and interest, pulling from the enriched dataset to pair masterworks with technique annotations.
-- **next-up suggestions** — recommends what to study next based on completed work and learning patterns.
-- **attempt submission** — lets users upload their practice work for AI-powered feedback against reference masterworks.
-- **progress history** — surfaces practice history and progression over time.
+**study plan generation** — creates personalized learning sequences based on skill level, pulling from the enriched dataset to pair items with structured annotations.
 
-each tool declares its required scopes (read vs write). the same gatewaystack identity layer used in [inner](/case-studies/inner-governance) was applied — OAuth via Auth0, scope-based access control, per-user data isolation in firestore, audit logging. the governance setup took hours instead of days because the patterns were already proven.
+**next-up suggestions** — recommends what to study next based on completed work and learning patterns.
 
-deployed to cloud run, submitted as a chatgpt app, and launched at [learnart.app](https://learnart.app).
+**attempt submission** — lets users upload practice work for AI-powered feedback against reference items.
+
+**progress history** — surfaces practice history and progression over time.
+
+each tool declares its required scopes (read vs write). the same identity layer used in a [prior governance engagement](/case-studies/inner-governance) was applied — OAuth via Auth0, scope-based access control, per-user data isolation in firestore, audit logging. the governance setup took hours instead of days because the patterns were already proven.
+
+deployed to cloud run. works through any AI client that supports MCP.
 
 ## the result
 
-apprentice works through any AI client that supports MCP. when new agents add MCP support, apprentice is already there — no rebuild required. the "UI" is whatever AI client the user prefers.
+production MCP server in one week, serving through multiple AI clients from day one. when new agents add MCP support, the app is already there — no rebuild required. the "UI" is whatever AI client the user prefers.
 
 the reusable governance pattern meant auth and scoping — usually the slowest part of a new service — was the fastest. one identity layer, applied to new tool definitions, done.
 
 ## key decisions
 
-- **MCP-native from day one.** instead of building a traditional web app and bolting on AI later, apprentice was designed as a set of tools that AI clients call. less to build, more flexible, future-proof.
+- **MCP-native, not AI-bolted-on.** designed as a set of tools that AI clients call, not a web app with an integration layer. less to build, more flexible, future-proof against new AI clients.
 
-- **reusable governance pattern.** by using the same gatewaystack identity layer as inner, the governance setup was hours not days. OAuth scopes, firestore isolation, and audit logging were already proven — just applied to new tool definitions.
+- **reusable governance pattern.** same identity layer as the [prior engagement](/case-studies/inner-governance) — OAuth scopes, firestore isolation, audit logging — applied to new tool definitions. hours, not days. this is the pattern: solve governance once, reuse it across every new MCP server.
 
-- **data is the moat, the app is the flywheel.** the strategic bet was to invest heavily in dataset curation and enrichment, and build the MCP server as a distribution channel. the enriched data compounds over time as users interact with it.
+- **scope enforcement at the tool boundary.** each tool declares what it needs. adding a new capability is a one-line scope declaration, not an infrastructure change.
 
 ---
 
