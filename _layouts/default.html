@@ -279,5 +279,81 @@
       {{ content }}
     </div>
     <script>document.querySelectorAll('img').forEach(function(img){img.loading='lazy'})</script>
+    <script>
+    (function() {
+      var p = window.plausible;
+      var page = location.pathname;
+
+      // 1. CTA click tracking — elements with data-track attribute
+      document.addEventListener('click', function(e) {
+        var el = e.target.closest('[data-track]');
+        if (el) {
+          p('CTA Click', { props: { label: el.getAttribute('data-track'), page: page } });
+        }
+      });
+
+      // 2. Outbound link tracking — any external link
+      document.addEventListener('click', function(e) {
+        var a = e.target.closest('a[href]');
+        if (!a) return;
+        var href = a.getAttribute('href');
+        if (href && href.indexOf('http') === 0 && a.hostname !== location.hostname) {
+          p('Outbound Link', { props: { url: href, page: page } });
+        }
+      });
+
+      // 3. Nav click tracking — top nav links
+      document.addEventListener('click', function(e) {
+        var nav = e.target.closest('.top-nav a');
+        if (nav) {
+          p('Nav Click', { props: { label: nav.textContent.trim(), page: page } });
+        }
+      });
+
+      // 4. Scroll depth — homepage only
+      if (page === '/') {
+        var fired = {};
+        var milestones = [25, 50, 75, 100];
+        window.addEventListener('scroll', function() {
+          var docH = document.documentElement.scrollHeight - window.innerHeight;
+          if (docH <= 0) return;
+          var pct = Math.round((window.scrollY / docH) * 100);
+          milestones.forEach(function(m) {
+            if (pct >= m && !fired[m]) {
+              fired[m] = true;
+              p('Scroll Depth', { props: { depth: m + '%', page: page } });
+            }
+          });
+        }, { passive: true });
+      }
+
+      // 5. Blog/writing engagement — fire "Post Read" after 30s on post pages
+      if (page.match(/\/writing\//) || page.match(/\/buildlogs?\//)) {
+        var title = document.querySelector('h1');
+        setTimeout(function() {
+          p('Post Read', { props: { title: title ? title.textContent.trim() : page, page: page } });
+        }, 30000);
+      }
+
+      // 6. Offer page views — fire after 10s on any offer page (shows real interest)
+      if (page.match(/\/offers\//)) {
+        var offerTitle = document.querySelector('h1');
+        setTimeout(function() {
+          p('Offer Interest', { props: { offer: offerTitle ? offerTitle.textContent.trim() : page, page: page } });
+        }, 10000);
+      }
+
+      // 7. Build page engagement — intake form started
+      if (page === '/build' || page === '/build/') {
+        var observed = false;
+        document.addEventListener('focusin', function(e) {
+          if (!observed && e.target.closest('#chatflow')) {
+            observed = true;
+            p('Intake Started', { props: { page: page } });
+          }
+        });
+      }
+    })();
+    </script>
   </body>
 </html>

@@ -32,7 +32,7 @@ best fit for founders or small operating teams -- including those in enterprise 
 
 i work equally well with technical and non-technical clients.
 
-[**book an intro call**](/build) — 45 minutes, no cost, we'll build together — live
+[**book an intro call**](/build){: data-track="Homepage: Book Intro Call"} — 45 minutes, no cost, we'll build together — live
 
 ## fixed-price packages {#fixed-price-packages}
 
@@ -42,31 +42,31 @@ i also offer fixed-price packages for scoped deliverables starting at $10k
 
 **assess**
 
-[***genai initiative prioritization***](/offers/genai-prioritization-workshop)  
+[***genai initiative prioritization***](/offers/genai-prioritization-workshop){: data-track="Offer: GenAI Prioritization"}  
 stop guessing which AI projects to fund. source, score, and prioritize as a portfolio
 
-[***ai architecture audit***](/offers/ai-architecture-audit)  
+[***ai architecture audit***](/offers/ai-architecture-audit){: data-track="Offer: Architecture Audit"}  
 a focused review of your AI stack with a prioritized action plan
 
-[***build vs buy analysis***](/offers/build-vs-buy-analysis)  
+[***build vs buy analysis***](/offers/build-vs-buy-analysis){: data-track="Offer: Build vs Buy"}  
 a structured analysis of whether to build or buy AI capabilities — with cost models and a clear recommendation
 
 **build**
 
-[***idea-to-pilot sprint***](/offers/idea-to-pilot-sprint)  
+[***idea-to-pilot sprint***](/offers/idea-to-pilot-sprint){: data-track="Offer: Idea to Pilot"}  
 one week to turn your AI idea into a working pilot — validated, functional, ready to demo  
 [*see how this worked for apprentice →*](/case-studies/apprentice-pilot)
 
-[***mcp server build sprint***](/offers/mcp-server-sprint)  
+[***mcp server build sprint***](/offers/mcp-server-sprint){: data-track="Offer: MCP Sprint"}  
 zero to production mcp server in one week. deployed, documented, yours  
 [*see how this worked for apprentice →*](/case-studies/apprentice-mcp)
 
 **harden**
 
-[***pilot-to-production sprint***](/offers/pilot-to-production-sprint)  
+[***pilot-to-production sprint***](/offers/pilot-to-production-sprint){: data-track="Offer: Pilot to Prod"}  
 two weeks of half day sprints to ship your stalled AI pilot — or kill it with a clear post-mortem
 
-[***ai governance layer setup***](/offers/ai-governance-setup)  
+[***ai governance layer setup***](/offers/ai-governance-setup){: data-track="Offer: Governance Setup"}  
 identity, permissions, and audit trails for your AI systems — powered by [gatewaystack](https://gatewaystack.com)  
 [*see how this worked for inner →*](/case-studies/inner-governance)
 
