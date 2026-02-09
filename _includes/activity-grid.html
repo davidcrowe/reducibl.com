@@ -1,15 +1,28 @@
-<!-- GitHub-style activity grid based on toolCallCount -->
-<div class="activity-grid-container">
-  <div class="activity-months" id="activityMonths"></div>
-  <div class="activity-grid" id="activityGrid"></div>
+<!-- GitHub-style activity grid and tool call distribution -->
+<div class="activity-dashboard">
+  <div class="activity-grid-container">
+    <div class="activity-months" id="activityMonths"></div>
+    <div class="activity-grid" id="activityGrid"></div>
+  </div>
+  <div class="distribution-container" id="distributionContainer" style="display: none;">
+    <div class="distribution-header">daily tool calls</div>
+    <div class="distribution-chart" id="distributionChart"></div>
+    <div class="distribution-labels" id="distributionLabels"></div>
+  </div>
 </div>
 
 <style>
-.activity-grid-container {
+.activity-dashboard {
+  display: flex;
+  align-items: flex-start;
+  gap: 96px;
   margin: 1rem 0 0.5rem 0;
-  width: 100%;
+}
+
+.activity-grid-container {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  flex-shrink: 0;
 }
 
 .activity-months {
@@ -48,6 +61,16 @@
   }
 }
 
+@media (max-width: 799px) {
+  .activity-dashboard {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .distribution-chart {
+    height: 102px !important;
+  }
+}
+
 .activity-cell {
   border-radius: 2px;
   background: rgba(35, 30, 92, 0.06);
@@ -74,6 +97,59 @@
   pointer-events: none;
   z-index: 100;
   white-space: nowrap;
+}
+
+/* Distribution chart */
+.distribution-container {
+  flex-shrink: 0;
+}
+
+.distribution-header {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-bottom: 4px;
+  padding-left: 2px;
+}
+
+.distribution-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 116px;
+}
+
+.dist-bar {
+  width: 28px;
+  border-radius: 2px 2px 0 0;
+  position: relative;
+}
+
+.dist-bar:hover {
+  opacity: 0.8;
+}
+
+.dist-count {
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.6rem;
+  color: var(--heading, #231E5C);
+  font-weight: 600;
+}
+
+.distribution-labels {
+  display: flex;
+  gap: 3px;
+  margin-top: 4px;
+}
+
+.dist-label {
+  width: 28px;
+  font-size: 0.55rem;
+  color: var(--muted);
+  text-align: center;
 }
 </style>
 
@@ -122,7 +198,7 @@
   let lastMonth = -1;
   let weekIndex = 0;
 
-  // Create tooltip
+  // Create tooltip (shared with distribution chart)
   const tooltip = document.createElement('div');
   tooltip.className = 'activity-tooltip';
   tooltip.style.display = 'none';
@@ -196,7 +272,6 @@
   }
 
   // Render month labels
-  // Use pixel widths matching the grid (14px cell + 3px gap = 17px per week column)
   const colPx = 17;
   const totalWeeks = weekIndex;
 
@@ -211,5 +286,117 @@
 
     monthsContainer.appendChild(span);
   });
+
+  // ---- Distribution chart ----
+  const distContainer = document.getElementById('distributionContainer');
+  const distChart = document.getElementById('distributionChart');
+  const distLabels = document.getElementById('distributionLabels');
+
+  const toolCounts = buildLogs
+    .filter(l => l.toolCalls > 0)
+    .map(l => l.toolCalls)
+    .sort((a, b) => a - b);
+
+  if (toolCounts.length >= 2) {
+    const min = toolCounts[0];
+    const max = toolCounts[toolCounts.length - 1];
+    const range = max - min;
+
+    // Pick nice bucket size targeting ~7 buckets
+    const niceNums = [50, 100, 200, 250, 500, 1000];
+    const target = range / 7;
+    const bucketSize = niceNums.reduce((prev, curr) =>
+      Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev
+    );
+
+    const bucketStart = Math.floor(min / bucketSize) * bucketSize;
+    const bucketEnd = Math.ceil((max + 1) / bucketSize) * bucketSize;
+
+    // Create buckets
+    const buckets = [];
+    for (let b = bucketStart; b < bucketEnd; b += bucketSize) {
+      buckets.push({ start: b, end: b + bucketSize, count: 0 });
+    }
+
+    // Fill buckets
+    toolCounts.forEach(tc => {
+      const idx = Math.min(
+        Math.floor((tc - bucketStart) / bucketSize),
+        buckets.length - 1
+      );
+      if (idx >= 0) buckets[idx].count++;
+    });
+
+    const maxCount = Math.max(...buckets.map(b => b.count));
+    const barMaxHeight = 100;
+
+    // Color levels matching activity grid
+    const levelColors = [
+      'rgba(35, 30, 92, 0.15)',
+      'rgba(35, 30, 92, 0.25)',
+      'rgba(35, 30, 92, 0.4)',
+      'rgba(35, 30, 92, 0.6)',
+      'rgba(35, 30, 92, 0.9)'
+    ];
+
+    function fmtK(n) {
+      if (n < 1000) return String(n);
+      var thousands = Math.floor(n / 1000);
+      var hundreds = Math.floor((n % 1000) / 100);
+      return hundreds === 0 ? thousands + 'k' : thousands + '.' + hundreds + 'k';
+    }
+
+    buckets.forEach(bucket => {
+      // Bar
+      var bar = document.createElement('div');
+      bar.className = 'dist-bar';
+
+      var height = maxCount > 0 && bucket.count > 0
+        ? Math.max((bucket.count / maxCount) * barMaxHeight, 6)
+        : 0;
+      bar.style.height = height + 'px';
+
+      // Color based on bucket position (matches grid intensity)
+      if (bucket.count > 0) {
+        var midpoint = (bucket.start + bucket.end) / 2;
+        var ratio = maxCalls > 0 ? midpoint / maxCalls : 0;
+        var colorIdx = 0;
+        if (ratio > 0) colorIdx = 1;
+        if (ratio > 0.25) colorIdx = 2;
+        if (ratio > 0.5) colorIdx = 3;
+        if (ratio > 0.75) colorIdx = 4;
+        bar.style.background = levelColors[colorIdx];
+
+        // Count label above bar
+        var countEl = document.createElement('span');
+        countEl.className = 'dist-count';
+        countEl.textContent = bucket.count;
+        bar.appendChild(countEl);
+      }
+
+      // Tooltip
+      bar.dataset.tooltip = fmtK(bucket.start) + '–' + fmtK(bucket.end) + ': ' +
+        bucket.count + ' day' + (bucket.count !== 1 ? 's' : '');
+      bar.addEventListener('mouseenter', function(e) {
+        tooltip.textContent = bar.dataset.tooltip;
+        tooltip.style.display = 'block';
+        tooltip.style.left = e.pageX + 10 + 'px';
+        tooltip.style.top = e.pageY - 30 + 'px';
+      });
+      bar.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+
+      distChart.appendChild(bar);
+
+      // X-axis label
+      var label = document.createElement('span');
+      label.className = 'dist-label';
+      label.textContent = fmtK(bucket.start);
+      distLabels.appendChild(label);
+    });
+
+    distContainer.style.display = 'block';
+  }
 })();
 </script>

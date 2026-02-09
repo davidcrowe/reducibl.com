@@ -19,7 +19,7 @@ but you can't just trust a parrot.
 
 it could be lying. confused. intercepted on the way.
 
-guess what?
+### guess what?
 
 the parrot is an LLM.
 your backend is the bank.
@@ -29,7 +29,9 @@ David is… David.
 
 every team that moves an AI pilot into production hits this problem. usually the hard way. integration by integration.
 
-so what do you do? you set up a security checkpoint at the front door of the bank.
+### so what do you do? 
+
+you set up a security checkpoint at the front door of the bank.
 
 before the parrot gets anywhere near a teller:
 
@@ -45,7 +47,7 @@ before the parrot gets anywhere near a teller:
 
 6. **the whole transaction gets written in an immutable ledger.** who, what, when, approved or denied.
 
-don't trust the parrot.
+### don't trust the parrot.
 
 verify the request.
 
