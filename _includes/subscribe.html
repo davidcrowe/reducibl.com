@@ -65,6 +65,10 @@
   form.addEventListener('submit', function(e) {
     e.preventDefault();
 
+    if (window.plausible) {
+      plausible('Newsletter: Attempted', { props: { source: '{{ include.source | default: "post" }}' } });
+    }
+
     var email = emailInput.value.trim();
     if (!email) return;
 

@@ -67,8 +67,31 @@
     <script defer data-domain="reducibl.com" src="https://analytics.reducibl.com/js/pa-qA_7AgRK0qdqoqvtJQ_jX.js"></script>
     <script>
     window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-    plausible.init()
+    if (!window.localStorage.plausible_ignore) {
+      plausible.init()
+    }
+    if (window.localStorage.plausible_ignore) {
+      console.log('%c[plausible] tracking disabled — delete localStorage.plausible_ignore to re-enable', 'color: gray');
+    }
     </script>
+    <!--
+      Plausible goals to configure in dashboard (analytics.reducibl.com):
+      - CTA Click (properties: label, page)
+      - Outbound Link (properties: url, page)
+      - Nav Click (properties: label, page)
+      - Scroll Depth (properties: depth, page)
+      - Post Read (properties: title, page)
+      - Offer Interest (properties: offer, page)
+      - Intake Started (properties: page)
+      - Intake Completed (properties: page)
+      - Newsletter Signup (properties: source)
+      - Newsletter: Attempted (properties: source)
+      - Version Toggle (properties: version)
+
+      Owner exclusion: run localStorage.plausible_ignore=true in browser console
+
+      Remove "Form: Submission" goal from dashboard — it's auto-detected phantom tracking.
+    -->
 
     <style>
       :root {
@@ -343,13 +366,20 @@
         }, 10000);
       }
 
-      // 7. Build page engagement — intake form started
+      // 7. Build page engagement — intake form started + completed
       if (page === '/build' || page === '/build/') {
         var observed = false;
         document.addEventListener('focusin', function(e) {
           if (!observed && e.target.closest('#chatflow')) {
             observed = true;
             p('Intake Started', { props: { page: page } });
+          }
+        });
+
+        // Listen for chatflow completion message
+        window.addEventListener('message', function(e) {
+          if (e.data && e.data.type === 'chatflow:complete') {
+            p('Intake Completed', { props: { page: page } });
           }
         });
       }

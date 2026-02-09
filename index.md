@@ -99,6 +99,8 @@ you're worried about identity, permissions, audit → <a href="/offers/ai-govern
 </p>
 </details>
 
+**→ [join friday office hours](/office-hours)** — free weekly drop-in for anyone building with AI. no pitch, just help.
+
 ## what i've shipped
 
 [inner](https://innerdreamapp.com) — emotional memory for LLMs, available as a chatgpt app and on iOS
