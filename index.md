@@ -99,7 +99,13 @@ you're worried about identity, permissions, audit → <a href="/offers/ai-govern
 </p>
 </details>
 
-**→ [join friday office hours](/office-hours)** — free weekly drop-in for anyone building with AI. no pitch, just help.
+<details>
+<summary><strong><em>join friday office hours</em></strong></summary>
+<p>free weekly drop-in for anyone building with AI. no pitch, just help.
+
+→ <a href="/office-hours">join office hours</a><br>
+</p>
+</details>
 
 ## what i've shipped
 
