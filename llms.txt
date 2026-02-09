@@ -33,7 +33,7 @@ ongoing arrangements for AI strategy, architecture, and shipping. 8-20 hours/wee
 
 - inner (https://innerdreamapp.com): emotional memory for LLMs, available as a chatgpt app and on iOS
 - apprentice (https://learnart.app): AI-powered art study across 37,000+ masterworks
-- gatewaystack (https://gatewaystack.com): trust and governance layer for user-scoped AI access — handles identity, permissions, and auditability
+- gatewaystack (https://github.com/davidcrowe/GatewayStack): trust and governance layer for user-scoped AI access — handles identity, permissions, and auditability
 
 ## writing
 

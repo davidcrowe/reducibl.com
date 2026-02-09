@@ -43,4 +43,4 @@ the audit trail answers the question every AI system eventually faces: "who acce
 
 ---
 
-*[ai governance layer setup](/offers/ai-governance-setup) — identity, permissions, and audit trails for your AI systems — powered by [gatewaystack](https://gatewaystack.com).*
+*[ai governance layer setup](/offers/ai-governance-setup) — identity, permissions, and audit trails for your AI systems — powered by [gatewaystack](https://github.com/davidcrowe/GatewayStack).*

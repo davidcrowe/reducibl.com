@@ -67,7 +67,7 @@ zero to production mcp server in one week. deployed, documented, yours
 two weeks of half day sprints to ship your stalled AI pilot — or kill it with a clear post-mortem
 
 [***ai governance layer setup***](/offers/ai-governance-setup){: data-track="Offer: Governance Setup"}  
-identity, permissions, and audit trails for your AI systems — powered by [gatewaystack](https://gatewaystack.com)  
+identity, permissions, and audit trails for your AI systems — powered by [gatewaystack](https://github.com/davidcrowe/GatewayStack)  
 [*see how this worked for inner →*](/case-studies/inner-governance)
 
 <details>
@@ -107,7 +107,7 @@ you're worried about identity, permissions, audit → <a href="/offers/ai-govern
 
 [apprentice](https://learnart.app) — AI-powered art study across 37,000+ masterworks
 
-both run on [gatewaystack](https://gatewaystack.com), the trust and governance layer i built for user-scoped AI access. it handles identity, permissions, and auditability.
+both run on [gatewaystack](https://github.com/davidcrowe/GatewayStack), the trust and governance layer i built for user-scoped AI access. it handles identity, permissions, and auditability.
 
 ## writing {#writing}
 

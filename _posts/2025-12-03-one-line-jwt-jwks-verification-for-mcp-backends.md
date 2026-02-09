@@ -23,7 +23,7 @@ so i started writing a package to standardize this process for my new apps. and 
 
 ### origins of gatewaystack
 
-identity is fundamental to ai apps but it's just the start. so I started designing and implementing what eventually became [gatewaystack](https://gatewaystack.com): a modular, open-source agentic control plane that adds identity, safety, validation, routing, limits, and auditability to AI calls. gatewaystack is a user-scoped trust and governance gateway for ai apps. it standardizes the layer that should exist between a user clicking “send” and the request hitting the model api.
+identity is fundamental to ai apps but it's just the start. so I started designing and implementing what eventually became [gatewaystack](https://github.com/davidcrowe/GatewayStack): a modular, open-source agentic control plane that adds identity, safety, validation, routing, limits, and auditability to AI calls. gatewaystack is a user-scoped trust and governance gateway for ai apps. it standardizes the layer that should exist between a user clicking “send” and the request hitting the model api.
 
 last night, the first piece of that vision went live.
 
@@ -476,7 +476,7 @@ if you're running an mcp server with oauth, the migration is straightforward:
 reach out if you hit any roadblocks - i would be happy to help you migrate.
 
 ### follow along
-**next up:** `proxyabl` and `limitabl` - gatewaystack's routing and limiting layers — are under active development. follow along at [gatewaystack.com](https://gatewaystack.com) or [star the repo](https://github.com/davidcrowe/GatewayStack) for updates.
+**next up:** `proxyabl` and `limitabl` - gatewaystack's routing and limiting layers — are under active development. follow along on [github](https://github.com/davidcrowe/GatewayStack) for updates.
 
 this isn't just about replacing 100 lines with 1 line. It's about **standardizing how identity flows through AI applications**.
  
