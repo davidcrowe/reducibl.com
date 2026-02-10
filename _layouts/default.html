@@ -105,6 +105,7 @@
       - Newsletter Signup (properties: source)
       - Newsletter: Attempted (properties: source)
       - Version Toggle (properties: version)
+      - 404 (properties: path)
 
       Owner exclusion: run localStorage.plausible_ignore=true in browser console
 
@@ -384,7 +385,12 @@
         }, 10000);
       }
 
-      // 7. Build page engagement — intake form started + completed
+      // 7. 404 tracking — log broken URLs
+      if (document.querySelector('[data-page-type="404"]')) {
+        p('404', { props: { path: page } });
+      }
+
+      // 8. Build page engagement — intake form started + completed
       if (page === '/build' || page === '/build/') {
         var observed = false;
         document.addEventListener('focusin', function(e) {
