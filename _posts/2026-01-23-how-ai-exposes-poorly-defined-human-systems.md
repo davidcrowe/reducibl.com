@@ -2,6 +2,9 @@
 layout: post
 title: "how ai exposes poorly defined human systems"
 description: "automate informal systems at your peril"
+permalink: /writing/how-ai-exposes-poorly-defined-human-systems
+redirect_from:
+  - /2026/01/23/how-ai-exposes-poorly-defined-human-systems.html
 ---
 
 *originally posted to linkedin*

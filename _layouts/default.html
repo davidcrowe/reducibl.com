@@ -50,14 +50,32 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "David Crowe",
-      "url": "https://reducibl.com",
-      "jobTitle": "AI Engineer & Consultant",
-      "description": "Live, on demand applied AI strategy and engineering — from idea to production in weeks.",
-      "sameAs": [
-        "https://www.linkedin.com/in/mrdavidcrowe",
-        "https://github.com/davidcrowe"
+      "@graph": [
+        {
+          "@type": "Person",
+          "name": "David Crowe",
+          "url": "https://reducibl.com",
+          "jobTitle": "AI Engineer & Consultant",
+          "description": "Live, on demand applied AI strategy and engineering — from idea to production in weeks.",
+          "sameAs": [
+            "https://www.linkedin.com/in/mrdavidcrowe",
+            "https://github.com/davidcrowe"
+          ]
+        },
+        {
+          "@type": "Organization",
+          "name": "reducibl",
+          "url": "https://reducibl.com",
+          "description": "Applied AI studio — live, on demand AI strategy and engineering from idea to production in weeks.",
+          "founder": {
+            "@type": "Person",
+            "name": "David Crowe"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/in/mrdavidcrowe",
+            "https://github.com/davidcrowe"
+          ]
+        }
       ]
     }
     </script>

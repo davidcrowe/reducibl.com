@@ -2,6 +2,9 @@
 layout: post
 title: "building an AI backend for early-stage products"
 description: "how i think about moving from idea to architecture to production for modern early-stage AI systems"
+permalink: /writing/ai-app-backend-architecture
+redirect_from:
+  - /2025/11/19/ai-app-backend-architecture.html
 ---
 
 you found your million-dollar AI idea. you built a no-code minimum viable product and showed it to potential customers. the interactions validated a real problem they will pay to solve. and your mvp solves it!

@@ -10,11 +10,11 @@ thoughts on applied AI, infrastructure, and building real systems
 
 ## featured
 
-[**apps are the flywheel, data is the asset**](/2026/02/04/the-apps-are-the-flywheel) — building a portfolio of AI apps? bet on the data
+[**apps are the flywheel, data is the asset**](/writing/apps-are-the-flywheel-data-is-the-asset) — building a portfolio of AI apps? bet on the data
 
-[**the three-party identity problem in mcp servers**](/2025/12/01/the-three-party-identity-problem-in-mcp-servers) — the architectural challenge every agent system hits
+[**the three-party identity problem in mcp servers**](/writing/the-three-party-identity-problem-in-mcp-servers) — the architectural challenge every agent system hits
 
-[**is claude code secure?**](/2026/01/31/is-claude-code-secure) — secrets, prompt injection, and the real weak link
+[**is claude code secure?**](/writing/is-claude-code-secure) — secrets, prompt injection, and the real weak link
 
 ## all posts
 

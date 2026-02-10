@@ -1,7 +1,10 @@
 ---
 layout: post
 title: "resourcing genai initiatives"
-description: "don’t resource genAI projects. resource learning"
+description: "don't resource genAI projects. resource learning"
+permalink: /writing/resourcing-genai-initiatives
+redirect_from:
+  - /2026/01/12/resourcing-genai-initiatives.html
 ---
 
 <p align="center">

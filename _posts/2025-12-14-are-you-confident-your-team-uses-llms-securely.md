@@ -2,6 +2,9 @@
 layout: post
 title: "does your team use llms securely?"
 description: "why chatgpt enterprise alone isn't sufficient"
+permalink: /writing/are-you-confident-your-team-uses-llms-securely
+redirect_from:
+  - /2025/12/14/are-you-confident-your-team-uses-llms-securely.html
 ---
 
 <p align="center">

@@ -3,6 +3,8 @@ layout: post
 title: "don't trust the parrot"
 description: "the three-party problem in agentic AI, explained with a bird"
 permalink: /writing/dont-trust-the-parrot
+redirect_from:
+  - /2026/02/09/dont-trust-the-parrot.html
 ---
 
 <div class="version-content" data-version="linkedin" markdown="1">

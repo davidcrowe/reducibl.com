@@ -2,6 +2,9 @@
 layout: post
 title: "how is an llm like a financial advisor?"
 description: "mcp servers are three party systems"
+permalink: /writing/how-is-an-llm-like-a-financial-advisor
+redirect_from:
+  - /2025/12/11/how-is-an-llm-like-a-financial-advisor.html
 ---
 
 *originally posted to linkedin*

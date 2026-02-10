@@ -2,6 +2,9 @@
 layout: post
 title: "apps sdk vs mcp vs normal apis"
 description: "my mental model for understanding the emerging AI app ecosystem"
+permalink: /writing/apps-sdk-vs-mcp-vs-normal-apis
+redirect_from:
+  - /2025/11/24/apps-sdk-vs-mcp-vs-normal-apis.html
 ---
 
 i spent days confused by apps sdk vs model context protocol vs "regular" apis.

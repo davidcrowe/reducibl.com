@@ -7,6 +7,8 @@ client: "an AI-powered learning app built on a large public dataset (reference a
 industry: education / consumer AI
 timeline: 1 week
 permalink: /case-studies/apprentice-pilot
+redirect_from:
+  - /2026/02/06/case-study-apprentice-pilot.html
 ---
 
 ## the situation

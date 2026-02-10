@@ -1,7 +1,10 @@
 ---
 layout: post
-title: "user identity isn’t a first-order AI system design principle"
+title: "user identity isn't a first-order AI system design principle"
 description: "and why this is as a fundamental architectural mistake"
+permalink: /writing/user-identity-as-ai-system-first-order-design-principle
+redirect_from:
+  - /2026/01/21/user-identity-as-ai-system-first-order-design-principle.html
 ---
 
 *originally posted to linkedin*

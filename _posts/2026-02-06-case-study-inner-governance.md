@@ -7,6 +7,8 @@ client: "a consumer AI app with three client surfaces — chatgpt, claude via MC
 industry: consumer AI
 timeline: 1 week
 permalink: /case-studies/inner-governance
+redirect_from:
+  - /2026/02/06/case-study-inner-governance.html
 ---
 
 ## the situation

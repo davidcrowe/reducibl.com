@@ -2,6 +2,9 @@
 layout: post
 title: "prioritizing genai initiatives"
 description: "portfolio theory for genai"
+permalink: /writing/prioritizing-genai-initiatives
+redirect_from:
+  - /2026/01/09/prioritizing-genai-initiatives.html
 ---
 
 <p align="center">
