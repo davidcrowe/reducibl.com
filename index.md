@@ -70,6 +70,7 @@ two weeks of half day sprints to ship your stalled AI pilot — or kill it with 
 identity, permissions, and audit trails for your AI systems — powered by [gatewaystack](https://github.com/davidcrowe/GatewayStack)  
 [*see how this worked for inner →*](/case-studies/inner-governance)
 
+{% comment %}
 <details>
 <summary><strong><em>not sure where to start?</em></strong></summary>
 <p>you're spinning up a genai program and need to decide what to prioritize → <a href="/offers/genai-prioritization-workshop">genai initiative prioritization</a><br>
@@ -85,7 +86,7 @@ you're worried about identity, permissions, audit → <a href="/offers/ai-govern
 
 <details>
 <summary><strong><em>not ready for a package?</em></strong></summary>
-<p>start with a single sprint session. we'll pick one problem, build live, and you'll see how i work — no commitment beyond the session. if it leads somewhere, great. if not, you walk away with working code. 
+<p>start with a single sprint session. we'll pick one problem, build live, and you'll see how i work — no commitment beyond the session. if it leads somewhere, great. if not, you walk away with working code.
 
 → book an <a href="/build">intro call</a><br>
 </p>
@@ -106,6 +107,7 @@ you're worried about identity, permissions, audit → <a href="/offers/ai-govern
 → <a href="/office-hours">join office hours</a><br>
 </p>
 </details>
+{% endcomment %}
 
 ## what i've shipped
 
@@ -113,7 +115,9 @@ you're worried about identity, permissions, audit → <a href="/offers/ai-govern
 
 [apprentice](https://learnart.app) — AI-powered art study across 37,000+ masterworks
 
-both run on [gatewaystack](https://github.com/davidcrowe/GatewayStack), the trust and governance layer i built for user-scoped AI access. it handles identity, permissions, and auditability.
+[agentic control plane](https://agenticcontrolplane.com) — own your AI governance layer
+
+all three run on [gatewaystack](https://github.com/davidcrowe/GatewayStack), the trust and governance layer i built for user-scoped AI access. it handles identity, permissions, and auditability.
 
 ## writing {#writing}
 

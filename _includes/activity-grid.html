@@ -1,11 +1,12 @@
 <!-- GitHub-style activity grid and tool call distribution -->
 <div class="activity-dashboard">
   <div class="activity-grid-container">
-    <div class="activity-months" id="activityMonths"></div>
+    <div class="distribution-header">daily tool calls</div>
     <div class="activity-grid" id="activityGrid"></div>
+    <div class="activity-months" id="activityMonths"></div>
   </div>
   <div class="distribution-container" id="distributionContainer" style="display: none;">
-    <div class="distribution-header">daily tool calls</div>
+    <div class="distribution-header">files edited per day</div>
     <div class="distribution-chart" id="distributionChart"></div>
     <div class="distribution-labels" id="distributionLabels"></div>
   </div>
@@ -29,7 +30,7 @@
   display: flex;
   font-size: 0.7rem;
   color: var(--muted);
-  margin-bottom: 4px;
+  margin-top: 4px;
   padding-left: 2px;
   min-width: 700px;
 }
@@ -162,6 +163,7 @@
       {
         date: "{{ post.date | date: '%Y-%m-%d' }}",
         toolCalls: {{ post.toolCallCount | default: 0 }},
+        filesWritten: {{ post.filesWrittenCount | default: 0 }},
         title: "{{ post.title | escape }}",
         url: "{{ post.url | relative_url }}"
       },
@@ -293,8 +295,8 @@
   const distLabels = document.getElementById('distributionLabels');
 
   const toolCounts = buildLogs
-    .filter(l => l.toolCalls > 0)
-    .map(l => l.toolCalls)
+    .filter(l => l.filesWritten > 0)
+    .map(l => l.filesWritten)
     .sort((a, b) => a - b);
 
   if (toolCounts.length >= 2) {
@@ -303,7 +305,7 @@
     const range = max - min;
 
     // Pick nice bucket size targeting ~7 buckets
-    const niceNums = [50, 100, 200, 250, 500, 1000];
+    const niceNums = [10, 20, 25, 50, 100, 200, 250, 500];
     const target = range / 7;
     const bucketSize = niceNums.reduce((prev, curr) =>
       Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev
@@ -359,7 +361,8 @@
       // Color based on bucket position (matches grid intensity)
       if (bucket.count > 0) {
         var midpoint = (bucket.start + bucket.end) / 2;
-        var ratio = maxCalls > 0 ? midpoint / maxCalls : 0;
+        var maxFiles = toolCounts[toolCounts.length - 1];
+        var ratio = maxFiles > 0 ? midpoint / maxFiles : 0;
         var colorIdx = 0;
         if (ratio > 0) colorIdx = 1;
         if (ratio > 0.25) colorIdx = 2;
@@ -375,7 +378,7 @@
       }
 
       // Tooltip
-      bar.dataset.tooltip = fmtK(bucket.start) + '–' + fmtK(bucket.end) + ': ' +
+      bar.dataset.tooltip = bucket.start + '–' + bucket.end + ' files: ' +
         bucket.count + ' day' + (bucket.count !== 1 ? 's' : '');
       bar.addEventListener('mouseenter', function(e) {
         tooltip.textContent = bar.dataset.tooltip;
@@ -392,7 +395,7 @@
       // X-axis label
       var label = document.createElement('span');
       label.className = 'dist-label';
-      label.textContent = fmtK(bucket.start);
+      label.textContent = bucket.start;
       distLabels.appendChild(label);
     });
 
