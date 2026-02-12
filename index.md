@@ -70,6 +70,11 @@ two weeks of half day sprints to ship your stalled AI pilot — or kill it with 
 identity, permissions, and audit trails for your AI systems — powered by [gatewaystack](https://github.com/davidcrowe/GatewayStack)  
 [*see how this worked for inner →*](/case-studies/inner-governance)
 
+<details>
+<summary><strong>not sure where you stand?</strong></summary>
+<p><a href="/diagnostic" data-track="Homepage: Diagnostic Link">take the 2-minute ai governance diagnostic</a> — find your gaps before you scope the work</p>
+</details>
+
 {% comment %}
 <details>
 <summary><strong><em>not sure where to start?</em></strong></summary>

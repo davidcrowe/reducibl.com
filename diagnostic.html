@@ -1,0 +1,527 @@
+---
+layout: default
+title: "ai governance readiness diagnostic"
+description: "a 2-minute self-assessment to find gaps in your AI governance posture — identity, access control, audit trails, and incident response."
+permalink: /diagnostic
+---
+
+<style>
+  .diagnostic-intro h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .diagnostic-intro p {
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-start {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    background: var(--heading);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+
+  .btn-start:hover {
+    opacity: 0.9;
+    color: white;
+    text-decoration: none;
+  }
+
+  .question {
+    display: none;
+  }
+
+  .question.active {
+    display: block;
+    animation: fadeIn 200ms ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .question h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .question-progress {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .option-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    background: white;
+    border: 1px solid rgba(35, 30, 92, 0.15);
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text);
+    transition: border-color 150ms, background 150ms;
+  }
+
+  .option-btn:hover {
+    border-color: var(--heading);
+    background: rgba(35, 30, 92, 0.03);
+  }
+
+  .option-btn.selected {
+    border-color: var(--heading);
+    background: rgba(35, 30, 92, 0.06);
+  }
+
+  .results {
+    display: none;
+  }
+
+  .results.active {
+    display: block;
+    animation: fadeIn 200ms ease;
+  }
+
+  .score-display {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--heading);
+    margin-bottom: 0;
+  }
+
+  .tier-name {
+    font-size: 1.3rem;
+    color: var(--heading);
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .tier-description {
+    margin-bottom: 1.5rem;
+  }
+
+  .weak-areas {
+    background: rgba(35, 30, 92, 0.05);
+    border-left: 3px solid var(--heading);
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .weak-areas p {
+    margin: 0;
+  }
+
+  .weak-areas strong {
+    color: var(--heading);
+  }
+
+  .results-cta {
+    margin-top: 1.5rem;
+  }
+
+  .results-cta p {
+    margin-bottom: 0.75rem;
+  }
+
+  .email-form {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .email-form input {
+    padding: 0.4rem 0.6rem;
+    border: 1px solid rgba(35, 30, 92, 0.2);
+    border-radius: 4px;
+    font-family: inherit;
+    min-width: 160px;
+  }
+
+  .email-form input:focus {
+    outline: none;
+    border-color: var(--heading);
+  }
+
+  .email-form button {
+    padding: 0.4rem 0.75rem;
+    background: var(--heading);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .email-form button:hover {
+    opacity: 0.9;
+  }
+
+  .email-success {
+    display: none;
+    color: var(--muted);
+  }
+
+  .email-error {
+    display: none;
+    color: #b91c1c;
+  }
+
+  .btn-book {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    background: var(--heading);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+
+  .btn-book:hover {
+    opacity: 0.9;
+    color: white;
+    text-decoration: none;
+  }
+
+  @media (max-width: 640px) {
+    .email-form {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .email-form input {
+      width: 100%;
+    }
+  }
+</style>
+
+<div id="diagnostic">
+
+  <!-- Intro -->
+  <div id="intro">
+    <h1>ai governance readiness diagnostic</h1>
+    <p>5 questions. 2 minutes. find out where your AI governance posture has gaps — before an incident finds them for you.</p>
+    <button class="btn-start" id="startBtn">start diagnostic</button>
+  </div>
+
+  <!-- Questions -->
+  <div id="questions">
+
+    <div class="question" data-q="inventory">
+      <p class="question-progress">question 1 of 5</p>
+      <h2>ai tool inventory</h2>
+      <p>how well do you know which AI tools and models are in use across your organization?</p>
+      <button class="option-btn" data-score="0">we don't track AI tool usage</button>
+      <button class="option-btn" data-score="1">some teams self-report, but there's no central list</button>
+      <button class="option-btn" data-score="2">we maintain a list, but it's updated manually and may be incomplete</button>
+      <button class="option-btn" data-score="3">we have an automated, up-to-date inventory of all AI tools and models</button>
+    </div>
+
+    <div class="question" data-q="access">
+      <p class="question-progress">question 2 of 5</p>
+      <h2>identity & access control</h2>
+      <p>how do you manage who can access your AI systems and what they can do?</p>
+      <button class="option-btn" data-score="0">no formal access controls for AI systems</button>
+      <button class="option-btn" data-score="1">basic authentication, but permissions aren't role-based</button>
+      <button class="option-btn" data-score="2">role-based access exists but isn't consistently enforced</button>
+      <button class="option-btn" data-score="3">centralized identity with role-based, scoped permissions across all AI systems</button>
+    </div>
+
+    <div class="question" data-q="audit">
+      <p class="question-progress">question 3 of 5</p>
+      <h2>audit trail</h2>
+      <p>if something went wrong with an AI system today, could you trace what happened?</p>
+      <button class="option-btn" data-score="0">no logging of AI system activity</button>
+      <button class="option-btn" data-score="1">some logs exist, but they're scattered and incomplete</button>
+      <button class="option-btn" data-score="2">centralized logs exist but aren't regularly reviewed</button>
+      <button class="option-btn" data-score="3">comprehensive audit trails with automated alerting and regular review</button>
+    </div>
+
+    <div class="question" data-q="ownership">
+      <p class="question-progress">question 4 of 5</p>
+      <h2>governance ownership</h2>
+      <p>who is responsible for AI governance in your organization?</p>
+      <button class="option-btn" data-score="0">no one owns it — it's ad hoc</button>
+      <button class="option-btn" data-score="1">it falls loosely to IT or security, but it's not their primary focus</button>
+      <button class="option-btn" data-score="2">there's a designated owner, but limited authority or resources</button>
+      <button class="option-btn" data-score="3">clear ownership with authority, budget, and cross-functional support</button>
+    </div>
+
+    <div class="question" data-q="incident">
+      <p class="question-progress">question 5 of 5</p>
+      <h2>incident response</h2>
+      <p>what happens if an AI system produces harmful output, leaks data, or goes down?</p>
+      <button class="option-btn" data-score="0">no plan — we'd figure it out in the moment</button>
+      <button class="option-btn" data-score="1">we have a general incident process, but nothing AI-specific</button>
+      <button class="option-btn" data-score="2">there's an AI incident plan, but it hasn't been tested</button>
+      <button class="option-btn" data-score="3">documented, tested AI incident response with clear escalation paths</button>
+    </div>
+
+  </div>
+
+  <!-- Results -->
+  <div id="results" class="results">
+    <p class="score-display"><span id="scoreValue"></span> out of 15</p>
+    <p class="tier-name" id="tierName"></p>
+    <p class="tier-description" id="tierDesc"></p>
+
+    <div class="weak-areas" id="weakAreas" style="display: none;">
+      <p><strong>weakest area<span id="weakPlural"></span>:</strong> <span id="weakList"></span></p>
+    </div>
+
+    <!-- CTA for exposed/emerging -->
+    <div class="results-cta" id="ctaEmail" style="display: none;">
+      <p>i'll send you a personalized 5-minute take on your results — no call needed</p>
+      <form class="email-form" id="emailForm">
+        <input type="text" id="emailName" placeholder="first name" required>
+        <input type="email" id="emailAddr" placeholder="work email" required>
+        <button type="submit">send my take</button>
+      </form>
+      <p class="email-success" id="emailSuccess">thanks — check your inbox in the next day or two.</p>
+      <p class="email-error" id="emailError">something went wrong. try again?</p>
+    </div>
+
+    <!-- CTA for structured/advanced -->
+    <div class="results-cta" id="ctaBook" style="display: none;">
+      <p>you've got a solid foundation. let's talk about what to optimize next.</p>
+      <a href="/build" class="btn-book" data-track="Diagnostic: Book Call">book a 30-min working session</a>
+    </div>
+
+    <p style="margin-top: 2rem;"><a href="/diagnostic" id="retakeLink">retake diagnostic</a></p>
+  </div>
+
+</div>
+
+<!-- JSON-LD Quiz schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  "name": "AI Governance Readiness Diagnostic",
+  "description": "A 2-minute self-assessment to find gaps in your AI governance posture — identity, access control, audit trails, and incident response.",
+  "educationalAlignment": {
+    "@type": "AlignmentObject",
+    "alignmentType": "assesses",
+    "targetName": "AI Governance Readiness"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "reducibl",
+    "url": "https://reducibl.com"
+  }
+}
+</script>
+
+<script>
+(function() {
+  var p = window.plausible;
+  var page = '/diagnostic';
+  var scores = {};
+  var questions = document.querySelectorAll('.question');
+  var currentQ = 0;
+
+  var areaLabels = {
+    inventory: 'ai tool inventory',
+    access: 'identity & access control',
+    audit: 'audit trail',
+    ownership: 'governance ownership',
+    incident: 'incident response'
+  };
+
+  var tiers = [
+    { max: 4, name: 'exposed', desc: 'you have significant gaps in your AI governance posture. without systematic controls, you\'re one incident away from a serious problem — data leaks, compliance failures, or uncontrolled AI usage.' },
+    { max: 9, name: 'emerging', desc: 'you\'ve started thinking about AI governance, but lack the systematic controls to manage risk at scale. the foundations are missing, which means gaps will widen as AI adoption grows.' },
+    { max: 12, name: 'structured', desc: 'you have real foundations in place. the focus now is automation and consistency — closing the gaps between policy and practice so governance scales with your AI footprint.' },
+    { max: 15, name: 'advanced', desc: 'you have a strong governance posture. the focus now shifts to continuous improvement — staying ahead of new AI capabilities, regulatory changes, and expanding use cases.' }
+  ];
+
+  // Parse UTM params
+  function getUtmParams() {
+    var params = {};
+    var search = window.location.search.substring(1);
+    if (!search) return params;
+    search.split('&').forEach(function(pair) {
+      var parts = pair.split('=');
+      if (parts[0] && parts[0].indexOf('utm_') === 0) {
+        params[parts[0]] = decodeURIComponent(parts[1] || '');
+      }
+    });
+    return params;
+  }
+
+  // Start
+  document.getElementById('startBtn').addEventListener('click', function() {
+    document.getElementById('intro').style.display = 'none';
+    document.getElementById('questions').style.display = 'block';
+    questions[0].classList.add('active');
+    if (p) p('Diagnostic: Started', { props: { page: page } });
+  });
+
+  // Option click — event delegation
+  document.getElementById('questions').addEventListener('click', function(e) {
+    var btn = e.target.closest('.option-btn');
+    if (!btn) return;
+
+    var question = btn.closest('.question');
+    var area = question.getAttribute('data-q');
+    var score = parseInt(btn.getAttribute('data-score'), 10);
+
+    // Highlight selection
+    question.querySelectorAll('.option-btn').forEach(function(b) { b.classList.remove('selected'); });
+    btn.classList.add('selected');
+
+    // Store score
+    scores[area] = score;
+
+    // Advance after brief delay
+    setTimeout(function() {
+      question.classList.remove('active');
+      currentQ++;
+      if (currentQ < questions.length) {
+        questions[currentQ].classList.add('active');
+      } else {
+        showResults();
+      }
+    }, 250);
+  });
+
+  function showResults() {
+    document.getElementById('questions').style.display = 'none';
+
+    var total = 0;
+    var areas = Object.keys(scores);
+    areas.forEach(function(a) { total += scores[a]; });
+
+    // Find tier
+    var tier = tiers[0];
+    for (var i = 0; i < tiers.length; i++) {
+      if (total <= tiers[i].max) { tier = tiers[i]; break; }
+    }
+
+    document.getElementById('scoreValue').textContent = total;
+    document.getElementById('tierName').textContent = tier.name;
+    document.getElementById('tierDesc').textContent = tier.desc;
+
+    // Weakest areas (score of 0 or 1, or the minimum)
+    var minScore = Math.min.apply(null, areas.map(function(a) { return scores[a]; }));
+    var weak = areas.filter(function(a) { return scores[a] === minScore && minScore < 3; });
+
+    if (weak.length > 0) {
+      document.getElementById('weakPlural').textContent = weak.length > 1 ? 's' : '';
+      document.getElementById('weakList').textContent = weak.map(function(a) { return areaLabels[a]; }).join(', ');
+      document.getElementById('weakAreas').style.display = 'block';
+    }
+
+    // Show correct CTA
+    if (total <= 9) {
+      document.getElementById('ctaEmail').style.display = 'block';
+    } else {
+      document.getElementById('ctaBook').style.display = 'block';
+    }
+
+    var resultsEl = document.getElementById('results');
+    resultsEl.classList.add('active');
+
+    if (p) p('Diagnostic: Completed', { props: { tier: tier.name, score: String(total), page: page } });
+
+    // Store for email form
+    resultsEl._diagnosticData = {
+      scores: scores,
+      total: total,
+      tier: tier.name,
+      weakestAreas: weak
+    };
+  }
+
+  // Email form
+  document.getElementById('emailForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var name = document.getElementById('emailName').value.trim();
+    var email = document.getElementById('emailAddr').value.trim();
+    if (!name || !email) return;
+
+    var form = this;
+    var btn = form.querySelector('button');
+    var data = document.getElementById('results')._diagnosticData;
+
+    // Disable form
+    form.querySelectorAll('input, button').forEach(function(el) { el.disabled = true; });
+    btn.textContent = '...';
+
+    var payload = {
+      name: name,
+      email: email,
+      scores: data.scores,
+      total: data.total,
+      tier: data.tier,
+      weakestAreas: data.weakestAreas,
+      utmParams: getUtmParams(),
+      timestamp: new Date().toISOString(),
+      source: 'reducibl-diagnostic'
+    };
+
+    // Placeholder endpoint — swap when backend is deployed
+    fetch('https://us-central1-trim-glazing-445021-n8.cloudfunctions.net/submitDiagnostic', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(res) {
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('emailSuccess').style.display = 'block';
+        if (p) p('Diagnostic: Email Submitted', { props: { tier: data.tier, score: String(data.total), page: page } });
+      } else {
+        throw new Error('Request failed');
+      }
+    })
+    .catch(function() {
+      document.getElementById('emailError').style.display = 'block';
+      form.querySelectorAll('input, button').forEach(function(el) { el.disabled = false; });
+      btn.textContent = 'send my take';
+    });
+  });
+
+  // Retake
+  document.getElementById('retakeLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    scores = {};
+    currentQ = 0;
+
+    // Reset UI
+    questions.forEach(function(q) { q.classList.remove('active'); });
+    questions.forEach(function(q) {
+      q.querySelectorAll('.option-btn').forEach(function(b) { b.classList.remove('selected'); });
+    });
+    document.getElementById('results').classList.remove('active');
+    document.getElementById('weakAreas').style.display = 'none';
+    document.getElementById('ctaEmail').style.display = 'none';
+    document.getElementById('ctaBook').style.display = 'none';
+    document.getElementById('emailSuccess').style.display = 'none';
+    document.getElementById('emailError').style.display = 'none';
+    var emailForm = document.getElementById('emailForm');
+    emailForm.style.display = 'flex';
+    emailForm.querySelectorAll('input, button').forEach(function(el) { el.disabled = false; });
+    emailForm.querySelector('button').textContent = 'send my take';
+    emailForm.reset();
+
+    document.getElementById('intro').style.display = 'block';
+    document.getElementById('questions').style.display = 'none';
+  });
+
+})();
+</script>
