@@ -2,6 +2,7 @@
 layout: post
 title: "what tools is your openclaw agent using?"
 description: "introducing gatewaystack governance — identity, scope, rate limiting, injection detection, and audit logging for every tool call"
+og_image: /assets/openclaw-gatewaystack-governance-og.png
 permalink: /writing/what-tools-is-your-openclaw-agent-using
 redirect_from:
   - /2026/02/15/what-tools-is-your-openclaw-agent-using.html
