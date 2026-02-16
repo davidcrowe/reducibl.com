@@ -289,31 +289,31 @@
   </head>
   <body>
     <div class="page">
-      {% if page.url != "/" %}
-        <nav class="top-nav">
+      <nav class="top-nav">
+        {% if page.url != "/" %}
           <a href="{{ '/' | relative_url }}">home</a>
-          {% if page.url != '/writing/' %}
-            <span class="sep">·</span>
-            <a href="{{ '/writing' | relative_url }}">writing</a>
-          {% endif %}
-          {% if page.url != '/buildlogs/' %}
-            <span class="sep">·</span>
-            <a href="{{ '/buildlogs' | relative_url }}">build logs</a>
-          {% endif %}
-          {% if page.url != '/diagnostic/' and page.url != '/diagnostic' %}
-            <span class="sep">·</span>
-            <a href="{{ '/diagnostic' | relative_url }}">diagnostic</a>
-          {% endif %}
-          {% if page.url != '/build/' and page.url != '/build' %}
-            <span class="sep">·</span>
-            <a href="{{ '/build' | relative_url }}">work with me</a>
-          {% endif %}
-          {% if page.url != '/office-hours/' and page.url != '/office-hours' %}
-            <span class="sep">·</span>
-            <a href="{{ '/office-hours' | relative_url }}">office hours</a>
-          {% endif %}
-        </nav>
-      {% endif %}
+        {% endif %}
+        {% if page.url != '/writing/' %}
+          {% if page.url != "/" %}<span class="sep">·</span>{% endif %}
+          <a href="{{ '/writing' | relative_url }}">writing</a>
+        {% endif %}
+        {% if page.url != '/buildlogs/' %}
+          <span class="sep">·</span>
+          <a href="{{ '/buildlogs' | relative_url }}">build logs</a>
+        {% endif %}
+        {% if page.url != '/diagnostic/' and page.url != '/diagnostic' %}
+          <span class="sep">·</span>
+          <a href="{{ '/diagnostic' | relative_url }}">diagnostic</a>
+        {% endif %}
+        {% if page.url != '/build/' and page.url != '/build' %}
+          <span class="sep">·</span>
+          <a href="{{ '/build' | relative_url }}">work with me</a>
+        {% endif %}
+        {% if page.url != '/office-hours/' and page.url != '/office-hours' %}
+          <span class="sep">·</span>
+          <a href="{{ '/office-hours' | relative_url }}">office hours</a>
+        {% endif %}
+      </nav>
 
       {{ content }}
     </div>
