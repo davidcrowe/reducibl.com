@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "22 security tools on clawhub — and what they actually do"
-description: "we scanned the clawhub registry and found 22 tools claiming to protect your AI agent. here's what each one does, where they overlap, and which ones to actually install."
+title: "20+ security tools on ClawHub — and what they actually do"
+description: "we scanned the ClawHub registry and found 20+ tools claiming to protect your AI agent. here's what each one does, where they overlap, and which ones to actually install."
 permalink: /writing/22-security-tools-on-clawhub
 image: /assets/22-clawhub-security-tools-og.png
 redirect_from:
@@ -9,13 +9,13 @@ redirect_from:
   - /writing/22-clawbot-sec-tools
 ---
 
-i build governance tools for AI agents. that means i have opinions about how agent security should work, and a stake in the answer. i'm going to be upfront about both throughout this post.
+i build a governance tool for AI agents. that means i have opinions about how agent security should work, and a stake in the answer. i'm going to be upfront about both throughout this post.
 
-it also means that when we ran a [full scan of the clawhub registry](/writing/we-scanned-every-skill-on-clawhub), the security category was the part i cared about most. 22 tools. some with thousands of downloads. some with six. i went through every one.
+it also means that when we ran a [full scan of the clawhub registry](/writing/we-scanned-every-skill-on-clawhub), the security category was the part i cared about most. 20+ tools as of february 2026. some with thousands of downloads. some with six. i went through every one.
 
 two things struck me. first: clawhub is surprisingly clean. whatever combination of moderation, automated scanning, and community reporting they're running behind the scenes, it's working. i expected to find malicious skills hiding in plain sight. i didn't. i suspect clawhub deserves more credit than they get for the work that goes into keeping the registry trustworthy.
 
-second: the security tools themselves are individually impressive — and collectively incomplete. not because the builders did anything wrong, but because the problem space is enormous. when you lay all 22 side by side, you can see exactly where the coverage runs deep and where it drops off. that's what this post is about.
+second: the security tools themselves are individually impressive — and collectively incomplete. not because the builders did anything wrong, but because the problem space is enormous. when you lay them all side by side, you can see exactly where the coverage runs deep and where it drops off. that's what this post is about.
 
 ---
 
@@ -81,9 +81,9 @@ not everything needs to be an injection classifier.
 
 ---
 
-## the rest of the 22
+## the rest of the list
 
-not all 22 tools are security tools in the narrow sense, but they showed up in the security/governance/trust category and they're worth noting for completeness.
+not all of them are security tools in the narrow sense, but they showed up in the security/governance/trust category and they're worth noting for completeness.
 
 | tool | downloads | what it does |
 |------|-----------|-------------|
@@ -138,4 +138,4 @@ if you only install one, install the one that matches your biggest worry. prompt
 
 ---
 
-*the raw data behind this post — download counts, feature analysis, and approach categorization for all 22 tools — comes from our [nightly clawhub audit pipeline](https://github.com/davidcrowe/openclaw-gatewaystack-governance). methodology is documented in the repo.*
+*the raw data behind this post — download counts, feature analysis, and approach categorization for all the tools reviewed — comes from our [nightly clawhub audit pipeline](https://github.com/davidcrowe/openclaw-gatewaystack-governance). methodology is documented in the repo.*

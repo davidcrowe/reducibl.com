@@ -8,26 +8,33 @@ redirect_from:
   - /2026/02/15/what-tools-is-your-openclaw-agent-using.html
 ---
 
-what tools is your openclaw agent using? and what are they using them for?
+I installed OpenClaw and pointed it at my project directory. Within minutes it had read my .env file.
 
-openclaw gives your personal AI agent access to powerful tools — read files, write files, execute commands, search the web. but out of the box, there's no governance layer answering:
+Fair enough — I gave it file access. So I installed a permissions skill to lock things down.
 
-- **who** is making the call?
-- **what** tool are they invoking?
-- is the payload **safe**?
-- is there a **record**?
+The agent ignored it.
 
-### gatewaystack governance fixes this
+Not maliciously. The skill was just a suggestion to the LLM, not an enforcement layer. There's nothing in OpenClaw's architecture that forces the agent to check every skill and permission before calling a tool. It's all voluntary compliance.
 
-it's an openclaw plugin that hooks into every tool call at the process level — so the agent can't bypass it.
+So I built GatewayStack Governance — a plugin that hooks into every tool call at the process level. The agent doesn't get to decide whether governance applies. It always does.
 
-five checks run automatically on every invocation:
+Five checks run on every invocation: 
 
-1. **identity** — maps the agent to a policy role
-2. **scope** — deny-by-default tool allowlist
-3. **rate limiting** — per-user and per-session limits
-4. **injection detection** — 40+ patterns from published security research
-5. **audit logging** — every decision recorded
+- identity mapping
+- deny-by-default tool scoping
+- rate limiting
+- injection detection (40+ patterns from published research)
+- full audit logging.
+
+This isn't theoretical. Snyk audited ClawHub and found 12% of published skills were compromised — including one campaign that delivered macOS malware through markdown instructions.
+
+"Trust the LLM to do the right thing" is not a security model.
+
+GatewayStack Governance is.
+
+Open source. MIT licensed. One command install. 
+
+Peace of mind.
 
 ### see it in action
 
@@ -37,10 +44,6 @@ five checks run automatically on every invocation:
 </video>
 
 in the demo: a read succeeds (agent has permission), but write and exec are blocked — the agent's role doesn't have access. the governance layer explains why, and every decision hits the audit log.
-
-### why this matters
-
-this matters because published research from [cisco](https://blogs.cisco.com/ai/personal-ai-agents-like-openclaw-are-a-security-nightmare), [snyk](https://snyk.io/blog/toxicskills-malicious-ai-agent-skills-clawhub/), and [kaspersky](https://www.kaspersky.com/blog/openclaw-vulnerabilities-exposed/55263/) has found real vulnerabilities in personal AI agents — malicious skills, prompt injection via email, and RCE via websocket hijacking. "trust the LLM to do the right thing" isn't a security strategy.
 
 ### get started
 
@@ -52,4 +55,4 @@ openclaw plugins install @gatewaystack/gatewaystack-governance
 
 zero config. governance is active on every tool call immediately.
 
-[github repo](https://github.com/davidcrowe/openclaw-gatewaystack-governance) · [npm package](https://www.npmjs.com/package/@gatewaystack/gatewaystack-governance)
+[github repo](https://github.com/davidcrowe/openclaw-gatewaystack-governance) · [npm package](https://www.npmjs.com/package/@gatewaystack/gatewaystack-governance) · [clawhub page](https://clawhub.ai/davidcrowe/gatewaystack-governance)
