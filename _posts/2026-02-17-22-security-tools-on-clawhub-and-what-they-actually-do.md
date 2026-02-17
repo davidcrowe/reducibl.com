@@ -118,6 +118,22 @@ i want to be careful here though. i scanned one category in one registry on one 
 
 ---
 
+## what's happening outside clawhub
+
+clawhub isn't the only place people are building agent security tooling. when i went looking on github, i found several projects that cover exactly the gaps i just described — they just aren't packaged as clawhub skills.
+
+**openclaw-telemetry** (Knostic) is the closest thing i've seen to the runtime monitoring layer that's missing from clawhub. it captures tool calls, LLM usage, and agent lifecycle events, then pipes them to SIEM platforms. that's the observability story — not just "did something bad happen" but "what is my agent actually doing over time." paired with **openclaw-shield** (also Knostic), which adds output DLP with secret and PII detection across five defense layers, you get both halves of the monitoring problem: watching behavior and watching output.
+
+**secureclaw** (Adversa AI) runs 51 OWASP-aligned audit checks with 15 behavioral rules and runtime monitoring. it's trying to be the comprehensive security suite — detection, governance, and monitoring in one package.
+
+**openclaw-security-monitor** takes a different angle: 32-point security scans with real-time threat detection. more of a continuous scanning approach than a governance pipeline.
+
+on the credential side, **openclaw-vault** and **closedclaw** both handle encrypted credential lifecycle management, and **clawshell** acts as a credential isolation proxy — keeping secrets out of the agent's direct reach.
+
+none of these are one-click clawhub installs. they're github repos, which means more setup friction. but if your threat model extends beyond what clawhub's registry currently covers — especially runtime monitoring and output policy — they're worth evaluating. i'd particularly watch what Knostic is doing with the telemetry + shield combination, since that's the monitoring layer i most want to see mature.
+
+---
+
 ## what i'd actually install
 
 if i were starting from zero, five tools covering five layers:
