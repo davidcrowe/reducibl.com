@@ -3,8 +3,6 @@ layout: post
 title: "validating AI workflows with no-code mvps"
 description: "a simple approach to proving a problem exists before investing in engineering"
 permalink: /writing/validate-ai-workflows-with-no-code-mvp
-redirect_from:
-  - /2025/11/13/validate-ai-workflows-with-no-code-mvp.html
 ---
 
 i was on a call recently with a group of subject matter experts who want to build an AI app in their field.

@@ -3,8 +3,6 @@ layout: post
 title: "most genAI initiatives never make it from pilot to production"
 description: "and why that's expected and okay"
 permalink: /writing/most-genai-initiatives-never-make-it-from-pilot-to-production
-redirect_from:
-  - /2026/01/05/most-genai-initiatives-never-make-it-from-pilot-to-production.html
 ---
 
 <p align="center">

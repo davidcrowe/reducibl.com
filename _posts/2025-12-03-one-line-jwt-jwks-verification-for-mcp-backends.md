@@ -3,8 +3,6 @@ layout: post
 title: "1-line jwt/jwks verification for mcp backends"
 description: "npm i identifiabl — deploying gatewaystack's first layer into production"
 permalink: /writing/one-line-jwt-jwks-verification-for-mcp-backends
-redirect_from:
-  - /2025/12/03/one-line-jwt-jwks-verification-for-mcp-backends.html
 ---
 
 i have redeveloped the same 100-line jwt verification flow for every model context prptocol (mcp) server i have built. while somewhat boilerplate, the cognitive load of sorting out JWKS fetching, signature verification, scope mapping, etc. for every app is draining.  

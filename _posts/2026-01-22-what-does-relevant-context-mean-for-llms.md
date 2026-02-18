@@ -3,8 +3,6 @@ layout: post
 title: "what does 'relevant context' really mean for LLM applications?"
 description: "want to know? learn from a human"
 permalink: /writing/what-does-relevant-context-mean-for-llms
-redirect_from:
-  - /2026/01/22/what-does-relevant-context-mean-for-llms.html
 ---
 
 *originally posted to linkedin*

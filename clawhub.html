@@ -1,0 +1,116 @@
+---
+layout: default
+title: "clawhub audit dashboard"
+description: "nightly security scan of the clawhub ai skill registry"
+permalink: /clawhub/
+published: false
+sitemap: false
+---
+
+<h1>clawhub audit dashboard</h1>
+<p style="color: var(--muted); margin-bottom: 2rem;">nightly security scan of the <a href="https://clawhub.ai">clawhub</a> ai skill registry</p>
+
+{% assign dashboard = site.data.clawhub-dashboard %}
+
+{% if dashboard %}
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+  <div style="background: white; padding: 1.25rem; border-radius: 8px; text-align: center;">
+    <div style="font-size: 2rem; font-weight: 700; color: var(--heading);">{{ dashboard.totalSkills }}</div>
+    <div style="font-size: 0.8rem; color: var(--muted);">total skills</div>
+  </div>
+  {% assign latest = dashboard.history | last %}
+  {% if latest %}
+  <div style="background: white; padding: 1.25rem; border-radius: 8px; text-align: center;">
+    <div style="font-size: 2rem; font-weight: 700; color: var(--heading);">{{ latest.skillsScanned }}</div>
+    <div style="font-size: 0.8rem; color: var(--muted);">scanned today</div>
+  </div>
+  <div style="background: white; padding: 1.25rem; border-radius: 8px; text-align: center;">
+    <div style="font-size: 2rem; font-weight: 700; color: var(--heading);">{{ latest.findings }}</div>
+    <div style="font-size: 0.8rem; color: var(--muted);">regex findings</div>
+  </div>
+  <div style="background: white; padding: 1.25rem; border-radius: 8px; text-align: center;">
+    <div style="font-size: 2rem; font-weight: 700; color: {% if latest.flagged > 0 %}#dc2626{% else %}#16a34a{% endif %};">{{ latest.flagged }}</div>
+    <div style="font-size: 0.8rem; color: var(--muted);">flagged</div>
+  </div>
+  {% endif %}
+</div>
+
+{% if latest %}
+<h2>latest scan — {{ latest.date }}</h2>
+
+<div style="margin-bottom: 2rem;">
+  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+    <span style="background: #16a34a; color: white; padding: 0.35rem 0.75rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 500;">{{ latest.benign }} benign</span>
+    <span style="background: #d97706; color: white; padding: 0.35rem 0.75rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 500;">{{ latest.suspicious }} suspicious</span>
+    <span style="background: #dc2626; color: white; padding: 0.35rem 0.75rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 500;">{{ latest.malicious }} malicious</span>
+  </div>
+</div>
+{% endif %}
+
+{% if dashboard.currentFlagged.size > 0 %}
+<h2>flagged skills</h2>
+<div style="margin-bottom: 2rem;">
+  {% for skill in dashboard.currentFlagged %}
+  <div style="background: #fef2f2; border-left: 3px solid #dc2626; padding: 0.75rem 1rem; margin-bottom: 0.5rem; border-radius: 0 4px 4px 0;">
+    <div style="font-weight: 600; color: var(--heading);">{{ skill.slug }}</div>
+    <div style="font-size: 0.85rem; color: var(--muted);">{{ skill.downloads }} downloads · {{ skill.reasoning }}</div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if dashboard.history.size > 1 %}
+<h2>trend</h2>
+<div style="overflow-x: auto; margin-bottom: 2rem;">
+  <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+    <thead>
+      <tr style="border-bottom: 2px solid rgba(35, 30, 92, 0.2);">
+        <th style="text-align: left; padding: 0.5rem;">date</th>
+        <th style="text-align: right; padding: 0.5rem;">scanned</th>
+        <th style="text-align: right; padding: 0.5rem;">findings</th>
+        <th style="text-align: right; padding: 0.5rem;">benign</th>
+        <th style="text-align: right; padding: 0.5rem;">suspicious</th>
+        <th style="text-align: right; padding: 0.5rem;">malicious</th>
+        <th style="text-align: right; padding: 0.5rem;">flagged</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for entry in dashboard.history reversed %}
+      <tr style="border-bottom: 1px solid rgba(35, 30, 92, 0.1);">
+        <td style="padding: 0.4rem 0.5rem;">{{ entry.date }}</td>
+        <td style="text-align: right; padding: 0.4rem 0.5rem;">{{ entry.skillsScanned }}</td>
+        <td style="text-align: right; padding: 0.4rem 0.5rem;">{{ entry.findings }}</td>
+        <td style="text-align: right; padding: 0.4rem 0.5rem; color: #16a34a;">{{ entry.benign }}</td>
+        <td style="text-align: right; padding: 0.4rem 0.5rem; color: #d97706;">{{ entry.suspicious }}</td>
+        <td style="text-align: right; padding: 0.4rem 0.5rem; color: #dc2626;">{{ entry.malicious }}</td>
+        <td style="text-align: right; padding: 0.4rem 0.5rem; font-weight: {% if entry.flagged > 0 %}700{% else %}400{% endif %}; color: {% if entry.flagged > 0 %}#dc2626{% else %}var(--muted){% endif %};">{{ entry.flagged }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+<h2>methodology</h2>
+
+<p>the clawhub audit pipeline runs nightly and consists of three phases:</p>
+
+<ol>
+  <li><strong>differential download</strong> — fetch the current skill manifest, identify new/updated skills, download their contents</li>
+  <li><strong>regex scan</strong> — match against 40+ injection and exfiltration patterns derived from snyk, cisco, and kaspersky research</li>
+  <li><strong>llm triage</strong> — classify each regex finding as malicious, benign, or suspicious using claude haiku with full skill context</li>
+</ol>
+
+<p>this approach reduces the ~72% false positive rate of regex-only scanning to actionable results for human review.</p>
+
+<p style="color: var(--muted); font-size: 0.85rem; margin-top: 2rem;">
+  last updated: {{ dashboard.lastUpdated | date: "%Y-%m-%d %H:%M" }} ·
+  built by <a href="https://gatewaystack.com">gatewaystack</a>
+</p>
+
+{% else %}
+
+<p style="color: var(--muted);">no scan data available yet. the dashboard will populate after the first nightly scan with llm triage.</p>
+
+{% endif %}

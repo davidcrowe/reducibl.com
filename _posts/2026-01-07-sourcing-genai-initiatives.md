@@ -3,8 +3,6 @@ layout: post
 title: "sourcing genai initiatives"
 description: "practical advice to fill the top of your genai funnel"
 permalink: /writing/sourcing-genai-initiatives
-redirect_from:
-  - /2026/01/07/sourcing-genai-initiatives.html
 ---
 
 *originally posted to linkedin*

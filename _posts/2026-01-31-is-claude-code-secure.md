@@ -3,8 +3,6 @@ layout: post
 title: "is claude code secure?"
 description: "first impressions on secrets, prompt injection, and the real weak link"
 permalink: /writing/is-claude-code-secure
-redirect_from:
-  - /2026/01/31/is-claude-code-secure.html
 ---
   <img src="/assets/claude-code-security.png" alt="Claude Code responding to security concerns" />
 

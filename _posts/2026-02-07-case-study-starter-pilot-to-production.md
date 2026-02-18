@@ -7,8 +7,6 @@ client: "an open-source MCP server starter kit with OAuth-protected CRM demo too
 industry: developer tools / AI infrastructure
 timeline: 1 day
 permalink: /case-studies/starter-pilot-to-production
-redirect_from:
-  - /2026/02/07/case-study-starter-pilot-to-production.html
 ---
 
 ## the situation

@@ -3,8 +3,6 @@ layout: post
 title: "i automated my build logs with AI"
 description: "how i use gemini to turn claude code transcripts into daily build logs"
 permalink: /writing/i-automated-my-build-logs-with-ai
-redirect_from:
-  - /2026/02/03/i-automated-my-build-logs-with-ai.html
 ---
 
 *originally posted to linkedin*

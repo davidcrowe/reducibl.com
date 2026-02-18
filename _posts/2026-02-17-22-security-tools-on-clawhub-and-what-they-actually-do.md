@@ -4,9 +4,6 @@ title: "20+ security tools on ClawHub — and what they actually do"
 description: "we scanned the ClawHub registry and found 20+ tools claiming to protect your AI agent. here's what each one does, where they overlap, and which ones to actually install."
 permalink: /writing/22-security-tools-on-clawhub
 image: /assets/22-clawhub-security-tools-og.png
-redirect_from:
-  - /2026/02/17/22-security-tools-on-clawhub-and-what-they-actually-do.html
-  - /writing/22-clawbot-sec-tools
 ---
 
 i build a governance tool for AI agents. that means i have opinions about how agent security should work, and a stake in the answer. i'm going to be upfront about both throughout this post.

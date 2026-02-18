@@ -7,8 +7,6 @@ client: "an AI-powered learning app exposing tools through MCP (reference availa
 industry: education / consumer AI
 timeline: 1 week
 permalink: /case-studies/apprentice-mcp
-redirect_from:
-  - /2026/02/06/case-study-apprentice-mcp.html
 ---
 
 ## the situation

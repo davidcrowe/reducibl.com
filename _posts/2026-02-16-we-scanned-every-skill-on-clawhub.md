@@ -3,8 +3,6 @@ layout: post
 title: "we scanned every skill on clawhub. here's what we found."
 description: "a static analysis of 7,522 AI agent skills using regex pattern matching"
 permalink: /writing/we-scanned-every-skill-on-clawhub
-redirect_from:
-  - /2026/02/16/we-scanned-every-skill-on-clawhub.html
 ---
 
 last week someone [forked my governance repo to distribute malware](/writing/someone-used-my-repo-to-distribute-malware). that got me thinking about the broader supply chain. not github — the AI tool ecosystem specifically. clawhub has 7,500+ skills that people install and run with their AI agents. what's actually in them?

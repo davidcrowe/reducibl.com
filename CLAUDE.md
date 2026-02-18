@@ -123,6 +123,8 @@ All offer pages have Service JSON-LD schema. Default layout has Article/Person s
 - never add co-authored-by or cite yourself in commits
 - lowercase aesthetic throughout — headings, titles, everything
 - build logs are auto-generated — don't manually create posts with category: buildlog
+- build log front matter must always include `sitemap: false` — build logs are excluded from the sitemap to focus crawl budget on indexable content
+- never add `redirect_from` to posts — the plugin was removed to eliminate ghost stub pages that hurt indexing
 - case studies use layout: case-study with front matter: pullquote, package, client, industry, timeline
 - offer pages follow pattern: problem → what you get → how it works → best for → pricing → other packages → see it in action → start here
 

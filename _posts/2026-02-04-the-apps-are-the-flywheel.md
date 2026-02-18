@@ -3,8 +3,6 @@ layout: post
 title: "apps are the flywheel, data is the asset"
 description: "building a portfolio of AI apps? bet on the data"
 permalink: /writing/apps-are-the-flywheel-data-is-the-asset
-redirect_from:
-  - /2026/02/04/the-apps-are-the-flywheel.html
 ---
 
 <div class="version-content" data-version="linkedin" markdown="1">
