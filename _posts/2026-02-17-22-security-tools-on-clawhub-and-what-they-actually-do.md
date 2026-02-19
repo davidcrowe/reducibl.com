@@ -6,9 +6,9 @@ permalink: /writing/22-security-tools-on-clawhub
 image: /assets/22-clawhub-security-tools-og.png
 ---
 
-i build governance tools for AI agents. that means i have opinions about how agent security should work, and a stake in the answer. i'm going to be upfront about both throughout this post.
+i build governance tools for AI agents. so i have opinions about how agent security should work, and a stake in the answer. i'll be upfront about both throughout this post.
 
-it also means that when we ran a [full scan of the clawhub registry](/writing/we-scanned-every-skill-on-clawhub), the security category was the part i cared about most. 20+ tools as of february 2026. some with thousands of downloads. some with six. i went through every one.
+it also means that when we ran a [full scan of the clawhub registry](/writing/we-scanned-every-skill-on-clawhub), the security category was the part i cared about most. 20+ tools as of february 2026. some with thousands of downloads. some with six. i went through all of them.
 
 two things struck me. first: clawhub is surprisingly clean. whatever combination of moderation, automated scanning, and community reporting they're running behind the scenes, it's working. i expected to find malicious skills hiding in plain sight. i didn't. i suspect clawhub deserves more credit than they get for the work that goes into keeping the registry trustworthy.
 
@@ -111,7 +111,7 @@ here's the picture. individually, these tools are impressive. the injection dete
 
 if you wanted to sketch the complete stack that doesn't exist yet, it would look something like: a governance pipeline (identity, scope, rate limits, audit) feeding into a content inspection layer (injection, DLP, output policy), backed by supply chain vetting (pre-install and ongoing), behavioral monitoring (runtime drift detection, anomaly alerting), infrastructure isolation (network, filesystem), and a coordination bus that lets all of these layers share context. today, you can cover maybe three of those six layers well. the others are either thin or missing.
 
-i want to be careful here though. i scanned one category in one registry on one day. there may be tools doing things i didn't catch — tools that do more than their README describes, tools in other categories that cover these gaps, tools that shipped last week. this is a snapshot, not a verdict. if you know of something i missed, i'd like to hear about it in the comments.
+i want to be careful here though. i scanned one category in one registry on one day. there may be tools doing things i didn't catch — tools that do more than their README describes, tools in other categories that cover these gaps, tools that shipped last week. this is a snapshot, not a verdict. if you know of something i missed, i'd like to hear about it.
 
 ---
 
@@ -149,6 +149,3 @@ five tools, five layers: content inspection, governance pipeline, supply chain v
 
 if you only install one, install the one that matches your biggest worry. prompt injection? prompt-guard. governance? gatewaystack or guardian-angel. supply chain? skill-auditor. you don't need all five to be meaningfully safer than running with nothing.
 
----
-
-*the raw data behind this post — download counts, feature analysis, and approach categorization for all the tools reviewed — comes from our [nightly clawhub audit pipeline](https://github.com/davidcrowe/openclaw-gatewaystack-governance). methodology is documented in the repo.*
