@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "20+ security tools on ClawHub — and what they actually do"
-description: "we scanned the ClawHub registry and found 20+ tools claiming to protect your AI agent. here's what each one does, where they overlap, and which ones to actually install."
+title: "i scanned 20+ security tools on ClawHub"
+description: "here's what each one does, where they overlap, and which ones to actually install"
 permalink: /writing/22-security-tools-on-clawhub
 image: /assets/22-clawhub-security-tools-og.png
 ---
