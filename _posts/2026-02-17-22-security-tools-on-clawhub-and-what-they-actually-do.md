@@ -6,7 +6,7 @@ permalink: /writing/22-security-tools-on-clawhub
 image: /assets/22-clawhub-security-tools-og.png
 ---
 
-i build a governance tool for AI agents. that means i have opinions about how agent security should work, and a stake in the answer. i'm going to be upfront about both throughout this post.
+i build governance tools for AI agents. that means i have opinions about how agent security should work, and a stake in the answer. i'm going to be upfront about both throughout this post.
 
 it also means that when we ran a [full scan of the clawhub registry](/writing/we-scanned-every-skill-on-clawhub), the security category was the part i cared about most. 20+ tools as of february 2026. some with thousands of downloads. some with six. i went through every one.
 
