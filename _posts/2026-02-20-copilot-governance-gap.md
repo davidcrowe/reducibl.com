@@ -8,11 +8,11 @@ image: /assets/copilot-blog-header.png
 
 this week microsoft confirmed a bug ([CW1226324](https://www.theregister.com/2026/02/18/microsoft_copilot_data_loss_prevention)) in microsoft 365 copilot chat. the root cause: a code issue that caused copilot to surface emails from users' sent items and draft folders despite sensitivity labels and data loss prevention (dlp) policies configured to prevent exactly that. imagine being the compliance lead who discovers your ai assistant is summarizing confidential merger and acquisition or financial forecast emails — even when every governance setting is configured correctly.
 
-microsoft's response is worth examining closely. a spokesperson said this ["did not provide anyone access to information they weren't already authorised to see."](https://cybersecuritynews.com/microsoft-365-copilot-bug/)
+a microsoft spokesperson [told the bbc](https://www.bbc.com/news/articles/c8jxevd8mdyo) the bug "did not provide anyone access to information they weren't already authorised to see," adding that "this behaviour did not meet our intended copilot experience, which is designed to exclude protected content from copilot access."
 
-that framing draws the authorization boundary at access permissions — can this user's account reach this mailbox item? yes. so in microsoft's view, nothing went wrong.
+microsoft is acknowledging the governance failure — but framing it as a product experience gap. they deployed a configuration update. the underlying architecture, where every control from identity to policy evaluation to data processing runs inside the same vendor pipeline, remains unchanged.
 
-but organisations apply sensitivity labels precisely because access permissions aren't enough. a user may have access to a document but policy says an ai assistant shouldn't be able to summarize it, extract it, or surface it in a chat window. that's what dlp is for. that's what sensitivity labels are for. these are governance controls, not access controls — and they failed silently.
+organisations apply sensitivity labels precisely because access permissions aren't enough. a user may have access to a document but policy says an ai assistant shouldn't be able to summarize it, extract it, or surface it in a chat window. that's what dlp is for. that's what sensitivity labels are for. these are governance controls, not access controls — and they failed silently.
 
 ## where the governance layer needs to live
 
@@ -36,6 +36,7 @@ questions or want to talk through your specific deployment? [office hours](/buil
 
 ## references
 
+- [microsoft copilot exposed confidential data despite security policies](https://www.bbc.com/news/articles/c8jxevd8mdyo) — bbc
 - [copilot chat bug bypasses dlp on 'confidential' email](https://www.theregister.com/2026/02/18/microsoft_copilot_data_loss_prevention) — the register
 - [microsoft 365 copilot flaw allows ai assistant to summarize sensitive emails](https://cybersecuritynews.com/microsoft-365-copilot-bug/) — cybersecurity news
 - [microsoft 365 copilot vulnerability exposes sensitive emails to ai summarization](https://cyberpress.org/microsoft-365-copilot-vulnerability-exposes-sensitive-emails-to-ai-summarization/) — cyberpress
