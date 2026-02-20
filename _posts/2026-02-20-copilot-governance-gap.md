@@ -22,7 +22,7 @@ every control in this scenario — identity, access, policy evaluation, data cla
 
 this is the architectural pattern that makes ai governance brittle. it's not unique to microsoft. any system where the vendor that processes the data is also the vendor that enforces the policies around that data has the same single point of failure. a bug, a misconfiguration, a regression in a quarterly update — any of these can collapse both layers simultaneously.
 
-the alternative is to separate enforcement from processing. run identity verification, data classification, and policy validation outside the vendor pipeline — before content reaches the ai. not as a step inside the vendor's processing chain, but as an external gate that runs before the vendor's pipeline begins. the policy decision happens independently of the system being governed.
+the alternative is to separate enforcement from processing. run data classification and policy validation outside the vendor pipeline — using the identity context the vendor already provides, but making the governance decision independently of the system being governed. not as a step inside the vendor's processing chain, but as an external gate that runs before the vendor's pipeline begins.
 
 ## gatewaystack
 
