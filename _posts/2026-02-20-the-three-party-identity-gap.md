@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "your ai agents are acting on behalf of your users. your backend systems have no idea."
-description: "when your agent calls your backend api, it uses a service account. your api has no idea which user initiated the request or whether the agent is acting within scope."
+title: "your ai agents are acting on behalf of your users"
+description: "and your backend systems have no idea who they are"
 permalink: /writing/the-three-party-identity-gap
 ---
 
@@ -91,6 +91,8 @@ questions or want to talk through your specific deployment? [office hours](/buil
 
 ## further reading
 
+- [the three-party identity problem in mcp servers](/writing/the-three-party-identity-problem-in-mcp-servers) — the origin of this problem: no shared identity layer between the user, the llm, and your backend
+- [1-line jwt/jwks verification for mcp backends](/writing/one-line-jwt-jwks-verification-for-mcp-backends) — practical implementation of scoped identity propagation with gatewaystack's identifiabl module
 - [before you build agentic ai, understand the confused deputy problem](https://www.hashicorp.com/en/blog/before-you-build-agentic-ai-understand-the-confused-deputy-problem) — hashicorp on why traditional service auth breaks with agents
 - [the looming authorization crisis: why traditional iam fails agentic ai](https://www.isaca.org/resources/news-and-trends/industry-news/2025/the-looming-authorization-crisis-why-traditional-iam-fails-agentic-ai) — isaca on the structural iam gap
 - [security risks of agentic ai: an mcp introduction](https://businessinsights.bitdefender.com/security-risks-agentic-ai-model-context-protocol-mcp-introduction) — bitdefender's analysis of mcp's missing user context
