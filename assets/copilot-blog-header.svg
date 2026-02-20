@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a3e"/>
+      <stop offset="100%" style="stop-color:#0d0d2b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+
+  <!-- Title — two lines -->
+  <text x="80" y="150" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="54" font-weight="800" fill="#ffffff" letter-spacing="0.5">
+    When AI Governance Has
+  </text>
+  <text x="80" y="215" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="54" font-weight="800" fill="#ffffff" letter-spacing="0.5">
+    a Single Point of Failure.
+  </text>
+
+  <!-- Subtitle — grounded in the real event -->
+  <text x="80" y="295" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="400" fill="#a0a0c0" letter-spacing="0.2">
+    lessons from the Microsoft Copilot policy bypass.</text>
+
+  <!-- Checklist items - what was configured -->
+  <rect x="80" y="390" width="22" height="22" rx="3" fill="#5ce0b8"/>
+  <text x="82" y="408" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#1a1a3e">&#10003;</text>
+  <text x="118" y="409" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="600" fill="#5ce0b8">
+    Sensitivity Labels
+  </text>
+
+  <rect x="80" y="450" width="22" height="22" rx="3" fill="#5ce0b8"/>
+  <text x="82" y="468" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#1a1a3e">&#10003;</text>
+  <text x="118" y="469" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="600" fill="#5ce0b8">
+    Data Loss Prevention Policies
+  </text>
+
+  <rect x="80" y="510" width="22" height="22" rx="3" fill="#5ce0b8"/>
+  <text x="82" y="528" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="800" fill="#1a1a3e">&#10003;</text>
+  <text x="118" y="529" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="600" fill="#5ce0b8">
+    Access Permissions
+  </text>
+
+  <!-- What was missing -->
+  <rect x="80" y="600" width="22" height="22" rx="3" fill="none" stroke="#e05c5c" stroke-width="2"/>
+  <text x="118" y="619" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="600" fill="#e05c5c">
+    Independent Enforcement
+  </text>
+
+  <!-- Explanatory line -->
+  <text x="80" y="710" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="400" fill="#b0b0d0">
+    every control lived inside the vendor stack.
+  </text>
+  <text x="80" y="750" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="400" fill="#b0b0d0">
+    one code defect collapsed them all.
+  </text>
+
+  <!-- URL -->
+  <text x="80" y="960" font-family="'SF Mono', 'Fira Code', 'Courier New', monospace" font-size="28" font-weight="600" fill="#5ce0b8">
+    reducibl.com/writing/copilot-governance-gap
+  </text>
+</svg>
