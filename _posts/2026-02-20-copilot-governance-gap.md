@@ -2,7 +2,7 @@
 layout: post
 title: "the governance controls existed"
 description: "they lived inside the system that failed"
-permalink: /writing/copilot-governance-gap
+permalink: /copilot-governance-gap
 image: /assets/copilot-blog-header.png
 ---
 

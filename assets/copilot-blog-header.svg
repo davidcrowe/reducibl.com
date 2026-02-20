@@ -13,7 +13,7 @@
     When AI Governance Has
   </text>
   <text x="80" y="215" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="54" font-weight="800" fill="#ffffff" letter-spacing="0.5">
-    a Single Point of Failure.
+    a Single Point of Failure
   </text>
 
   <!-- Subtitle — grounded in the real event -->
@@ -47,14 +47,14 @@
 
   <!-- Explanatory line -->
   <text x="80" y="710" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="400" fill="#b0b0d0">
-    every control lived inside the vendor stack.
+    every control was in place.
   </text>
   <text x="80" y="750" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="400" fill="#b0b0d0">
-    one code defect collapsed them all.
+    the system still surfaced the data.
   </text>
 
   <!-- URL -->
-  <text x="80" y="960" font-family="'SF Mono', 'Fira Code', 'Courier New', monospace" font-size="28" font-weight="600" fill="#5ce0b8">
-    reducibl.com/writing/copilot-governance-gap
+  <text x="80" y="960" font-family="'SF Mono', 'Fira Code', 'Courier New', monospace" font-size="32" font-weight="700" fill="#5ce0b8">
+    reducibl.com/copilot-governance-gap
   </text>
 </svg>
