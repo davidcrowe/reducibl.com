@@ -309,6 +309,10 @@
           <span class="sep">·</span>
           <a href="{{ '/build' | relative_url }}">work with me</a>
         {% endif %}
+        {% if page.url != '/clawhub/' and page.url != '/clawhub' %}
+          <span class="sep">·</span>
+          <a href="{{ '/clawhub' | relative_url }}">clawhub</a>
+        {% endif %}
         {% if page.url != '/office-hours/' and page.url != '/office-hours' %}
           <span class="sep">·</span>
           <a href="{{ '/office-hours' | relative_url }}">office hours</a>

@@ -3,35 +3,31 @@
   <rect width="1080" height="1080" fill="#1a1744"/>
 
   <!-- Title — larger, filling more width -->
-  <text x="80" y="160" fill="rgba(255,255,255,0.95)" font-family="system-ui,-apple-system,BlinkMacSystemFont,sans-serif" font-size="64" font-weight="800">OpenClaw Just Shipped</text>
-  <text x="80" y="240" fill="rgba(255,255,255,0.95)" font-family="system-ui,-apple-system,BlinkMacSystemFont,sans-serif" font-size="64" font-weight="800">40+ Security Fixes</text>
+  <text x="80" y="160" fill="rgba(255,255,255,0.95)" font-family="system-ui,-apple-system,BlinkMacSystemFont,sans-serif" font-size="64" font-weight="800">OpenClaw Shipped 40+</text>
+  <text x="80" y="240" fill="rgba(255,255,255,0.95)" font-family="system-ui,-apple-system,BlinkMacSystemFont,sans-serif" font-size="64" font-weight="800">Security Fixes</text>
 
   <!-- Subtitle -->
   <text x="80" y="310" fill="rgba(255,255,255,0.55)" font-family="system-ui,-apple-system,BlinkMacSystemFont,sans-serif" font-size="28" font-weight="400">here's what they hardened.</text>
 
-  <!-- Item 1: Session Management — green filled -->
+  <!-- Item 1: Session Exhaustion -->
   <rect x="80" y="390" width="28" height="28" rx="4" fill="#34d399"/>
-  <text x="126" y="414" fill="#34d399" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="36" font-weight="600">Session Management</text>
+  <text x="126" y="414" fill="#34d399" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="36" font-weight="600">Session Exhaustion</text>
 
-  <!-- Item 2: Tool Authorization — green filled -->
+  <!-- Item 2: Privilege Escalation -->
   <rect x="80" y="460" width="28" height="28" rx="4" fill="#34d399"/>
-  <text x="126" y="484" fill="#34d399" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="36" font-weight="600">Tool Authorization</text>
+  <text x="126" y="484" fill="#34d399" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="36" font-weight="600">Privilege Escalation</text>
 
-  <!-- Item 3: Path Traversal — green filled -->
+  <!-- Item 3: Supply Chain Poisoning -->
   <rect x="80" y="530" width="28" height="28" rx="4" fill="#34d399"/>
-  <text x="126" y="554" fill="#34d399" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="36" font-weight="600">Path Traversal</text>
+  <text x="126" y="554" fill="#34d399" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="36" font-weight="600">Supply Chain Poisoning</text>
 
-  <!-- Item 4: Canvas Auth — green filled -->
+  <!-- Item 4: Auth Bypass -->
   <rect x="80" y="600" width="28" height="28" rx="4" fill="#34d399"/>
-  <text x="126" y="624" fill="#34d399" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="36" font-weight="600">Canvas Auth</text>
+  <text x="126" y="624" fill="#34d399" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="36" font-weight="600">Auth Bypass</text>
 
-  <!-- Item 5: Plugin Containment — green filled -->
+  <!-- Item 5: 2 GHSAs Published -->
   <rect x="80" y="670" width="28" height="28" rx="4" fill="#34d399"/>
-  <text x="126" y="694" fill="#34d399" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="36" font-weight="600">Plugin Containment</text>
-
-  <!-- Item 6: 2 GHSAs Published — green filled -->
-  <rect x="80" y="740" width="28" height="28" rx="4" fill="#34d399"/>
-  <text x="126" y="764" fill="#34d399" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="36" font-weight="600">2 GHSAs Published</text>
+  <text x="126" y="694" fill="#34d399" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="36" font-weight="600">2 GHSAs Published</text>
 
   <!-- URL — bigger, cyan to pop -->
   <text x="80" y="930" fill="#22d3ee" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="38" font-weight="700">reducibl.com/openclaw-40</text>
