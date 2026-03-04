@@ -293,8 +293,10 @@
         {% if page.url != "/" %}
           <a href="{{ '/' | relative_url }}">home</a>
         {% endif %}
+        {% if page.url != "/" %}<span class="sep">·</span>{% else %}{% endif %}
+        <a href="https://agenticcontrolplane.com">agentic control plane</a>
         {% if page.url != '/writing/' %}
-          {% if page.url != "/" %}<span class="sep">·</span>{% endif %}
+          <span class="sep">·</span>
           <a href="{{ '/writing' | relative_url }}">writing</a>
         {% endif %}
         {% if page.url != '/buildlogs/' %}
@@ -308,10 +310,6 @@
         {% if page.url != '/build/' and page.url != '/build' %}
           <span class="sep">·</span>
           <a href="{{ '/build' | relative_url }}">work with me</a>
-        {% endif %}
-        {% if page.url != '/office-hours/' and page.url != '/office-hours' %}
-          <span class="sep">·</span>
-          <a href="{{ '/office-hours' | relative_url }}">office hours</a>
         {% endif %}
       </nav>
 
