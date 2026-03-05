@@ -15,7 +15,7 @@ important caveat upfront: this is static text analysis. regex patterns against f
 
 i wrote a scanner that pulls every skill from the clawhub registry, downloads the scannable files (SKILL.md, source code, configs), and runs 40 regex patterns against them. the patterns come from published research — snyk's toxicskills report, cisco's skill scanner, kaspersky's work on indirect prompt injection. the categories cover the things you'd worry about: prompt injection, credential exfiltration, reverse shells, hardcoded secrets, obfuscated payloads, data exfil endpoints.
 
-the whole thing runs in docker with `--network=none`. no skill code ever touches a live network. download phase pulls the files, then the container goes fully airgapped for analysis.
+the whole thing runs in docker with --network=none. no skill code ever touches a live network. download phase pulls the files, then the container goes fully airgapped for analysis. the deep analysis pass uses an LLM to validate findings in context — that call happens outside the container, against already-downloaded file contents.
 
 first pass: 7,522 skills scanned. 4,931 findings across 746 skills. 61% estimated false positive rate.
 
@@ -43,7 +43,7 @@ the second-pass analyzer reads every finding, pulls the surrounding context from
 
 each finding gets classified into a threat category (prompt injection, RCE, credential exfil, etc.), assigned a validation status (confirmed, likely, uncertain, benign, noise), and scored.
 
-result after deep analysis: **4,931 findings reduced to 1,397 actionable.** 72% noise reduction. 16 confirmed threats. 284 likely threats.
+result after deep analysis: **4,931 findings reduced to 1,397 actionable.** 72% noise reduction. 284 likely threats. 16 confirmed threats. 
 
 ## what the "confirmed threats" actually are
 
@@ -56,8 +56,6 @@ here's where it gets interesting. i manually reviewed every confirmed threat. al
 - **5 are benign usage**. `docker-sandbox` uses `bash -c` to run builds in isolated containers. `dns-networking` uses `/dev/tcp/` for port connectivity checks. `rose-docker-build-skill` has `bash -c` because that's how you run multi-line commands in docker.
 
 - **4 are false positives**. `calendar-reminders` matched "print instructions" — it's telling users how to print their calendar config. `snapmaker-2` matched "override safety" — it's about overriding 3D printer safety limits, not AI safety.
-
-- **1 is a real credential leak**. `antigravity-quota-1-1-0` has a google oauth client ID and client secret encoded in base64 inside a javascript file. the base64 values decode to valid google oauth credentials — a `GOCSPX-` prefixed client secret and a `.apps.googleusercontent.com` client ID. committed to a public skill with 562 downloads. probably unintentional, but it's there. (we've redacted the actual values and reported the issue.)
 
 - **1 is a prompt injection example** in a backup file. `proactive-agent` has "ignore previous instructions" in `SKILL-v2.3-backup.md`. 14,488 downloads. likely a leftover from testing, not active.
 
@@ -77,7 +75,7 @@ clawhub flags 978 skills as "suspicious." we found findings in 746 skills. the o
 
 after removing noise, it drops to 10% agreement. they're flagging different things than we are, and neither system is flagging the right things with high confidence.
 
-clawhub missed `antigravity-quota-1-1-0` (the real credential leak). they flagged `calendar-reminders` (a false positive). the moderation layer exists but it's not doing what you'd hope.
+clawhub missed the (name redacted) real credential leak. they flagged `calendar-reminders` (a false positive). the moderation layer exists but it's not doing what you'd hope.
 
 ## what this actually means
 
@@ -88,7 +86,7 @@ the clawhub ecosystem is cleaner than the headlines would suggest. out of 7,522 
 - **1 confirmed credential leak** across the entire registry
 - **0 confirmed malicious skills** (in the current registry, via static analysis)
 
-that last point comes with caveats. this is what's in the registry *right now*. anything truly malicious may have already been pulled. and static analysis only catches what's visible in text — a skill designed to be subtle wouldn't show up in regex patterns. this is a lower bound on safety, not a guarantee.
+that last point comes with caveats. this is what's in the registry *right now as of 2/16/26*. anything truly malicious may have already been pulled. and static analysis only catches what's visible in text — a skill designed to be subtle wouldn't show up in regex patterns. this is a lower bound on safety, not a guarantee.
 
 the security tools on clawhub are actually pretty good. `guardian-angel`, `indirect-prompt-injection`, `agent-tinman` — these are doing exactly what they should be doing: documenting threat patterns so AI agents can recognize and block them. the irony is that good security documentation triggers security scanners.
 
@@ -100,4 +98,4 @@ we're running a nightly differential scan. pull the manifest, diff against yeste
 
 the deeper question — the one i keep coming back to — is whether regex-based scanning is the right tool for this at all. the gap between "pattern match says this is RCE" and "a human reads the context and sees it's docker build docs" is enormous. the next version of this pipeline probably needs an LLM in the loop: feed each finding its surrounding context and ask "is this genuinely malicious intent?" that's where the real signal lives.
 
-for now, the data says the ecosystem is healthy. but the tooling to verify that didn't exist until this week.
+for now, the data says the ecosystem is healthy.
