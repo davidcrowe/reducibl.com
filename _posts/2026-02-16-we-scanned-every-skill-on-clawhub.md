@@ -45,7 +45,7 @@ each finding gets classified into a threat category (prompt injection, RCE, cred
 
 result after deep analysis: **4,931 findings reduced to 1,397 actionable.** 72% noise reduction. 284 likely threats. 16 confirmed threats. 
 
-## what the "confirmed threats" actually are
+## what the scanner flagged as confirmed
 
 here's where it gets interesting. i manually reviewed every confirmed threat. all 16 of them.
 
@@ -75,7 +75,7 @@ clawhub flags 978 skills as "suspicious." we found findings in 746 skills. the o
 
 after removing noise, it drops to 10% agreement. they're flagging different things than we are, and neither system is flagging the right things with high confidence.
 
-clawhub missed the (name redacted) real credential leak. they flagged `calendar-reminders` (a false positive). the moderation layer exists but it's not doing what you'd hope.
+clawhub missed the (name redacted) real credential leak. they flagged `calendar-reminders` (a false positive). neither system — theirs or ours — is catching everything with high confidence.
 
 ## what this actually means
 
