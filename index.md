@@ -1,143 +1,40 @@
 ---
 layout: default
 title: reducibl
-description: "live, on demand applied ai strategy and engineering — from idea to production in weeks."
+description: "essays on agent harness architecture — identity, dispatch paths, delegation chains, and the protocols underneath."
 ---
 
 # reducibl
 
-**a product team of one.** live, on demand applied ai strategy and engineering
+**i work with agent harnesses.** i'm building [agentic control plane](https://agenticcontrolplane.com) — the governance instance of much of the thinking on this site.
 
-*from idea to production in weeks*
+*complexity is reducibl.*
 
-most AI projects don't fail because of the models. they fail because nobody owns identity, permissions, or the path to production.
+most of what's hard about agentic AI today isn't model capability — it's the layer between the model and the tools. that layer has a name nobody quite agreed on yet. i call it the **harness**, and the architectural primitives underneath it — dispatch path, identity propagation, delegation chains, failure modes, protocol coverage — decide what's possible above.
 
-## recent builds
+these essays explore those primitives.
 
-- deployed a saas product as chatgpt app in 7 days
-- implemented mcp auth live in a single session — with role level scopes
-- integrated internal database with chatgpt enterprise in hours — with auditability for each call
+## recent essays on harness architecture
 
-previously aws, dell · harvard, uchicago · [github](https://github.com/davidcrowe) · [linkedin](https://www.linkedin.com/in/mrdavidcrowe) · [email](mailto:david@reducibl.com)
+<ul style="margin: 1rem 0;">
+{% assign harness_posts = site.posts | where_exp: "post", "post.tags contains 'harness-architecture'" | limit: 6 %}
+{% for post in harness_posts %}
+  <li style="margin-bottom: 0.5rem;">
+    <a href="{{ post.url | relative_url }}">{{ post.title }}</a><br/>
+    <small style="color: var(--muted);">{{ post.description }}</small>
+  </li>
+{% endfor %}
+</ul>
 
-## ai sprint sessions {#sprint-sessions}
-
-i build AI products with founders and teams — live, on-camera, collaboratively, in focused sessions.
-
-from zero to working production system in *weeks*, not months.
-
-you walk away with a real system your team can use immediately. not a prototype, not slides. ready to deploy or iterate on.
-
-best fit for founders or small operating teams -- including those in enterprise and pe-backed environments -- serious about shipping ai.
-
-i work equally well with technical and non-technical clients.
-
-[**book an intro call**](/build){: data-track="Homepage: Book Intro Call"} — 45 minutes, no cost, we'll build together — live
-
-## fixed-price packages {#fixed-price-packages}
-
-i also offer fixed-price packages for scoped deliverables starting at $10k
-
-**assess → build → harden**
-
-**assess**
-
-[***genai initiative prioritization***](/offers/genai-prioritization-workshop){: data-track="Offer: GenAI Prioritization"}  
-stop guessing which AI projects to fund. source, score, and prioritize as a portfolio
-
-[***ai architecture audit***](/offers/ai-architecture-audit){: data-track="Offer: Architecture Audit"}  
-a focused review of your AI stack with a prioritized action plan
-
-[***build vs buy analysis***](/offers/build-vs-buy-analysis){: data-track="Offer: Build vs Buy"}  
-a structured analysis of whether to build or buy AI capabilities — with cost models and a clear recommendation
-
-**build**
-
-[***idea-to-pilot sprint***](/offers/idea-to-pilot-sprint){: data-track="Offer: Idea to Pilot"}  
-one week to turn your AI idea into a working pilot — validated, functional, ready to demo  
-[*see how this worked for apprentice →*](/case-studies/apprentice-pilot)
-
-[***mcp server build sprint***](/offers/mcp-server-sprint){: data-track="Offer: MCP Sprint"}  
-zero to production mcp server in one week. deployed, documented, yours  
-[*see how this worked for apprentice →*](/case-studies/apprentice-mcp)
-
-**harden**
-
-[***pilot-to-production sprint***](/offers/pilot-to-production-sprint){: data-track="Offer: Pilot to Prod"}  
-two weeks of half day sprints to ship your stalled AI pilot — or kill it with a clear post-mortem
-
-[***ai governance layer setup***](/offers/ai-governance-setup){: data-track="Offer: Governance Setup"}  
-identity, permissions, and audit trails for your AI systems — powered by [gatewaystack](https://github.com/davidcrowe/GatewayStack)  
-[*see how this worked for inner →*](/case-studies/inner-governance)
-
-<details>
-<summary><strong>not sure where you stand?</strong></summary>
-<p><a href="/diagnostic" data-track="Homepage: Diagnostic Link">take the 2-minute ai governance diagnostic</a> — find your gaps before you scope the work</p>
-</details>
-
-{% comment %}
-<details>
-<summary><strong><em>not sure where to start?</em></strong></summary>
-<p>you're spinning up a genai program and need to decide what to prioritize → <a href="/offers/genai-prioritization-workshop">genai initiative prioritization</a><br>
-you want to design and architect an internal ai platform or product → <a href="/offers/ai-architecture-audit">ai architecture audit</a><br>
-you're deciding whether to build or buy → <a href="/offers/build-vs-buy-analysis">build vs buy analysis</a><br>
-you have an AI idea that needs to become real → <a href="/offers/idea-to-pilot-sprint">idea-to-pilot sprint</a><br>
-you need AI tools talking to real systems → <a href="/offers/mcp-server-sprint">mcp server build sprint</a><br>
-you have a pilot that's stalled → <a href="/offers/pilot-to-production-sprint">pilot-to-production sprint</a><br>
-you're worried about identity, permissions, audit → <a href="/offers/ai-governance-setup">ai governance layer setup</a>
-</p>
-
-</details>
-
-<details>
-<summary><strong><em>not ready for a package?</em></strong></summary>
-<p>start with a single sprint session. we'll pick one problem, build live, and you'll see how i work — no commitment beyond the session. if it leads somewhere, great. if not, you walk away with working code.
-
-→ book an <a href="/build">intro call</a><br>
-</p>
-</details>
-
-<details>
-<summary><strong><em>still not sure?</em></strong></summary>
-<p>book a slot
-
-→  <a href="/office-hours">weekly office hours</a><br>
-</p>
-</details>
-
-<details>
-<summary><strong><em>join friday office hours</em></strong></summary>
-<p>free weekly drop-in for anyone building with AI. no pitch, just help.
-
-→ <a href="/office-hours">join office hours</a><br>
-</p>
-</details>
-{% endcomment %}
+[**all writing →**](/writing){: data-track="Homepage: All Writing"}
 
 ## what i've shipped
 
-[inner](https://innerdreamapp.com) — emotional memory for LLMs, available as a chatgpt app and on iOS
+- [**agentic control plane**](https://agenticcontrolplane.com) — cross-architecture governance for AI agents. hooks, decorators, proxies, MCP gateways under one identity model.
+- [**inner**](https://innerdreamapp.com) — emotional memory layer for LLMs (chatgpt app, MCP server, iOS).
+- [**apprentice**](https://learnart.app) — AI-powered art study across 25k+ enriched masterworks.
+- [**gatewaystack**](https://gatewaystack.com) — open-source identity and governance npm packages (the foundation under ACP).
 
-[apprentice](https://learnart.app) — AI-powered art study across 37,000+ masterworks
+## about
 
-[agentic control plane](https://agenticcontrolplane.com) — own your AI governance layer
-
-all three run on [gatewaystack](https://github.com/davidcrowe/GatewayStack), the trust and governance layer i built for user-scoped AI access. it handles identity, permissions, and auditability.
-
-## writing {#writing}
-
-[*apps are the flywheel, data is the asset*](/writing/apps-are-the-flywheel-data-is-the-asset) — building a portfolio of AI apps? bet on the data
-
-[*the three-party identity problem in mcp servers*](/writing/the-three-party-identity-problem-in-mcp-servers) — the architectural challenge every agent system hits
-
-[*is claude code secure?*](/writing/is-claude-code-secure) — secrets, prompt injection, and the real weak link
-
-[all writing →](/writing)
-
-## build logs
-
-notes from building AI-native systems in public.
-
-[latest logs →](/buildlogs)
-
-{% include subscribe.html label="get updates by email" source="homepage" %}
+david crowe · previously aws, dell · harvard, uchicago · [github](https://github.com/davidcrowe) · [linkedin](https://www.linkedin.com/in/mrdavidcrowe) · [email](mailto:david@reducibl.com)

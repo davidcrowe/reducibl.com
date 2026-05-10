@@ -3,6 +3,7 @@ layout: post
 title: "the three-party identity problem in mcp servers"
 description: "thoughts around an agentic control plane for ai model access"
 permalink: /writing/the-three-party-identity-problem-in-mcp-servers
+tags: [harness-architecture, identity]
 ---
 
 a few weeks ago i was building an mcp server to integrate an app into chatgpt. it took me days just to get user authentication working. turns out that binding cryptographic user identity to AI requests isn't a solved problem. there's no shared identity layer between the user, the llm, and your backend. this is what i call the "three-party problem". 

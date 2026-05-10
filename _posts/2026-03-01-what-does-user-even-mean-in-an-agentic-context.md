@@ -3,6 +3,7 @@ layout: post
 title: "what does 'user' even mean in an agentic context?"
 description: "Most teams can't answer that"
 og_image: /assets/ACP-demo-mar12026.mp4
+tags: [harness-architecture, identity]
 ---
 
 What does 'user' even mean in an agentic context?

@@ -3,6 +3,7 @@ layout: post
 title: "user identity isn't a first-order AI system design principle"
 description: "and why this is as a fundamental architectural mistake"
 permalink: /writing/user-identity-as-ai-system-first-order-design-principle
+tags: [harness-architecture, identity]
 ---
 
 *originally posted to linkedin*

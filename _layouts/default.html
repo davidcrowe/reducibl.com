@@ -292,25 +292,13 @@
       <nav class="top-nav">
         {% if page.url != "/" %}
           <a href="{{ '/' | relative_url }}">home</a>
+          <span class="sep">·</span>
         {% endif %}
-        {% if page.url != "/" %}<span class="sep">·</span>{% else %}{% endif %}
-        <a href="https://agenticcontrolplane.com">agentic control plane</a>
         {% if page.url != '/writing/' %}
-          <span class="sep">·</span>
           <a href="{{ '/writing' | relative_url }}">writing</a>
-        {% endif %}
-        {% if page.url != '/buildlogs/' %}
           <span class="sep">·</span>
-          <a href="{{ '/buildlogs' | relative_url }}">build logs</a>
         {% endif %}
-        {% if page.url != '/diagnostic/' and page.url != '/diagnostic' %}
-          <span class="sep">·</span>
-          <a href="{{ '/diagnostic' | relative_url }}">diagnostic</a>
-        {% endif %}
-        {% if page.url != '/build/' and page.url != '/build' %}
-          <span class="sep">·</span>
-          <a href="{{ '/build' | relative_url }}">work with me</a>
-        {% endif %}
+        <a href="https://agenticcontrolplane.com">agentic control plane</a>
       </nav>
 
       {{ content }}

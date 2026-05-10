@@ -2,20 +2,20 @@
 
 ## What This Is
 
-Personal brand and consulting site for David Crowe — applied AI studio offering consulting, apps, and infrastructure.
+Personal site for David Crowe — essays on **agent harness architecture**, identity, dispatch paths, and the protocols underneath agentic AI.
 
-**Positioning:** "Complexity is reducibl" — even the most complex AI systems can be reduced to core components.
+**Positioning:** Thought-leadership blog. The thinking instance of David's product work. Cross-links to [Agentic Control Plane](https://agenticcontrolplane.com), the governance product David is building.
 
-**Tagline:** "a product team of one" — live, on demand applied ai strategy and engineering.
+**Tagline:** "i work with agent harnesses" — paired with disclosure that David is building ACP.
+
+**Repositioned (2026-05):** previously framed as a consulting / "product team of one" site with sprint sessions and fixed-price packages. Pivoted to thought-leadership-only. Consulting pages (/build, /diagnostic, /offers/*) retired with HTML meta-refresh + canonical (no `redirect_from` plugin per anti-pattern note below). Build logs removed from nav and feed.
 
 ## Site Sections
 
-- **Homepage (index.md)** — Studio intro, recent builds, sprint sessions, fixed-price packages, shipped products, writing, build logs
-- **Build logs (buildlogs.md)** — Auto-generated daily notes from Claude Code sessions with activity grid
-- **Writing (writing.md)** — Long-form posts on AI systems
-- **/build (build.html)** — "Work with me" page with pricing, FAQ, referral program, intake form
-- **/offers/** — Individual package detail pages (7 packages)
-- **Case studies** — Deep dives on inner and apprentice, linked from offer pages
+- **Homepage (index.md)** — Hero with positioning + ACP cross-link, feed of recent harness-architecture essays, "what i've shipped" portfolio, about footer
+- **Writing (writing.md)** — Two sections: "harness architecture" (posts tagged `harness-architecture`) and "other writing" (everything else, build logs and case studies excluded)
+- **Posts** — Essays on harness architecture and adjacent topics. Posts tagged `harness-architecture` cluster on the homepage feed
+- **Retired pages** — `/build`, `/diagnostic`, `/offers/*`, `/buildlogs` all serve a meta-refresh + canonical to a relevant destination (mostly homepage or ACP)
 
 ## Products (Cross-Project References)
 
@@ -27,29 +27,18 @@ Personal brand and consulting site for David Crowe — applied AI studio offerin
 
 All apps use GatewayStack for identity (Auth0 OAuth, scope-based access, per-user Firestore isolation). When referencing these products, check the relevant repo's CLAUDE.md for architecture details.
 
-## Consulting Model
+## Tagging Convention
 
-### Service Ladder
-1. **Intro call** — 45 minutes, free, includes live building demo
-2. **Sprint sessions** — 4-hour blocks ($1,200) or 8-hour blocks ($2,000)
-3. **Fixed-price packages** — $10,000 each, scoped deliverables
+The harness-architecture thesis is collected via a tag, not a single keystone post:
 
-### Fixed-Price Packages (Assess → Build → Harden)
+- `harness-architecture` — essays exploring an aspect of the harness layer (dispatch path, identity propagation, failure modes, protocol coverage, etc.)
+- Other tags (`identity`, `protocols`, `autonomy`, `dispatch-path`) supplement it
 
-**Assess:**
-- GenAI Initiative Prioritization — source, score, prioritize AI initiatives
-- AI Architecture Audit — focused review with prioritized action plan
-- Build vs Buy Analysis — cost models and recommendation
+Posts tagged `harness-architecture` cluster:
+- On the homepage under "recent essays on harness architecture"
+- On /writing under the "harness architecture" section (separate from "other writing")
 
-**Build:**
-- Idea-to-Pilot Sprint — one week, idea to working pilot
-- MCP Server Build Sprint — one week, zero to production MCP server
-- Pilot-to-Production Sprint — two weeks of half-day sprints
-
-**Harden:**
-- AI Governance Layer Setup — identity, permissions, audit trails via GatewayStack
-
-Each package has: an offer page (/offers/), a case study (if written), and an internal playbook (_playbooks/, gitignored).
+Over time the tag's collection of posts is intended to span the whole harness territory.
 
 ## Stack
 
