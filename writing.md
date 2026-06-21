@@ -1,12 +1,11 @@
 ---
 layout: default
-title: writing
-description: "i build products like agentic control plane and calafia.ai. i publish my writing on applied AI, infrastructure, and building real systems here."
+description: "i build products like agentic control plane and calafia.ai. i believe complexity is reducibl. i publish my writing on applied AI, infrastructure, and building real systems here."
 ---
 
-i build products like [agentic control plane](https://agenticcontrolplane.com) and [calafia.ai](https://calafia.ai). i publish my writing here.
+# reducibl
 
-<p style="color: var(--muted);"><a href="https://www.linkedin.com/in/mrdavidcrowe">contact me</a></p>
+i build products like [agentic control plane](https://agenticcontrolplane.com) and [calafia.ai](https://calafia.ai). i believe that complexity is reducibl. i publish my writing here.
 
 <ul>
   {% for post in site.posts %}
@@ -20,4 +19,4 @@ i build products like [agentic control plane](https://agenticcontrolplane.com) a
   {% endfor %}
 </ul>
 
-{% include subscribe.html label="get new posts by email" source="writing" %}
+{% include subscribe.html label="get new posts by email" source="writing" contact="https://www.linkedin.com/in/mrdavidcrowe" %}

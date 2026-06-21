@@ -1,10 +1,13 @@
 <!-- Email subscribe form -->
 <div class="subscribe-form" id="subscribeForm">
-  <form id="subscribeFormEl" class="subscribe-row">
-    <span class="subscribe-label">{{ include.label | default: "get new posts by email" }}</span>
-    <input type="email" id="subscribeEmail" placeholder="you@example.com" required>
-    <button type="submit">subscribe</button>
-  </form>
+  <div class="subscribe-row">
+    <form id="subscribeFormEl" class="subscribe-fields">
+      <span class="subscribe-label">{{ include.label | default: "get new posts by email" }}</span>
+      <input type="email" id="subscribeEmail" placeholder="you@example.com" required>
+      <button type="submit">subscribe</button>
+    </form>
+    {% if include.contact %}<a class="subscribe-contact" href="{{ include.contact }}">{{ include.contact_label | default: "contact me" }}</a>{% endif %}
+  </div>
   <p id="subscribeSuccess" style="display: none; color: var(--muted); margin: 0;">thanks — you're on the list.</p>
   <p id="subscribeError" style="display: none; color: #b91c1c; margin: 0;">something went wrong. try again?</p>
 </div>
@@ -14,7 +17,8 @@
   margin: 1rem 0;
 }
 
-.subscribe-row {
+.subscribe-row,
+.subscribe-fields {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -22,6 +26,10 @@
 }
 
 .subscribe-label {
+  color: var(--muted);
+}
+
+.subscribe-contact {
   color: var(--muted);
 }
 
