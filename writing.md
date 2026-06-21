@@ -8,16 +8,6 @@ i build products like [agentic control plane](https://agenticcontrolplane.com) a
 
 <p style="color: var(--muted);"><a href="https://www.linkedin.com/in/mrdavidcrowe">contact me</a></p>
 
-## featured
-
-[**apps are the flywheel, data is the asset**](/writing/apps-are-the-flywheel-data-is-the-asset) — building a portfolio of AI apps? bet on the data
-
-[**the three-party identity problem in mcp servers**](/writing/the-three-party-identity-problem-in-mcp-servers) — the architectural challenge every agent system hits
-
-[**is claude code secure?**](/writing/is-claude-code-secure) — secrets, prompt injection, and the real weak link
-
-## all posts
-
 <ul>
   {% for post in site.posts %}
     {% if post.categories contains "buildlog" %}{% continue %}{% endif %}
