@@ -1,14 +1,12 @@
 ---
 layout: default
-title: david crowe
-description: "david crowe — i build products like agentic control plane and calafia.ai. i publish my writing on applied AI, infrastructure, and building real systems here."
+title: writing
+description: "i build products like agentic control plane and calafia.ai. i publish my writing on applied AI, infrastructure, and building real systems here."
 ---
-
-# david crowe
 
 i build products like [agentic control plane](https://agenticcontrolplane.com) and [calafia.ai](https://calafia.ai). i publish my writing here.
 
-<p style="color: var(--muted);"><a href="https://www.linkedin.com/in/mrdavidcrowe">linkedin</a> · <a href="mailto:david@agenticcontrolplane.com">david@agenticcontrolplane.com</a></p>
+<p style="color: var(--muted);"><a href="https://www.linkedin.com/in/mrdavidcrowe">contact me</a></p>
 
 ## featured
 
