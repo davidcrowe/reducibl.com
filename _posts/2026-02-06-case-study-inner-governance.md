@@ -1,4 +1,5 @@
 ---
+published: false
 layout: case-study
 title: "ai governance setup: solving the three-party identity problem"
 pullquote: "100 lines of custom auth replaced with one identity layer."

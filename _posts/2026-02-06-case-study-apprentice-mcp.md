@@ -1,4 +1,5 @@
 ---
+published: false
 layout: case-study
 title: "mcp server build sprint: production MCP server with auth in one week"
 pullquote: "governance setup took hours, not days."

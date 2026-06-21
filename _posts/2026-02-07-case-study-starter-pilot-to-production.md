@@ -1,4 +1,5 @@
 ---
+published: false
 layout: case-study
 title: "pilot-to-production sprint: hardening an MCP server from demo to deployable"
 pullquote: "690 lines of dead code removed, one scope enforcement bug caught, zero manual test effort before."

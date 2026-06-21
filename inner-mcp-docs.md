@@ -1,4 +1,5 @@
 ---
+published: false
 layout: default
 title: Inner MCP Documentation
 description: "documentation for integrating the Inner MCP server with ChatGPT, Claude, and other MCP-compatible clients."

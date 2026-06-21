@@ -1,4 +1,5 @@
 ---
+published: false
 layout: case-study
 title: "idea-to-pilot sprint: from raw dataset to live AI product in one week"
 pullquote: "80,000 items to curated product in five days."

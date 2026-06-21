@@ -290,27 +290,11 @@
   <body>
     <div class="page">
       <nav class="top-nav">
-        {% if page.url != "/" %}
-          <a href="{{ '/' | relative_url }}">home</a>
-        {% endif %}
-        {% if page.url != "/" %}<span class="sep">·</span>{% else %}{% endif %}
         <a href="https://agenticcontrolplane.com">agentic control plane</a>
-        {% if page.url != '/writing/' %}
-          <span class="sep">·</span>
-          <a href="{{ '/writing' | relative_url }}">writing</a>
-        {% endif %}
-        {% if page.url != '/buildlogs/' %}
-          <span class="sep">·</span>
-          <a href="{{ '/buildlogs' | relative_url }}">build logs</a>
-        {% endif %}
-        {% if page.url != '/diagnostic/' and page.url != '/diagnostic' %}
-          <span class="sep">·</span>
-          <a href="{{ '/diagnostic' | relative_url }}">diagnostic</a>
-        {% endif %}
-        {% if page.url != '/build/' and page.url != '/build' %}
-          <span class="sep">·</span>
-          <a href="{{ '/build' | relative_url }}">work with me</a>
-        {% endif %}
+        <span class="sep">·</span>
+        <a href="https://calafia.ai">calafia</a>
+        <span class="sep">·</span>
+        <a href="{{ '/writing' | relative_url }}">writing</a>
       </nav>
 
       {{ content }}
@@ -365,7 +349,7 @@
       }
 
       // 5. Blog/writing engagement — fire "Post Read" after 30s on post pages
-      if (page.match(/\/writing\//) || page.match(/\/buildlogs?\//)) {
+      if (page.match(/\/writing\//)) {
         var title = document.querySelector('h1');
         setTimeout(function() {
           p('Post Read', { props: { title: title ? title.textContent.trim() : page, page: page } });
