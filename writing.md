@@ -5,7 +5,9 @@ description: "i build products like agentic control plane and calafia.ai. i beli
 
 # reducibl
 
-i build products like [agentic control plane](https://agenticcontrolplane.com) and [calafia.ai](https://calafia.ai). i believe that complexity is reducibl. i publish my writing here.
+complexity is reducibl.
+
+i build products like [agentic control plane](https://agenticcontrolplane.com) and [calafia.ai](https://calafia.ai). i publish my writing here.
 
 <ul>
   {% for post in site.posts %}
