@@ -7,7 +7,7 @@ description: "i build products like agentic control plane and calafia.ai. i beli
 
 complexity is reducibl.
 
-i build products like [agentic control plane](https://agenticcontrolplane.com) and [calafia.ai](https://calafia.ai). i publish my writing here.
+i build products like [agentic control plane](https://agenticcontrolplane.com) and [calafia.ai](https://calafia.ai) and publish my writing here.
 
 <ul>
   {% for post in site.posts %}
